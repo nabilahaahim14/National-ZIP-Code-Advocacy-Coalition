@@ -1,0 +1,3109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_9097d20f0870d7e39deb3f6b654caa10 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_9097d20f0870d7e39deb3f6b654caa10" ></div>
+        
+    
+
+<!doctype html>
+<html lang="en">
+<head>
+  <style>
+    #maplegend {
+      position: absolute;
+      top: 50px;
+      right: 50px;
+      width: 120px;
+      z-index: 9999;
+      background-color: white;
+      padding: 10px;
+      border: 2px solid grey;
+      border-radius: 5px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      box-shadow: 3px 3px 5px rgba(0,0,0,0.3);
+    }
+    .legend-item { margin-bottom: 5px; }
+    .circle {
+      height: 10px;
+      width: 10px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div id='maplegend'>
+    <div style='margin-bottom: 8px; font-weight: bold;'>Region Legend</div>
+    <div class='legend-item'><span class='circle' style='background:blue;'></span>Midwest</div>
+    <div class='legend-item'><span class='circle' style='background:red;'></span>South</div>
+    <div class='legend-item'><span class='circle' style='background:green;'></span>West</div>
+    <div class='legend-item'><span class='circle' style='background:purple;'></span>Northeast</div>
+  </div>
+</body>
+</html>
+    
+<!doctype html>
+<html>
+<head>
+<style>
+    /* --- BUTTON STYLES --- */
+    .map-btn {
+        position: absolute;
+        left: 60px;
+        z-index: 9999;
+        background-color: white;
+        border: 2px solid rgba(0,0,0,0.2);
+        border-radius: 4px;
+        padding: 5px 10px;
+        cursor: pointer;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    }
+    .map-btn:hover { background-color: #f4f4f4; }
+
+    #print-btn { top: 20px; }
+    #toggle-btn { top: 60px; } /* Placed below the print button */
+
+    /* --- PERMANENT TOOLTIP STYLES --- */
+    .static-label {
+        background-color: rgba(255, 255, 255, 0.8);
+        border: 1px solid #ccc;
+        box-shadow: none;
+        font-size: 10px;
+        font-weight: bold;
+        padding: 2px 4px;
+        color: black;
+        pointer-events: none; /* Allows clicking through the label to the bubble */
+    }
+
+    /* --- TOGGLE LOGIC --- */
+    /* When body has class 'hide-labels', hide the tooltips */
+    body.hide-labels .static-label {
+        display: none !important;
+    }
+
+    /* --- PRINT MODE STYLES --- */
+    @media print {
+        /* Hide Buttons and Legend */
+        .map-btn, .leaflet-control-zoom, .leaflet-control-layers, #maplegend { display: none !important; }
+        
+        /* Force Map to fit the PAGE exactly */
+        html, body {
+            width: 100vw !important;
+            height: 100vh !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            overflow: hidden !important;
+        }
+        
+        .folium-map {
+            width: 100vw !important;
+            height: 100vh !important;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            z-index: 0 !important;
+        }
+
+        /* FORCE LABELS VISIBLE IN PRINT (Even if toggled off on screen) */
+        .static-label {
+            display: block !important;
+            background: white !important;
+            opacity: 1 !important;
+            border: 1px solid #999 !important;
+            font-size: 10px !important;
+            white-space: nowrap !important;
+        }
+    }
+</style>
+</head>
+<body>
+    <button id="print-btn" class="map-btn" onclick="window.print()">🖨️ Print Map</button>
+    <button id="toggle-btn" class="map-btn" onclick="document.body.classList.toggle('hide-labels')">💬 Toggle Labels</button>
+</body>
+</html>
+</body>
+<script>
+    
+    
+            var map_9097d20f0870d7e39deb3f6b654caa10 = L.map(
+                "map_9097d20f0870d7e39deb3f6b654caa10",
+                {
+                    center: [39.8283, -98.5795],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 4,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_e290b149753ed70dbf0c29fd69e5625a = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_e290b149753ed70dbf0c29fd69e5625a.addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+            var circle_marker_2671cf1c8671b9675ad5e403df4e7b56 = L.circleMarker(
+                [41.7502971, -87.9161818],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_7a9fce53dbad5b640e5fcbfe2369934a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d3ccf28b1823ec260d8a4b6fa7b83c3b = $(`<div id="html_d3ccf28b1823ec260d8a4b6fa7b83c3b" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid blue;">             Burr Ridge, IL         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_7a9fce53dbad5b640e5fcbfe2369934a.setContent(html_d3ccf28b1823ec260d8a4b6fa7b83c3b);
+            
+        
+
+        circle_marker_2671cf1c8671b9675ad5e403df4e7b56.bindPopup(popup_7a9fce53dbad5b640e5fcbfe2369934a)
+        ;
+
+        
+    
+    
+            circle_marker_2671cf1c8671b9675ad5e403df4e7b56.bindTooltip(
+                `<div>
+                     Burr Ridge, IL (Midwest)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_38150e818806c28ea034c8bae24da3f3 = L.circleMarker(
+                [42.7870581, -87.8043925],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_5159449aac6e1da68f4d870455107b82 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_271d0a0bef9df8b9fd115324d1f2ed26 = $(`<div id="html_271d0a0bef9df8b9fd115324d1f2ed26" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid blue;">             Caledonia, WI         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>S. 1455</li><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_5159449aac6e1da68f4d870455107b82.setContent(html_271d0a0bef9df8b9fd115324d1f2ed26);
+            
+        
+
+        circle_marker_38150e818806c28ea034c8bae24da3f3.bindPopup(popup_5159449aac6e1da68f4d870455107b82)
+        ;
+
+        
+    
+    
+            circle_marker_38150e818806c28ea034c8bae24da3f3.bindTooltip(
+                `<div>
+                     Caledonia, WI (Midwest)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d68ab44d0a9c1220a8302527c2e86949 = L.circleMarker(
+                [37.9942469, -83.8876978],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_cd4a7a1b2ad6833d825a9c9c3da0025c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_c4944c04fa1ff0f01b7dcc91a50becb0 = $(`<div id="html_c4944c04fa1ff0f01b7dcc91a50becb0" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid red;">             Camargo, KY         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_cd4a7a1b2ad6833d825a9c9c3da0025c.setContent(html_c4944c04fa1ff0f01b7dcc91a50becb0);
+            
+        
+
+        circle_marker_d68ab44d0a9c1220a8302527c2e86949.bindPopup(popup_cd4a7a1b2ad6833d825a9c9c3da0025c)
+        ;
+
+        
+    
+    
+            circle_marker_d68ab44d0a9c1220a8302527c2e86949.bindTooltip(
+                `<div>
+                     Camargo, KY (South)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_bb91d25135f6e698296396bbd6728216 = L.circleMarker(
+                [33.6836539, -117.262615],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_73a5718e7f7ec13f5145653e375008c1 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8f270efe13d77952a67c0876b0b57fb1 = $(`<div id="html_8f270efe13d77952a67c0876b0b57fb1" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid green;">             Canyon Lake, CA         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_73a5718e7f7ec13f5145653e375008c1.setContent(html_8f270efe13d77952a67c0876b0b57fb1);
+            
+        
+
+        circle_marker_bb91d25135f6e698296396bbd6728216.bindPopup(popup_73a5718e7f7ec13f5145653e375008c1)
+        ;
+
+        
+    
+    
+            circle_marker_bb91d25135f6e698296396bbd6728216.bindTooltip(
+                `<div>
+                     Canyon Lake, CA (West)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9ef3f1def394e0eeca5499bfe29ebc2c = L.circleMarker(
+                [39.9784186, -86.1283681],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_e048ce3caca67b4cc89bb431377ccff6 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_51a23278104e3e098600cce3fd30ebf4 = $(`<div id="html_51a23278104e3e098600cce3fd30ebf4" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid blue;">             Carmel, IN         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_e048ce3caca67b4cc89bb431377ccff6.setContent(html_51a23278104e3e098600cce3fd30ebf4);
+            
+        
+
+        circle_marker_9ef3f1def394e0eeca5499bfe29ebc2c.bindPopup(popup_e048ce3caca67b4cc89bb431377ccff6)
+        ;
+
+        
+    
+    
+            circle_marker_9ef3f1def394e0eeca5499bfe29ebc2c.bindTooltip(
+                `<div>
+                     Carmel, IN (Midwest)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2f4a97ff0995397f0df34fd6b8376fa4 = L.circleMarker(
+                [39.4702853, -104.8804384],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_9d508c857fa45c173d721548bf2e2601 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_7582afde4d261fe42f6c2e7e4f088300 = $(`<div id="html_7582afde4d261fe42f6c2e7e4f088300" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid green;">             Castle Pines, CO         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>S. 1455</li><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_9d508c857fa45c173d721548bf2e2601.setContent(html_7582afde4d261fe42f6c2e7e4f088300);
+            
+        
+
+        circle_marker_2f4a97ff0995397f0df34fd6b8376fa4.bindPopup(popup_9d508c857fa45c173d721548bf2e2601)
+        ;
+
+        
+    
+    
+            circle_marker_2f4a97ff0995397f0df34fd6b8376fa4.bindTooltip(
+                `<div>
+                     Castle Pines, CO (West)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e6a97f5be06b8df9c7cbe5bae01aa4d1 = L.circleMarker(
+                [39.579155, -104.8769227],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_692fe900270f92bbfb940e5a6a351051 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b5a3c2a2e01c0ea7f9d55940fab49737 = $(`<div id="html_b5a3c2a2e01c0ea7f9d55940fab49737" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid green;">             Centennial, CO         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_692fe900270f92bbfb940e5a6a351051.setContent(html_b5a3c2a2e01c0ea7f9d55940fab49737);
+            
+        
+
+        circle_marker_e6a97f5be06b8df9c7cbe5bae01aa4d1.bindPopup(popup_692fe900270f92bbfb940e5a6a351051)
+        ;
+
+        
+    
+    
+            circle_marker_e6a97f5be06b8df9c7cbe5bae01aa4d1.bindTooltip(
+                `<div>
+                     Centennial, CO (West)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a4cf78e270221c6834b733b4d7d5ea3c = L.circleMarker(
+                [39.6416544, -104.959425],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_1be659baa8cc4f0a5e2b210729dd4152 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_789e11e24bb3334e9ab848c43e171e03 = $(`<div id="html_789e11e24bb3334e9ab848c43e171e03" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid green;">             Cherry Hills Village, CO         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_1be659baa8cc4f0a5e2b210729dd4152.setContent(html_789e11e24bb3334e9ab848c43e171e03);
+            
+        
+
+        circle_marker_a4cf78e270221c6834b733b4d7d5ea3c.bindPopup(popup_1be659baa8cc4f0a5e2b210729dd4152)
+        ;
+
+        
+    
+    
+            circle_marker_a4cf78e270221c6834b733b4d7d5ea3c.bindTooltip(
+                `<div>
+                     Cherry Hills Village, CO (West)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_aa7310c984b5490596288bf28ecbf41d = L.circleMarker(
+                [26.2517482, -80.1789351],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_23ef274037e35a09eac2b5b60fc941d7 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_a61d657311aad4956c6cc148a66d04e1 = $(`<div id="html_a61d657311aad4956c6cc148a66d04e1" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid red;">             Coconut Creek, FL         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_23ef274037e35a09eac2b5b60fc941d7.setContent(html_a61d657311aad4956c6cc148a66d04e1);
+            
+        
+
+        circle_marker_aa7310c984b5490596288bf28ecbf41d.bindPopup(popup_23ef274037e35a09eac2b5b60fc941d7)
+        ;
+
+        
+    
+    
+            circle_marker_aa7310c984b5490596288bf28ecbf41d.bindTooltip(
+                `<div>
+                     Coconut Creek, FL (South)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ca8193e620209ec0822080018d3743e1 = L.circleMarker(
+                [26.057783, -80.2695109],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_14ffbd69c327c6184ffc6f97562cd8cc = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_94b727f88b3bceec953d9730e0ec57a8 = $(`<div id="html_94b727f88b3bceec953d9730e0ec57a8" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid red;">             Cooper City, FL         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 672</li><li>S. 1455</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_14ffbd69c327c6184ffc6f97562cd8cc.setContent(html_94b727f88b3bceec953d9730e0ec57a8);
+            
+        
+
+        circle_marker_ca8193e620209ec0822080018d3743e1.bindPopup(popup_14ffbd69c327c6184ffc6f97562cd8cc)
+        ;
+
+        
+    
+    
+            circle_marker_ca8193e620209ec0822080018d3743e1.bindTooltip(
+                `<div>
+                     Cooper City, FL (South)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a8947a03fe136b2ef24dc2fd7515dd9a = L.circleMarker(
+                [26.318342, -80.0996306],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_001bdb8e305c61083d23f50f808b6e11 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_2bfeefa41f73c5a887d6f5c90fa9bd46 = $(`<div id="html_2bfeefa41f73c5a887d6f5c90fa9bd46" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid red;">             Deerfield Beach, FL         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_001bdb8e305c61083d23f50f808b6e11.setContent(html_2bfeefa41f73c5a887d6f5c90fa9bd46);
+            
+        
+
+        circle_marker_a8947a03fe136b2ef24dc2fd7515dd9a.bindPopup(popup_001bdb8e305c61083d23f50f808b6e11)
+        ;
+
+        
+    
+    
+            circle_marker_a8947a03fe136b2ef24dc2fd7515dd9a.bindTooltip(
+                `<div>
+                     Deerfield Beach, FL (South)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3680a6ad206741316c045649546782ee = L.circleMarker(
+                [33.9747067, -117.566541],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_7b2d671fa74f248b5f34eff842bef119 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_2321003d089efc34389562b61c176c82 = $(`<div id="html_2321003d089efc34389562b61c176c82" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid green;">             Eastvale, CA         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 672</li><li>S. 1455</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_7b2d671fa74f248b5f34eff842bef119.setContent(html_2321003d089efc34389562b61c176c82);
+            
+        
+
+        circle_marker_3680a6ad206741316c045649546782ee.bindPopup(popup_7b2d671fa74f248b5f34eff842bef119)
+        ;
+
+        
+    
+    
+            circle_marker_3680a6ad206741316c045649546782ee.bindTooltip(
+                `<div>
+                     Eastvale, CA (West)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9f7b082bd4d371dd0dc94ae4bb1fe5a0 = L.circleMarker(
+                [26.4381474, -81.8067537],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_40328d19d1f659a2b54c55d118176a0c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_a98550a79946940168e4d84afc60853e = $(`<div id="html_a98550a79946940168e4d84afc60853e" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid red;">             Estero, FL         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 672</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_40328d19d1f659a2b54c55d118176a0c.setContent(html_a98550a79946940168e4d84afc60853e);
+            
+        
+
+        circle_marker_9f7b082bd4d371dd0dc94ae4bb1fe5a0.bindPopup(popup_40328d19d1f659a2b54c55d118176a0c)
+        ;
+
+        
+    
+    
+            circle_marker_9f7b082bd4d371dd0dc94ae4bb1fe5a0.bindTooltip(
+                `<div>
+                     Estero, FL (South)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_29c81c0bbbe0fb07eb885ebf6c4e474f = L.circleMarker(
+                [37.147578, -80.5562537],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_58e5113f3d6b3ad9400089e29bfd60c2 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6beacac3906ff9a5b2ccc6b57e63adda = $(`<div id="html_6beacac3906ff9a5b2ccc6b57e63adda" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid red;">             Fairlawn, VA         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_58e5113f3d6b3ad9400089e29bfd60c2.setContent(html_6beacac3906ff9a5b2ccc6b57e63adda);
+            
+        
+
+        circle_marker_29c81c0bbbe0fb07eb885ebf6c4e474f.bindPopup(popup_58e5113f3d6b3ad9400089e29bfd60c2)
+        ;
+
+        
+    
+    
+            circle_marker_29c81c0bbbe0fb07eb885ebf6c4e474f.bindTooltip(
+                `<div>
+                     Fairlawn, VA (South)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_931489cabded853984a1e08973145350 = L.circleMarker(
+                [33.1578325, -96.6318301],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_4e89f502762da0cee653c29bea33176c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b64cc2b01f89d15fd9cae321e64f54d0 = $(`<div id="html_b64cc2b01f89d15fd9cae321e64f54d0" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid red;">             Fairview, TX         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_4e89f502762da0cee653c29bea33176c.setContent(html_b64cc2b01f89d15fd9cae321e64f54d0);
+            
+        
+
+        circle_marker_931489cabded853984a1e08973145350.bindPopup(popup_4e89f502762da0cee653c29bea33176c)
+        ;
+
+        
+    
+    
+            circle_marker_931489cabded853984a1e08973145350.bindTooltip(
+                `<div>
+                     Fairview, TX (South)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_49fb604d1ca1e164e8a9c36583e89aac = L.circleMarker(
+                [32.9414409, -96.3813805],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_eb6d6261ac96e51f429a9280257d66dc = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_fe9082b14718edbd326b32d7a54d85f2 = $(`<div id="html_fe9082b14718edbd326b32d7a54d85f2" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid red;">             Fate, TX         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_eb6d6261ac96e51f429a9280257d66dc.setContent(html_fe9082b14718edbd326b32d7a54d85f2);
+            
+        
+
+        circle_marker_49fb604d1ca1e164e8a9c36583e89aac.bindPopup(popup_eb6d6261ac96e51f429a9280257d66dc)
+        ;
+
+        
+    
+    
+            circle_marker_49fb604d1ca1e164e8a9c36583e89aac.bindTooltip(
+                `<div>
+                     Fate, TX (South)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c0dc22b9eac96d8ffdc52aefcf9c9b31 = L.circleMarker(
+                [40.895274, -72.6046997],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "purple", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_f11030c400f00d77a178fbaa93a1bab7 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_eb7ee88dd165aeac584a96423cb198cd = $(`<div id="html_eb7ee88dd165aeac584a96423cb198cd" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid purple;">             Flanders, NY         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_f11030c400f00d77a178fbaa93a1bab7.setContent(html_eb7ee88dd165aeac584a96423cb198cd);
+            
+        
+
+        circle_marker_c0dc22b9eac96d8ffdc52aefcf9c9b31.bindPopup(popup_f11030c400f00d77a178fbaa93a1bab7)
+        ;
+
+        
+    
+    
+            circle_marker_c0dc22b9eac96d8ffdc52aefcf9c9b31.bindTooltip(
+                `<div>
+                     Flanders, NY (Northeast)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4ffef10b71b9f2961b251e38a6c263e8 = L.circleMarker(
+                [42.888627, -88.0384183],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_853a86660410489d0f5c10a057a4a57f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_63a970cd5cc018be24a50f5b478fb98b = $(`<div id="html_63a970cd5cc018be24a50f5b478fb98b" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid blue;">             Franklin, WI         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>S. 1455</li><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_853a86660410489d0f5c10a057a4a57f.setContent(html_63a970cd5cc018be24a50f5b478fb98b);
+            
+        
+
+        circle_marker_4ffef10b71b9f2961b251e38a6c263e8.bindPopup(popup_853a86660410489d0f5c10a057a4a57f)
+        ;
+
+        
+    
+    
+            circle_marker_4ffef10b71b9f2961b251e38a6c263e8.bindTooltip(
+                `<div>
+                     Franklin, WI (Midwest)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4d5e1fcc066dc70890f506b00e1bb5d7 = L.circleMarker(
+                [40.0986895, -104.9383159],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_b2ee3be6016b3042291afeb4c1292c1d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_3b5cb70c2f51affb0ada4814a991e463 = $(`<div id="html_3b5cb70c2f51affb0ada4814a991e463" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid green;">             Frederick, CO         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_b2ee3be6016b3042291afeb4c1292c1d.setContent(html_3b5cb70c2f51affb0ada4814a991e463);
+            
+        
+
+        circle_marker_4d5e1fcc066dc70890f506b00e1bb5d7.bindPopup(popup_b2ee3be6016b3042291afeb4c1292c1d)
+        ;
+
+        
+    
+    
+            circle_marker_4d5e1fcc066dc70890f506b00e1bb5d7.bindTooltip(
+                `<div>
+                     Frederick, CO (West)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d2717fce82deea100ffeff0500755bd6 = L.circleMarker(
+                [40.7014917, -73.8868028],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "purple", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_25f3b8f1b63a87124bc08fba56b7526b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_c268040f1de47702d749aed5fc571c2f = $(`<div id="html_c268040f1de47702d749aed5fc571c2f" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid purple;">             Glendale, NY         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_25f3b8f1b63a87124bc08fba56b7526b.setContent(html_c268040f1de47702d749aed5fc571c2f);
+            
+        
+
+        circle_marker_d2717fce82deea100ffeff0500755bd6.bindPopup(popup_25f3b8f1b63a87124bc08fba56b7526b)
+        ;
+
+        
+    
+    
+            circle_marker_d2717fce82deea100ffeff0500755bd6.bindTooltip(
+                `<div>
+                     Glendale, NY (Northeast)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fc0b1b2371c2bd3082939b3ee6b8c345 = L.circleMarker(
+                [43.1250236, -87.9285922],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_4a9a3db17c0da572de813b6c2085837e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_dc6f458cb4bb98be64bc1da9dddf940e = $(`<div id="html_dc6f458cb4bb98be64bc1da9dddf940e" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid blue;">             Glendale, WI         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_4a9a3db17c0da572de813b6c2085837e.setContent(html_dc6f458cb4bb98be64bc1da9dddf940e);
+            
+        
+
+        circle_marker_fc0b1b2371c2bd3082939b3ee6b8c345.bindPopup(popup_4a9a3db17c0da572de813b6c2085837e)
+        ;
+
+        
+    
+    
+            circle_marker_fc0b1b2371c2bd3082939b3ee6b8c345.bindTooltip(
+                `<div>
+                     Glendale, WI (Midwest)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_162134d08c4007080ea866721ae09de6 = L.circleMarker(
+                [32.9961038, -80.0387292],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_4ea8d97206027d5780bdcf56a165fa02 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_fa8a214ee8d6a6309a64fd087e293bb9 = $(`<div id="html_fa8a214ee8d6a6309a64fd087e293bb9" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid red;">             Goose Creek, SC         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_4ea8d97206027d5780bdcf56a165fa02.setContent(html_fa8a214ee8d6a6309a64fd087e293bb9);
+            
+        
+
+        circle_marker_162134d08c4007080ea866721ae09de6.bindPopup(popup_4ea8d97206027d5780bdcf56a165fa02)
+        ;
+
+        
+    
+    
+            circle_marker_162134d08c4007080ea866721ae09de6.bindTooltip(
+                `<div>
+                     Goose Creek, SC (South)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2f87e4df6f881a20f760ba1ef7d6f1b7 = L.circleMarker(
+                [40.9228197, -117.763695],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_3e7544ef0ab9a2ed73e232d62c4b96b8 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d083fb9bd23d8c5fe4f23131d62b7fa7 = $(`<div id="html_d083fb9bd23d8c5fe4f23131d62b7fa7" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid green;">             Grass Valley, NV         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_3e7544ef0ab9a2ed73e232d62c4b96b8.setContent(html_d083fb9bd23d8c5fe4f23131d62b7fa7);
+            
+        
+
+        circle_marker_2f87e4df6f881a20f760ba1ef7d6f1b7.bindPopup(popup_3e7544ef0ab9a2ed73e232d62c4b96b8)
+        ;
+
+        
+    
+    
+            circle_marker_2f87e4df6f881a20f760ba1ef7d6f1b7.bindTooltip(
+                `<div>
+                     Grass Valley, NV (West)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1c5006277e3b37dff055d49668ca1f13 = L.circleMarker(
+                [40.9468077, -81.4670631],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_128df6837b894ec7160365d6ba29546c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9032c4bfbead5db13622e02a598e38de = $(`<div id="html_9032c4bfbead5db13622e02a598e38de" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid blue;">             Green, OH         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_128df6837b894ec7160365d6ba29546c.setContent(html_9032c4bfbead5db13622e02a598e38de);
+            
+        
+
+        circle_marker_1c5006277e3b37dff055d49668ca1f13.bindPopup(popup_128df6837b894ec7160365d6ba29546c)
+        ;
+
+        
+    
+    
+            circle_marker_1c5006277e3b37dff055d49668ca1f13.bindTooltip(
+                `<div>
+                     Green, OH (Midwest)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_13558785ac7d1d9b5345663ae5a192cf = L.circleMarker(
+                [42.9596903, -87.98132],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_0b7e15f54802c51d317ecda1f13eda59 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_71b5690eabf02a72bdfcd23f1693fccc = $(`<div id="html_71b5690eabf02a72bdfcd23f1693fccc" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid blue;">             Greenfield, WI         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>S. 1455</li><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_0b7e15f54802c51d317ecda1f13eda59.setContent(html_71b5690eabf02a72bdfcd23f1693fccc);
+            
+        
+
+        circle_marker_13558785ac7d1d9b5345663ae5a192cf.bindPopup(popup_0b7e15f54802c51d317ecda1f13eda59)
+        ;
+
+        
+    
+    
+            circle_marker_13558785ac7d1d9b5345663ae5a192cf.bindTooltip(
+                `<div>
+                     Greenfield, WI (Midwest)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_849b1cc122cb5796beacd2f77f1b3d6d = L.circleMarker(
+                [39.6172101, -104.950814],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_b19c8d84c874e69fd309203bd826eb03 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_c43b9497bc882035120ecd4ec79dd195 = $(`<div id="html_c43b9497bc882035120ecd4ec79dd195" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid green;">             Greenwood Village, CO         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_b19c8d84c874e69fd309203bd826eb03.setContent(html_c43b9497bc882035120ecd4ec79dd195);
+            
+        
+
+        circle_marker_849b1cc122cb5796beacd2f77f1b3d6d.bindPopup(popup_b19c8d84c874e69fd309203bd826eb03)
+        ;
+
+        
+    
+    
+            circle_marker_849b1cc122cb5796beacd2f77f1b3d6d.bindTooltip(
+                `<div>
+                     Greenwood Village, CO (West)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8b0db6fff41da064aa11a979c7f1999a = L.circleMarker(
+                [35.388093, -78.8624963],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_57d048d812bde1f8b9f7df2fbd11f7ab = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_2695b9854edc095e085ace013e0ca0c3 = $(`<div id="html_2695b9854edc095e085ace013e0ca0c3" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid red;">             Harnett County, NC         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_57d048d812bde1f8b9f7df2fbd11f7ab.setContent(html_2695b9854edc095e085ace013e0ca0c3);
+            
+        
+
+        circle_marker_8b0db6fff41da064aa11a979c7f1999a.bindPopup(popup_57d048d812bde1f8b9f7df2fbd11f7ab)
+        ;
+
+        
+    
+    
+            circle_marker_8b0db6fff41da064aa11a979c7f1999a.bindTooltip(
+                `<div>
+                     Harnett County, NC (South)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_db020d9a4effde1a8ad529608d38e2c0 = L.circleMarker(
+                [45.0697709, -89.2851635],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_bc0ebd33a92ae3a1b0868f0b5596c023 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_86174a9135262bd07f524fecf4647b75 = $(`<div id="html_86174a9135262bd07f524fecf4647b75" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid blue;">             Harrison, WI         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_bc0ebd33a92ae3a1b0868f0b5596c023.setContent(html_86174a9135262bd07f524fecf4647b75);
+            
+        
+
+        circle_marker_db020d9a4effde1a8ad529608d38e2c0.bindPopup(popup_bc0ebd33a92ae3a1b0868f0b5596c023)
+        ;
+
+        
+    
+    
+            circle_marker_db020d9a4effde1a8ad529608d38e2c0.bindTooltip(
+                `<div>
+                     Harrison, WI (Midwest)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_48f0e2b4fcde9c9a667fa11fc80a873b = L.circleMarker(
+                [32.8365147, -96.474987],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_2981ab4076d7ace04bf310d7de08c2fa = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_05af81f365a7083149b43befb2d93f80 = $(`<div id="html_05af81f365a7083149b43befb2d93f80" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid red;">             Heath, TX         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_2981ab4076d7ace04bf310d7de08c2fa.setContent(html_05af81f365a7083149b43befb2d93f80);
+            
+        
+
+        circle_marker_48f0e2b4fcde9c9a667fa11fc80a873b.bindPopup(popup_2981ab4076d7ace04bf310d7de08c2fa)
+        ;
+
+        
+    
+    
+            circle_marker_48f0e2b4fcde9c9a667fa11fc80a873b.bindTooltip(
+                `<div>
+                     Heath, TX (South)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_90b957d5c515a56b2f08a0e5ae2bda74 = L.circleMarker(
+                [34.164091, -118.657837],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_f5d21333f026fddfc01d25a776ce4232 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_326a051c646044bd3cb993a2955c374d = $(`<div id="html_326a051c646044bd3cb993a2955c374d" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid green;">             Hidden Hills, CA         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_f5d21333f026fddfc01d25a776ce4232.setContent(html_326a051c646044bd3cb993a2955c374d);
+            
+        
+
+        circle_marker_90b957d5c515a56b2f08a0e5ae2bda74.bindPopup(popup_f5d21333f026fddfc01d25a776ce4232)
+        ;
+
+        
+    
+    
+            circle_marker_90b957d5c515a56b2f08a0e5ae2bda74.bindTooltip(
+                `<div>
+                     Hidden Hills, CA (West)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_67e4f474b7ea84a780bfb0258c6d66e8 = L.circleMarker(
+                [39.548359, -105.0004504],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_df7cbe2d28dffa40aa4b728d5a953c42 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b7c3675186dca7cb540aa87fe301fd65 = $(`<div id="html_b7c3675186dca7cb540aa87fe301fd65" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid green;">             Highlands Ranch, CO         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_df7cbe2d28dffa40aa4b728d5a953c42.setContent(html_b7c3675186dca7cb540aa87fe301fd65);
+            
+        
+
+        circle_marker_67e4f474b7ea84a780bfb0258c6d66e8.bindPopup(popup_df7cbe2d28dffa40aa4b728d5a953c42)
+        ;
+
+        
+    
+    
+            circle_marker_67e4f474b7ea84a780bfb0258c6d66e8.bindTooltip(
+                `<div>
+                     Highlands Ranch, CO (West)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a15af12de3068151ecf45713e14cb31b = L.circleMarker(
+                [34.1523292, -94.7527181],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_0edda17d100c0ccb2cb286389b43cda6 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_f492a54b9d6de6b75d5ecb408f2ac3f8 = $(`<div id="html_f492a54b9d6de6b75d5ecb408f2ac3f8" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid red;">             Hochatown, OK         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_0edda17d100c0ccb2cb286389b43cda6.setContent(html_f492a54b9d6de6b75d5ecb408f2ac3f8);
+            
+        
+
+        circle_marker_a15af12de3068151ecf45713e14cb31b.bindPopup(popup_0edda17d100c0ccb2cb286389b43cda6)
+        ;
+
+        
+    
+    
+            circle_marker_a15af12de3068151ecf45713e14cb31b.bindTooltip(
+                `<div>
+                     Hochatown, OK (South)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f9aec96bae6b61b7c6c68e88b69203e2 = L.circleMarker(
+                [26.0112014, -80.1494901],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_cd928d50c1f68c53f295d5f1423cd642 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_75f47c01fd20b38921d1ebd19c470432 = $(`<div id="html_75f47c01fd20b38921d1ebd19c470432" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid red;">             Hollywood, FL         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_cd928d50c1f68c53f295d5f1423cd642.setContent(html_75f47c01fd20b38921d1ebd19c470432);
+            
+        
+
+        circle_marker_f9aec96bae6b61b7c6c68e88b69203e2.bindPopup(popup_cd928d50c1f68c53f295d5f1423cd642)
+        ;
+
+        
+    
+    
+            circle_marker_f9aec96bae6b61b7c6c68e88b69203e2.bindTooltip(
+                `<div>
+                     Hollywood, FL (South)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_07d99443e509115e334c99ac997b63e7 = L.circleMarker(
+                [34.0182252, -117.9593061],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_80d314735cade0e558c2b3eecb44ff91 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_bc75c0b489f6180b5b9c9d3138965838 = $(`<div id="html_bc75c0b489f6180b5b9c9d3138965838" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid green;">             Industry, CA         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_80d314735cade0e558c2b3eecb44ff91.setContent(html_bc75c0b489f6180b5b9c9d3138965838);
+            
+        
+
+        circle_marker_07d99443e509115e334c99ac997b63e7.bindPopup(popup_80d314735cade0e558c2b3eecb44ff91)
+        ;
+
+        
+    
+    
+            circle_marker_07d99443e509115e334c99ac997b63e7.bindTooltip(
+                `<div>
+                     Industry, CA (West)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0f0a3d24fcfd70d2839eef9838f80881 = L.circleMarker(
+                [33.0612097, -96.307668],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_6610aed4135c82af2478a3a976cc78e5 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_cceae57866728a517614be4aed8b7020 = $(`<div id="html_cceae57866728a517614be4aed8b7020" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid red;">             Josephine, TX         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_6610aed4135c82af2478a3a976cc78e5.setContent(html_cceae57866728a517614be4aed8b7020);
+            
+        
+
+        circle_marker_0f0a3d24fcfd70d2839eef9838f80881.bindPopup(popup_6610aed4135c82af2478a3a976cc78e5)
+        ;
+
+        
+    
+    
+            circle_marker_0f0a3d24fcfd70d2839eef9838f80881.bindTooltip(
+                `<div>
+                     Josephine, TX (South)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_815c99fde20bb718f8d5780c330c1061 = L.circleMarker(
+                [39.596564, -105.9340342],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_6115e21517f093710db935f93c920251 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_7cda90183c83044bdedc64c458f643d2 = $(`<div id="html_7cda90183c83044bdedc64c458f643d2" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid green;">             Keystone, CO         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_6115e21517f093710db935f93c920251.setContent(html_7cda90183c83044bdedc64c458f643d2);
+            
+        
+
+        circle_marker_815c99fde20bb718f8d5780c330c1061.bindPopup(popup_6115e21517f093710db935f93c920251)
+        ;
+
+        
+    
+    
+            circle_marker_815c99fde20bb718f8d5780c330c1061.bindTooltip(
+                `<div>
+                     Keystone, CO (West)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a698451c4e39093d76d27e62fcf4a938 = L.circleMarker(
+                [41.0017644, -74.367096],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "purple", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_4f96c600017a0ae2ba80ae028b11187a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_cc197282c540d27a22cd72faaa176316 = $(`<div id="html_cc197282c540d27a22cd72faaa176316" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid purple;">             Kinnelon, NJ         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_4f96c600017a0ae2ba80ae028b11187a.setContent(html_cc197282c540d27a22cd72faaa176316);
+            
+        
+
+        circle_marker_a698451c4e39093d76d27e62fcf4a938.bindPopup(popup_4f96c600017a0ae2ba80ae028b11187a)
+        ;
+
+        
+    
+    
+            circle_marker_a698451c4e39093d76d27e62fcf4a938.bindTooltip(
+                `<div>
+                     Kinnelon, NJ (Northeast)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2b318c2e64517641e5e33e67da34cefb = L.circleMarker(
+                [38.8400395, -86.4880717],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_71a0591360f4faa5bee8e90a700a20f1 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_afa3e06c46c7f3216c8b3a7eaecac3d0 = $(`<div id="html_afa3e06c46c7f3216c8b3a7eaecac3d0" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid blue;">             Lawrence, IN         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_71a0591360f4faa5bee8e90a700a20f1.setContent(html_afa3e06c46c7f3216c8b3a7eaecac3d0);
+            
+        
+
+        circle_marker_2b318c2e64517641e5e33e67da34cefb.bindPopup(popup_71a0591360f4faa5bee8e90a700a20f1)
+        ;
+
+        
+    
+    
+            circle_marker_2b318c2e64517641e5e33e67da34cefb.bindTooltip(
+                `<div>
+                     Lawrence, IN (Midwest)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0dc20060ff18f6fdf2dab45cf30cb7ba = L.circleMarker(
+                [26.275636, -80.0872654],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_010c53da579fab19a5d78d946464fa9b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9da0ecb8c958911f2899b50b37463d21 = $(`<div id="html_9da0ecb8c958911f2899b50b37463d21" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid red;">             Lighthouse Point, FL         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_010c53da579fab19a5d78d946464fa9b.setContent(html_9da0ecb8c958911f2899b50b37463d21);
+            
+        
+
+        circle_marker_0dc20060ff18f6fdf2dab45cf30cb7ba.bindPopup(popup_010c53da579fab19a5d78d946464fa9b)
+        ;
+
+        
+    
+    
+            circle_marker_0dc20060ff18f6fdf2dab45cf30cb7ba.bindTooltip(
+                `<div>
+                     Lighthouse Point, FL (South)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_98097019408b6c948e6aff0ef82c7edd = L.circleMarker(
+                [39.5364152, -104.9041528],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_d73465907ebc41ffe09b4c521a690c6e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_27117ee0e0ab8d9874d00f27babcd13d = $(`<div id="html_27117ee0e0ab8d9874d00f27babcd13d" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid green;">             Lone Tree, CO         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_d73465907ebc41ffe09b4c521a690c6e.setContent(html_27117ee0e0ab8d9874d00f27babcd13d);
+            
+        
+
+        circle_marker_98097019408b6c948e6aff0ef82c7edd.bindPopup(popup_d73465907ebc41ffe09b4c521a690c6e)
+        ;
+
+        
+    
+    
+            circle_marker_98097019408b6c948e6aff0ef82c7edd.bindTooltip(
+                `<div>
+                     Lone Tree, CO (West)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_815570225d70845839b5ebfd89f8ba22 = L.circleMarker(
+                [34.77873, -82.310119],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_633cf398622f52eeb633b4f8a8231bca = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_fb20294ebe5a209eb73102bb3cf31694 = $(`<div id="html_fb20294ebe5a209eb73102bb3cf31694" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid red;">             Mauldin, SC         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_633cf398622f52eeb633b4f8a8231bca.setContent(html_fb20294ebe5a209eb73102bb3cf31694);
+            
+        
+
+        circle_marker_815570225d70845839b5ebfd89f8ba22.bindPopup(popup_633cf398622f52eeb633b4f8a8231bca)
+        ;
+
+        
+    
+    
+            circle_marker_815570225d70845839b5ebfd89f8ba22.bindTooltip(
+                `<div>
+                     Mauldin, SC (South)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fe3114cde45eb0f8fafd60178aa8ad81 = L.circleMarker(
+                [25.9087056, -80.3086619],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_ae31f9efc2caa06084513e94cb5d5434 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_5e92cb95c7453515c6c095af9ec3b88c = $(`<div id="html_5e92cb95c7453515c6c095af9ec3b88c" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid red;">             Miami Lakes, FL         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 672</li><li>S. 1455</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_ae31f9efc2caa06084513e94cb5d5434.setContent(html_5e92cb95c7453515c6c095af9ec3b88c);
+            
+        
+
+        circle_marker_fe3114cde45eb0f8fafd60178aa8ad81.bindPopup(popup_ae31f9efc2caa06084513e94cb5d5434)
+        ;
+
+        
+    
+    
+            circle_marker_fe3114cde45eb0f8fafd60178aa8ad81.bindTooltip(
+                `<div>
+                     Miami Lakes, FL (South)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a62b1c2c12b22dd786386d38452e0642 = L.circleMarker(
+                [42.841927, -106.367935],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_8d5cd05c34be21ff3232cd88f7db2c9e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_f780a1d07f004bcf86b40e85bd4ef644 = $(`<div id="html_f780a1d07f004bcf86b40e85bd4ef644" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid green;">             Mills, WY         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 672</li><li>S. 1455</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_8d5cd05c34be21ff3232cd88f7db2c9e.setContent(html_f780a1d07f004bcf86b40e85bd4ef644);
+            
+        
+
+        circle_marker_a62b1c2c12b22dd786386d38452e0642.bindPopup(popup_8d5cd05c34be21ff3232cd88f7db2c9e)
+        ;
+
+        
+    
+    
+            circle_marker_a62b1c2c12b22dd786386d38452e0642.bindTooltip(
+                `<div>
+                     Mills, WY (West)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cec4be29a26132c65422aa5c98905dc5 = L.circleMarker(
+                [30.0242921, -90.4601609],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_eea520d44f8cde9b7a98ae24b51311bd = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d8c727687eae1da220a9f7fc75185011 = $(`<div id="html_d8c727687eae1da220a9f7fc75185011" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid red;">             Montz, LA         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_eea520d44f8cde9b7a98ae24b51311bd.setContent(html_d8c727687eae1da220a9f7fc75185011);
+            
+        
+
+        circle_marker_cec4be29a26132c65422aa5c98905dc5.bindPopup(popup_eea520d44f8cde9b7a98ae24b51311bd)
+        ;
+
+        
+    
+    
+            circle_marker_cec4be29a26132c65422aa5c98905dc5.bindTooltip(
+                `<div>
+                     Montz, LA (South)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_96ae15105077434bff3c81cc57880976 = L.circleMarker(
+                [42.719161, -87.8543362],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_d733af65f52d0be56b736cc741f5315a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9a927605c50e8f96c3fd4d9088b00ce5 = $(`<div id="html_9a927605c50e8f96c3fd4d9088b00ce5" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid blue;">             Mount Pleasant, WI         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>S. 1455</li><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_d733af65f52d0be56b736cc741f5315a.setContent(html_9a927605c50e8f96c3fd4d9088b00ce5);
+            
+        
+
+        circle_marker_96ae15105077434bff3c81cc57880976.bindPopup(popup_d733af65f52d0be56b736cc741f5315a)
+        ;
+
+        
+    
+    
+            circle_marker_96ae15105077434bff3c81cc57880976.bindTooltip(
+                `<div>
+                     Mount Pleasant, WI (Midwest)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3b2e8e4bf5722bac1d0bf2db1f27cf10 = L.circleMarker(
+                [37.9313827, -107.856453],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_65f7e765d836707034c49ac5c2da4b17 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ce280f4b9317d1aeb642c4a1e1627ba9 = $(`<div id="html_ce280f4b9317d1aeb642c4a1e1627ba9" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid green;">             Mountain Village, CO         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_65f7e765d836707034c49ac5c2da4b17.setContent(html_ce280f4b9317d1aeb642c4a1e1627ba9);
+            
+        
+
+        circle_marker_3b2e8e4bf5722bac1d0bf2db1f27cf10.bindPopup(popup_65f7e765d836707034c49ac5c2da4b17)
+        ;
+
+        
+    
+    
+            circle_marker_3b2e8e4bf5722bac1d0bf2db1f27cf10.bindTooltip(
+                `<div>
+                     Mountain Village, CO (West)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6c5e1f7f2f2703d0fe11bd2755538a90 = L.circleMarker(
+                [38.9076593, -106.9690519],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_031fff95f0d0fc85b5d3edac0d47e95c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_7ce9a7db68f7260c5915fd30e84aac5a = $(`<div id="html_7ce9a7db68f7260c5915fd30e84aac5a" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid green;">             Mt. Crested Butte, CO         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_031fff95f0d0fc85b5d3edac0d47e95c.setContent(html_7ce9a7db68f7260c5915fd30e84aac5a);
+            
+        
+
+        circle_marker_6c5e1f7f2f2703d0fe11bd2755538a90.bindPopup(popup_031fff95f0d0fc85b5d3edac0d47e95c)
+        ;
+
+        
+    
+    
+            circle_marker_6c5e1f7f2f2703d0fe11bd2755538a90.bindTooltip(
+                `<div>
+                     Mt. Crested Butte, CO (West)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b36866b1c42c7b1bb01a60e18871b738 = L.circleMarker(
+                [33.0151208, -96.6130478],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_3b11395c382f5751da14c1aca9ef5151 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ee5abaea867f7e1f93df4215e221a8af = $(`<div id="html_ee5abaea867f7e1f93df4215e221a8af" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid red;">             Murphy, TX         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_3b11395c382f5751da14c1aca9ef5151.setContent(html_ee5abaea867f7e1f93df4215e221a8af);
+            
+        
+
+        circle_marker_b36866b1c42c7b1bb01a60e18871b738.bindPopup(popup_3b11395c382f5751da14c1aca9ef5151)
+        ;
+
+        
+    
+    
+            circle_marker_b36866b1c42c7b1bb01a60e18871b738.bindTooltip(
+                `<div>
+                     Murphy, TX (South)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_37982ac8108e862a96e519b93220f1fd = L.circleMarker(
+                [40.0460881, -86.0139854],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_a754813341916d83607a7a87c7ecbfce = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_bc41dc8a8c38b57cdae62e24563525bd = $(`<div id="html_bc41dc8a8c38b57cdae62e24563525bd" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid blue;">             Noblesville, IN         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_a754813341916d83607a7a87c7ecbfce.setContent(html_bc41dc8a8c38b57cdae62e24563525bd);
+            
+        
+
+        circle_marker_37982ac8108e862a96e519b93220f1fd.bindPopup(popup_a754813341916d83607a7a87c7ecbfce)
+        ;
+
+        
+    
+    
+            circle_marker_37982ac8108e862a96e519b93220f1fd.bindTooltip(
+                `<div>
+                     Noblesville, IN (Midwest)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cb36f16165a330a84842bd320d37f7dc = L.circleMarker(
+                [36.4355886, -97.8689466],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_3cde4ef4d76aa47cc74c09c1d94f3aa7 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_30488087211bead0355fe43814ae1089 = $(`<div id="html_30488087211bead0355fe43814ae1089" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid red;">             North Enid, OK         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_3cde4ef4d76aa47cc74c09c1d94f3aa7.setContent(html_30488087211bead0355fe43814ae1089);
+            
+        
+
+        circle_marker_cb36f16165a330a84842bd320d37f7dc.bindPopup(popup_3cde4ef4d76aa47cc74c09c1d94f3aa7)
+        ;
+
+        
+    
+    
+            circle_marker_cb36f16165a330a84842bd320d37f7dc.bindTooltip(
+                `<div>
+                     North Enid, OK (South)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1426b1777cf4284fdf8f3bc470182af4 = L.circleMarker(
+                [33.7633471, -117.7973921],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_867a63e7dd8105b3560e7d5993256f0b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d3c2750965a1cb10411592d7523a8ebb = $(`<div id="html_d3c2750965a1cb10411592d7523a8ebb" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid green;">             North Tustin, CA         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_867a63e7dd8105b3560e7d5993256f0b.setContent(html_d3c2750965a1cb10411592d7523a8ebb);
+            
+        
+
+        circle_marker_1426b1777cf4284fdf8f3bc470182af4.bindPopup(popup_867a63e7dd8105b3560e7d5993256f0b)
+        ;
+
+        
+    
+    
+            circle_marker_1426b1777cf4284fdf8f3bc470182af4.bindTooltip(
+                `<div>
+                     North Tustin, CA (West)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_199f16bf6817df68c6b7a4622bd212f5 = L.circleMarker(
+                [40.876365, -72.6761086],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "purple", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_e83b01e2bf79e7efc8b642780cefed9d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_83b5cd22b6b211143af6c6c284bcc5c0 = $(`<div id="html_83b5cd22b6b211143af6c6c284bcc5c0" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid purple;">             Northampton, NY         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_e83b01e2bf79e7efc8b642780cefed9d.setContent(html_83b5cd22b6b211143af6c6c284bcc5c0);
+            
+        
+
+        circle_marker_199f16bf6817df68c6b7a4622bd212f5.bindPopup(popup_e83b01e2bf79e7efc8b642780cefed9d)
+        ;
+
+        
+    
+    
+            circle_marker_199f16bf6817df68c6b7a4622bd212f5.bindTooltip(
+                `<div>
+                     Northampton, NY (Northeast)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1fb75df1fe3d7e9a027f8f5007ca2086 = L.circleMarker(
+                [33.1273432, -97.2655726],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_11c526799561ef409ce6e608384ce6bb = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_fc751ce0319937a2a7a909c34f5e1d50 = $(`<div id="html_fc751ce0319937a2a7a909c34f5e1d50" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid red;">             Northlake, TX         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_11c526799561ef409ce6e608384ce6bb.setContent(html_fc751ce0319937a2a7a909c34f5e1d50);
+            
+        
+
+        circle_marker_1fb75df1fe3d7e9a027f8f5007ca2086.bindPopup(popup_11c526799561ef409ce6e608384ce6bb)
+        ;
+
+        
+    
+    
+            circle_marker_1fb75df1fe3d7e9a027f8f5007ca2086.bindTooltip(
+                `<div>
+                     Northlake, TX (South)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_88c0479c0ee732b2bba04ca25d9bd237 = L.circleMarker(
+                [26.1723065, -80.1319893],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_982248a072d3d3c6a04ffd098fb4312e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_825bf86db52258fd8e0cee86d0678435 = $(`<div id="html_825bf86db52258fd8e0cee86d0678435" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid red;">             Oakland Park, FL         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_982248a072d3d3c6a04ffd098fb4312e.setContent(html_825bf86db52258fd8e0cee86d0678435);
+            
+        
+
+        circle_marker_88c0479c0ee732b2bba04ca25d9bd237.bindPopup(popup_982248a072d3d3c6a04ffd098fb4312e)
+        ;
+
+        
+    
+    
+            circle_marker_88c0479c0ee732b2bba04ca25d9bd237.bindTooltip(
+                `<div>
+                     Oakland Park, FL (South)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_afbf947d83a67a15d942148d764a74e1 = L.circleMarker(
+                [28.5694468, -81.5441944],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_cd3a11949f141b71084d2d061e012795 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_1eaa2aca194511c647e6c13329bb8343 = $(`<div id="html_1eaa2aca194511c647e6c13329bb8343" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid red;">             Ocoee, FL         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 672</li><li>S. 1455</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_cd3a11949f141b71084d2d061e012795.setContent(html_1eaa2aca194511c647e6c13329bb8343);
+            
+        
+
+        circle_marker_afbf947d83a67a15d942148d764a74e1.bindPopup(popup_cd3a11949f141b71084d2d061e012795)
+        ;
+
+        
+    
+    
+            circle_marker_afbf947d83a67a15d942148d764a74e1.bindTooltip(
+                `<div>
+                     Ocoee, FL (South)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_97121531f683d695500a739d3a265bb8 = L.circleMarker(
+                [32.7772597, -97.8045599],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_2597a24a070467d8bb7da536669d73e9 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_0d531a0c472fa9858ba7b9408fbddf14 = $(`<div id="html_0d531a0c472fa9858ba7b9408fbddf14" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid red;">             Parker, TX         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_2597a24a070467d8bb7da536669d73e9.setContent(html_0d531a0c472fa9858ba7b9408fbddf14);
+            
+        
+
+        circle_marker_97121531f683d695500a739d3a265bb8.bindPopup(popup_2597a24a070467d8bb7da536669d73e9)
+        ;
+
+        
+    
+    
+            circle_marker_97121531f683d695500a739d3a265bb8.bindTooltip(
+                `<div>
+                     Parker, TX (South)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6684f1aec27991698aab462f255d72b9 = L.circleMarker(
+                [26.3100794, -80.23727],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_fc77be27809a5366e064994bd1276915 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6ef8b96c3df1bad01a35ab60e172fd66 = $(`<div id="html_6ef8b96c3df1bad01a35ab60e172fd66" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid red;">             Parkland, FL         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_fc77be27809a5366e064994bd1276915.setContent(html_6ef8b96c3df1bad01a35ab60e172fd66);
+            
+        
+
+        circle_marker_6684f1aec27991698aab462f255d72b9.bindPopup(popup_fc77be27809a5366e064994bd1276915)
+        ;
+
+        
+    
+    
+            circle_marker_6684f1aec27991698aab462f255d72b9.bindTooltip(
+                `<div>
+                     Parkland, FL (South)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_37391b5a2b531424c08c1b900ef7b375 = L.circleMarker(
+                [43.086997, -78.727859],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "purple", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_66da21784f6086f50281612dfde55595 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_7d0b60453727beb1a71d45b864ab19dd = $(`<div id="html_7d0b60453727beb1a71d45b864ab19dd" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid purple;">             Pendleton, NY         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_66da21784f6086f50281612dfde55595.setContent(html_7d0b60453727beb1a71d45b864ab19dd);
+            
+        
+
+        circle_marker_37391b5a2b531424c08c1b900ef7b375.bindPopup(popup_66da21784f6086f50281612dfde55595)
+        ;
+
+        
+    
+    
+            circle_marker_37391b5a2b531424c08c1b900ef7b375.bindTooltip(
+                `<div>
+                     Pendleton, NY (Northeast)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_49130b93b17e9da1271ede51ff8801a8 = L.circleMarker(
+                [43.4432096, -96.8289293],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_5e429cdc689fa156a4de345102e101f9 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_0bb2d102921c70a2c9a1b465793f0a49 = $(`<div id="html_0bb2d102921c70a2c9a1b465793f0a49" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid blue;">             Quartzite Township, MN         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_5e429cdc689fa156a4de345102e101f9.setContent(html_0bb2d102921c70a2c9a1b465793f0a49);
+            
+        
+
+        circle_marker_49130b93b17e9da1271ede51ff8801a8.bindPopup(popup_5e429cdc689fa156a4de345102e101f9)
+        ;
+
+        
+    
+    
+            circle_marker_49130b93b17e9da1271ede51ff8801a8.bindTooltip(
+                `<div>
+                     Quartzite Township, MN (Midwest)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2b22290ee653b031868ceb8753cabe9f = L.circleMarker(
+                [40.9046145, -72.6773942],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "purple", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_1e6ce9dece3ea13b5a6d87f90859077c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_af04dc8b632841f3ff221a13e73549c2 = $(`<div id="html_af04dc8b632841f3ff221a13e73549c2" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid purple;">             Riverside, NY         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_1e6ce9dece3ea13b5a6d87f90859077c.setContent(html_af04dc8b632841f3ff221a13e73549c2);
+            
+        
+
+        circle_marker_2b22290ee653b031868ceb8753cabe9f.bindPopup(popup_1e6ce9dece3ea13b5a6d87f90859077c)
+        ;
+
+        
+    
+    
+            circle_marker_2b22290ee653b031868ceb8753cabe9f.bindTooltip(
+                `<div>
+                     Riverside, NY (Northeast)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_110310b2f8498257a05ba7c3a46222f8 = L.circleMarker(
+                [42.7412994, -88.2258926],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_1e4802775d345c1ab8a9fb0d0e0d0e66 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9810e5adc117b5cbfed4043f4cf1b349 = $(`<div id="html_9810e5adc117b5cbfed4043f4cf1b349" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid blue;">             Rochester, WI         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_1e4802775d345c1ab8a9fb0d0e0d0e66.setContent(html_9810e5adc117b5cbfed4043f4cf1b349);
+            
+        
+
+        circle_marker_110310b2f8498257a05ba7c3a46222f8.bindPopup(popup_1e4802775d345c1ab8a9fb0d0e0d0e66)
+        ;
+
+        
+    
+    
+            circle_marker_110310b2f8498257a05ba7c3a46222f8.bindTooltip(
+                `<div>
+                     Rochester, WI (Midwest)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_439978864c68e2e5d1ae10385d4f3409 = L.circleMarker(
+                [32.737075, -96.7797228],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_484d7d567949da1a55d56cf0cbdfa9dd = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9061aa05d6461543148d1ae55ad5cfae = $(`<div id="html_9061aa05d6461543148d1ae55ad5cfae" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid red;">             Sargent, TX         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_484d7d567949da1a55d56cf0cbdfa9dd.setContent(html_9061aa05d6461543148d1ae55ad5cfae);
+            
+        
+
+        circle_marker_439978864c68e2e5d1ae10385d4f3409.bindPopup(popup_484d7d567949da1a55d56cf0cbdfa9dd)
+        ;
+
+        
+    
+    
+            circle_marker_439978864c68e2e5d1ae10385d4f3409.bindTooltip(
+                `<div>
+                     Sargent, TX (South)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7e40f668e04e9ca271af3449fdb813f9 = L.circleMarker(
+                [41.6981999, -72.082083],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "purple", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_57617da59035a6757227d523fe36d79f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_abb41ce93ef0ee9affbc30e613c8074c = $(`<div id="html_abb41ce93ef0ee9affbc30e613c8074c" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid purple;">             Scotland, CT         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 672</li><li>S. 1455</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_57617da59035a6757227d523fe36d79f.setContent(html_abb41ce93ef0ee9affbc30e613c8074c);
+            
+        
+
+        circle_marker_7e40f668e04e9ca271af3449fdb813f9.bindPopup(popup_57617da59035a6757227d523fe36d79f)
+        ;
+
+        
+    
+    
+            circle_marker_7e40f668e04e9ca271af3449fdb813f9.bindTooltip(
+                `<div>
+                     Scotland, CT (Northeast)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_74f339dbad9948a8715fdea3f7a9a043 = L.circleMarker(
+                [40.5275435, -104.8959723],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_d0a1fdf59f28725440ead076abbedef9 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_10f3dd05c174796139cd561485c4eefa = $(`<div id="html_10f3dd05c174796139cd561485c4eefa" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid green;">             Severance, CO         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_d0a1fdf59f28725440ead076abbedef9.setContent(html_10f3dd05c174796139cd561485c4eefa);
+            
+        
+
+        circle_marker_74f339dbad9948a8715fdea3f7a9a043.bindPopup(popup_d0a1fdf59f28725440ead076abbedef9)
+        ;
+
+        
+    
+    
+            circle_marker_74f339dbad9948a8715fdea3f7a9a043.bindTooltip(
+                `<div>
+                     Severance, CO (West)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e0b9aa0d5f89882e22e3a15e2c912373 = L.circleMarker(
+                [38.1352969, -105.4464545],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_4939f21bd8f55583eb6d9914e797eaaa = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_eaf22dac9b3f072e8835beca704371e0 = $(`<div id="html_eaf22dac9b3f072e8835beca704371e0" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid green;">             Silver Cliff, CO         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>S. 1455</li><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_4939f21bd8f55583eb6d9914e797eaaa.setContent(html_eaf22dac9b3f072e8835beca704371e0);
+            
+        
+
+        circle_marker_e0b9aa0d5f89882e22e3a15e2c912373.bindPopup(popup_4939f21bd8f55583eb6d9914e797eaaa)
+        ;
+
+        
+    
+    
+            circle_marker_e0b9aa0d5f89882e22e3a15e2c912373.bindTooltip(
+                `<div>
+                     Silver Cliff, CO (West)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8321fa0bfb26c1d3d0a29d6080da786f = L.circleMarker(
+                [42.6301456, -87.9056175],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_517e6f5266705c5574ec2818466d8f08 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_3674642e54d940d57f037174b50e4ea6 = $(`<div id="html_3674642e54d940d57f037174b50e4ea6" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid blue;">             Somers, WI         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>S. 1455</li><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_517e6f5266705c5574ec2818466d8f08.setContent(html_3674642e54d940d57f037174b50e4ea6);
+            
+        
+
+        circle_marker_8321fa0bfb26c1d3d0a29d6080da786f.bindPopup(popup_517e6f5266705c5574ec2818466d8f08)
+        ;
+
+        
+    
+    
+            circle_marker_8321fa0bfb26c1d3d0a29d6080da786f.bindTooltip(
+                `<div>
+                     Somers, WI (Midwest)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_00b93ef8c6decdd392a5296c472d9b91 = L.circleMarker(
+                [43.7170662, -96.3727705],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_7d5a0665151995b1784edc026973f192 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_3206bf6fd49c06ee35a214d588895d22 = $(`<div id="html_3206bf6fd49c06ee35a214d588895d22" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid blue;">             Springwater Township, MN         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_7d5a0665151995b1784edc026973f192.setContent(html_3206bf6fd49c06ee35a214d588895d22);
+            
+        
+
+        circle_marker_00b93ef8c6decdd392a5296c472d9b91.bindPopup(popup_7d5a0665151995b1784edc026973f192)
+        ;
+
+        
+    
+    
+            circle_marker_00b93ef8c6decdd392a5296c472d9b91.bindTooltip(
+                `<div>
+                     Springwater Township, MN (Midwest)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9394458d23c34ec65d67a60255467f8d = L.circleMarker(
+                [39.4925996, -105.0372131],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_60fe2a1138bc97042dbc857e4eab4774 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_01e7d2cff40bbe31d60da003661e9cba = $(`<div id="html_01e7d2cff40bbe31d60da003661e9cba" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid green;">             Sterling Ranch, CO         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_60fe2a1138bc97042dbc857e4eab4774.setContent(html_01e7d2cff40bbe31d60da003661e9cba);
+            
+        
+
+        circle_marker_9394458d23c34ec65d67a60255467f8d.bindPopup(popup_60fe2a1138bc97042dbc857e4eab4774)
+        ;
+
+        
+    
+    
+            circle_marker_9394458d23c34ec65d67a60255467f8d.bindTooltip(
+                `<div>
+                     Sterling Ranch, CO (West)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_37a6a81ee8f374e0e6a867bb5f1fe4ba = L.circleMarker(
+                [39.9527634, -105.1685977],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_022334e23a90a9cd2ea7dff013926e37 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_61abf18a15988f8e8f2cd5b6de26df0d = $(`<div id="html_61abf18a15988f8e8f2cd5b6de26df0d" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid green;">             Superior, CO         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_022334e23a90a9cd2ea7dff013926e37.setContent(html_61abf18a15988f8e8f2cd5b6de26df0d);
+            
+        
+
+        circle_marker_37a6a81ee8f374e0e6a867bb5f1fe4ba.bindPopup(popup_022334e23a90a9cd2ea7dff013926e37)
+        ;
+
+        
+    
+    
+            circle_marker_37a6a81ee8f374e0e6a867bb5f1fe4ba.bindTooltip(
+                `<div>
+                     Superior, CO (West)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e2f24419053b2321ed9fe3a6209e223a = L.circleMarker(
+                [42.8723464, -72.3290406],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "purple", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_c1083241d2350eb5e61480d00cc76f06 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e04162488315aa12d06d010663320f3d = $(`<div id="html_e04162488315aa12d06d010663320f3d" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid purple;">             Swanzey, NH         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_c1083241d2350eb5e61480d00cc76f06.setContent(html_e04162488315aa12d06d010663320f3d);
+            
+        
+
+        circle_marker_e2f24419053b2321ed9fe3a6209e223a.bindPopup(popup_c1083241d2350eb5e61480d00cc76f06)
+        ;
+
+        
+    
+    
+            circle_marker_e2f24419053b2321ed9fe3a6209e223a.bindTooltip(
+                `<div>
+                     Swanzey, NH (Northeast)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a471bf59f493a2c75cdcc55351f1e759 = L.circleMarker(
+                [35.1321878, -118.4489739],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_97cb608c76b83aaf72efec633e82fa5c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_1cfa353fa7d0f1bd052c66e74439da4a = $(`<div id="html_1cfa353fa7d0f1bd052c66e74439da4a" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid green;">             Tehachapi, CA         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_97cb608c76b83aaf72efec633e82fa5c.setContent(html_1cfa353fa7d0f1bd052c66e74439da4a);
+            
+        
+
+        circle_marker_a471bf59f493a2c75cdcc55351f1e759.bindPopup(popup_97cb608c76b83aaf72efec633e82fa5c)
+        ;
+
+        
+    
+    
+            circle_marker_a471bf59f493a2c75cdcc55351f1e759.bindTooltip(
+                `<div>
+                     Tehachapi, CA (West)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7d4aa2a2484fa84f3fdf861d0150df79 = L.circleMarker(
+                [37.9374939, -107.812285],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_587f27944b6e1d3140cadcaf90b44631 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_62a011163d6b37a4631f71f83ab38f6a = $(`<div id="html_62a011163d6b37a4631f71f83ab38f6a" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid green;">             Telluride, CO         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_587f27944b6e1d3140cadcaf90b44631.setContent(html_62a011163d6b37a4631f71f83ab38f6a);
+            
+        
+
+        circle_marker_7d4aa2a2484fa84f3fdf861d0150df79.bindPopup(popup_587f27944b6e1d3140cadcaf90b44631)
+        ;
+
+        
+    
+    
+            circle_marker_7d4aa2a2484fa84f3fdf861d0150df79.bindTooltip(
+                `<div>
+                     Telluride, CO (West)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9a611f9f124d9fa4c05f410ca4f7d549 = L.circleMarker(
+                [41.6274511, -93.7380243],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_4000facf2ada79d7ba4490e01d4dd125 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_73c3115ee361296291182a88807f8616 = $(`<div id="html_73c3115ee361296291182a88807f8616" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid blue;">             Urbandale, IA         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 672</li><li>S. 1455</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_4000facf2ada79d7ba4490e01d4dd125.setContent(html_73c3115ee361296291182a88807f8616);
+            
+        
+
+        circle_marker_9a611f9f124d9fa4c05f410ca4f7d549.bindPopup(popup_4000facf2ada79d7ba4490e01d4dd125)
+        ;
+
+        
+    
+    
+            circle_marker_9a611f9f124d9fa4c05f410ca4f7d549.bindTooltip(
+                `<div>
+                     Urbandale, IA (Midwest)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9443847afe9a787a2d89cbd15e568acc = L.circleMarker(
+                [35.0223708, -80.7609035],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_7a8a1275369ff7271bf015630a336b8d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_397c79804c31fba736ce19a07ef63801 = $(`<div id="html_397c79804c31fba736ce19a07ef63801" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid red;">             Weddington, NC         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_7a8a1275369ff7271bf015630a336b8d.setContent(html_397c79804c31fba736ce19a07ef63801);
+            
+        
+
+        circle_marker_9443847afe9a787a2d89cbd15e568acc.bindPopup(popup_7a8a1275369ff7271bf015630a336b8d)
+        ;
+
+        
+    
+    
+            circle_marker_9443847afe9a787a2d89cbd15e568acc.bindTooltip(
+                `<div>
+                     Weddington, NC (South)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_055e13889057cca8df973a532d496c5e = L.circleMarker(
+                [40.0428151, -86.1274888],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_058c214c9e307ba67d087705c15003f3 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ac47ed4179be685095bff7d74df11a80 = $(`<div id="html_ac47ed4179be685095bff7d74df11a80" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid blue;">             Westfield, IN         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_058c214c9e307ba67d087705c15003f3.setContent(html_ac47ed4179be685095bff7d74df11a80);
+            
+        
+
+        circle_marker_055e13889057cca8df973a532d496c5e.bindPopup(popup_058c214c9e307ba67d087705c15003f3)
+        ;
+
+        
+    
+    
+            circle_marker_055e13889057cca8df973a532d496c5e.bindTooltip(
+                `<div>
+                     Westfield, IN (Midwest)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b84bffc26664cbacea3fde3784040d92 = L.circleMarker(
+                [43.0974428, -78.8831174],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "purple", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_ac96f7e9234841c5343c500660426e72 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_bc5d551d6a977888480d09c3be84c59a = $(`<div id="html_bc5d551d6a977888480d09c3be84c59a" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid purple;">             Wheatfield, NY         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_ac96f7e9234841c5343c500660426e72.setContent(html_bc5d551d6a977888480d09c3be84c59a);
+            
+        
+
+        circle_marker_b84bffc26664cbacea3fde3784040d92.bindPopup(popup_ac96f7e9234841c5343c500660426e72)
+        ;
+
+        
+    
+    
+            circle_marker_b84bffc26664cbacea3fde3784040d92.bindTooltip(
+                `<div>
+                     Wheatfield, NY (Northeast)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b2742bcdc5ef5b5093763f956f5fe61a = L.circleMarker(
+                [26.1603626, -80.138934],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_b87eb90b11b21144c9f629274a29eca7 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_3949fd56f3149b989a59f20f52952c03 = $(`<div id="html_3949fd56f3149b989a59f20f52952c03" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid red;">             Wilton Manors, FL         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_b87eb90b11b21144c9f629274a29eca7.setContent(html_3949fd56f3149b989a59f20f52952c03);
+            
+        
+
+        circle_marker_b2742bcdc5ef5b5093763f956f5fe61a.bindPopup(popup_b87eb90b11b21144c9f629274a29eca7)
+        ;
+
+        
+    
+    
+            circle_marker_b2742bcdc5ef5b5093763f956f5fe61a.bindTooltip(
+                `<div>
+                     Wilton Manors, FL (South)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7e208908470328950502148227258db2 = L.circleMarker(
+                [39.950724, -86.2616968],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_9097d20f0870d7e39deb3f6b654caa10);
+        
+    
+        var popup_b7a26d0ebe3aa603d8ffb0000de89102 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_2070ffa783669b1bcdb7ebb4b185c24d = $(`<div id="html_2070ffa783669b1bcdb7ebb4b185c24d" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial, sans-serif; width: 260px; max-height: 400px; overflow-y: auto;">         <h4 style="margin: 0 0 10px 0; border-bottom: 2px solid blue;">             Zionsville, IN         </h4>                  <div style="background-color: #f0f9f0; padding: 8px; border-radius: 5px; margin-bottom: 10px; font-size: 13px;">             <div style='margin-bottom: 8px;'><b>Federal Bills</b><ul style='margin: 0; padding-left: 20px;'><li>H.R. 3095</li><li>S. 2961</li></ul></div>         </div>      </div>     </div>`)[0];
+                popup_b7a26d0ebe3aa603d8ffb0000de89102.setContent(html_2070ffa783669b1bcdb7ebb4b185c24d);
+            
+        
+
+        circle_marker_7e208908470328950502148227258db2.bindPopup(popup_b7a26d0ebe3aa603d8ffb0000de89102)
+        ;
+
+        
+    
+    
+            circle_marker_7e208908470328950502148227258db2.bindTooltip(
+                `<div>
+                     Zionsville, IN (Midwest)
+                 </div>`,
+                {
+  "permanent": true,
+  "direction": "top",
+  "className": "static-label",
+  "offset": [0, -10],
+  "sticky": true,
+}
+            );
+        
+</script>
+</html>
