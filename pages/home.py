@@ -242,8 +242,8 @@ def render():
           <div class="hero-dot"></div>
         </div>
         <h1 class="hero-h1">
-          <span style="color: rgba(255,255,255,0.95);">Congress Passed the Fix.</span><br>
-          <span class="hero-h1-red">The Senate Must Act.</span>
+          <span style="color: rgba(255,255,255,0.95);">One City.</span><br>
+          <span class="hero-h1-red">One ZIP Code.</span>
         </h1>
         <p class="hero-sub">
           USPS ZIP code boundaries haven't been updated since 1963. Today they delay 911 calls,
