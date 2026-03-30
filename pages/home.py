@@ -179,7 +179,7 @@ def email_template(senator_name="Sen. Rand Paul"):
 
 I am writing on behalf of [Your City Name], a member of the National ZIP Code Advocacy Coalition — 79+ municipalities across 20+ states representing over 1 million residents.
 
-I urge you to advance S. 1455 and S. 2961 through the Senate Homeland Security & Governmental Affairs Committee. Both companion House bills passed in July 2025. The Senate must act before January 2027.
+I urge you to advance S. 1455 and S. 2961 through the Senate Homeland Security & Governmental Affairs Committee. Both companion House bills passed in July 2025. The Senate must act before December 2026.
 
 Three documented harms our community experiences due to outdated ZIP boundaries:
 
@@ -232,7 +232,7 @@ def render():
       <span class="alert-pill">⚠ SENATE ACTION NEEDED</span>
       <span class="alert-msg">H.R. 672 and H.R. 3095 passed the House in July 2025.
       S. 1455 and S. 2961 are <strong>stalled in committee.</strong>
-      The 119th Congress closes December 2026. —
+      The 119th Congress ends at the end of December 2026. —
       <a href="#action" class="alert-link">Take Action Now →</a></span>
     </div>
     """, unsafe_allow_html=True)
@@ -301,7 +301,7 @@ def render():
     st.markdown(f"""
     <div class="tracker-band">
     <div class="tracker-inner">
-      <span class="tracker-label">📊 Live Legislative Progress — 119th Congress (Jan 2025 – Jan 2027)</span>
+      <span class="tracker-label">📊 Live Legislative Progress — 119th Congress (Jan 2025 – Dec 2026)</span>
       <div class="tracker-grid">{tracker_html}</div>
     </div></div>
     """, unsafe_allow_html=True)
@@ -373,7 +373,7 @@ def render():
     st.markdown(f"""
     <div class="section section-w" style="border-top:1px solid var(--border);">
     <div class="inner">
-      <span class="sec-label">119th Congress · Jan 2025 – Jan 2027</span>
+      <span class="sec-label">119th Congress · Jan 2025 – Dec 2026</span>
       <h2 class="sec-h">Legislative Tracker</h2>
       <p class="sec-lead">Both House bills passed. The path to law runs entirely through the
       Senate Homeland Security &amp; Governmental Affairs Committee.</p>
@@ -382,7 +382,7 @@ def render():
         <div class="callout-t">⚠ The Bottleneck: Senate HSGA Committee</div>
         <div class="callout-b">Both Senate bills pass or fail together. Chairman Sen. Rand Paul (R-KY)
         must bring them to a vote. Once the Senate acts, a House/Senate conference merges all four bills
-        for White House signature. The 119th Congress window closes January 2027.</div>
+        for White House signature. The 119th Congress ends at the end of December 2026.</div>
       </div>
       <div style="margin-top:3rem;">
         <span class="sec-label sec-label-amber">Senate HSGA Committee — 15 Members</span>
@@ -581,8 +581,7 @@ def render():
       <h2 class="sec-h">Six Steps. One Goal.<br>Move the Senate.</h2>
       <p class="sec-lead">
         <strong style="color:var(--red);">Step 2 is the most time-sensitive action available.</strong>
-        Senate committee votes can happen with little public notice. The 119th Congress
-        window closes in January 2027. Complete all six steps and your city has done
+        Senate committee votes can happen with little public notice. The 119th Congress ends at the end of December 2026. Complete all six steps and your city has done
         everything possible to move this legislation.
       </p>
     </div></div>
@@ -693,7 +692,7 @@ def render():
       </div>
     </div></div>
     """, unsafe_allow_html=True)
-    
+
     # ── PRECEDENT + BEFORE/AFTER ──────────────────────────────────────────────
     st.markdown('<div id="precedent"></div>', unsafe_allow_html=True)
     st.markdown(f"""
@@ -836,7 +835,7 @@ def render():
     st.markdown("""
     <div class="cta-band">
       <div class="cta-inner">
-        <h2 class="cta-h">The Senate Window<br>Closes January 2027</h2>
+        <h2 class="cta-h">The Senate Window<br>The 119th Congress ends at the end of December 2026</h2>
         <p class="cta-p">Both House bills passed. 79+ cities are organized. The lobbying
         infrastructure is in place. What's missing is Senate action. One email from your
         city to Sen. Rand Paul can change that.</p>
@@ -891,7 +890,7 @@ def render():
         </div>
         <div class="foot-bar">
           <div class="foot-copy">© 2026 National ZIP Code Advocacy Coalition. All rights reserved.</div>
-          <div class="foot-tag">119TH CONGRESS · JAN 2025–JAN 2027 · ONE CITY. ONE ZIP CODE.</div>
+          <div class="foot-tag">119TH CONGRESS · JAN 2025 – DEC 2026 · ONE CITY. ONE ZIP CODE.</div>
         </div>
       </div>
     </footer>
