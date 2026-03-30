@@ -117,7 +117,7 @@ footer{visibility:hidden;}
 .hero-h1-red{color:#FCA5A5;}
 .hero-sub{
   font-size:clamp(1rem,1.6vw,1.15rem);color:rgba(255,255,255,0.62);
-  max-width:580px;line-height:1.85;margin-bottom:2.5rem;font-weight:400;
+  max-width:100%;line-height:1.85;margin-bottom:2.5rem;font-weight:400;
 }
 .hero-ctas{display:flex;gap:0.85rem;flex-wrap:wrap;margin-bottom:0;}
 .btn-hero-red{
@@ -180,11 +180,12 @@ footer{visibility:hidden;}
 .sec-h{
   font-size:clamp(2rem,3.8vw,3rem);font-weight:800;color:var(--blue);
   line-height:1.1;letter-spacing:-0.028em;margin-bottom:1.1rem;
+  white-space:nowrap;
 }
 .sec-h-white{color:var(--white);}
 .sec-lead{
   font-size:1.0625rem;color:var(--muted);line-height:1.85;
-  max-width:580px;letter-spacing:0.004em;
+  max-width:100%;letter-spacing:0.004em;
 }
 .sec-lead-light{color:rgba(255,255,255,0.65);}
 
