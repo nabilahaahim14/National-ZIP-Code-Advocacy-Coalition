@@ -642,7 +642,7 @@ def render():
     </div></div>
     """, unsafe_allow_html=True)
 
-    st.markdown('<div style="padding:0 3.5rem 5.5rem;max-width:1160px;margin:0 auto;"><div class="timeline">', unsafe_allow_html=True)
+    st.markdown('<div style="padding:0 3.5rem 5.5rem;max-width:1160px;margin:0 auto;padding-top:0;"><div class="timeline" style="margin-top:1.5rem;">', unsafe_allow_html=True)
 
     for step in [
         ("A", "Recommended Action — USPS", "Submit a USPS ZIP Code Boundary Review Request",

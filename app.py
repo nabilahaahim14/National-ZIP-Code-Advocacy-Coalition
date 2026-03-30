@@ -321,7 +321,7 @@ footer{visibility:hidden;}
 
 /* ── TIMELINE STEPPER ─────────────────────────────────────────────────────── */
 .timeline{
-  position:relative;margin-top:3.5rem;
+  position:relative;margin-top:1rem;
   padding-left:0;
 }
 /* Vertical spine */
@@ -501,17 +501,17 @@ footer{visibility:hidden;}
   gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,0.07);}
 .fb-name{font-size:1.15rem;font-weight:900;color:var(--white);
   margin-bottom:0.65rem;letter-spacing:-0.02em;}
-.fb-desc{font-size:0.85rem;color:rgba(255,255,255,0.38);line-height:1.75;max-width:280px;}
+.fb-desc{font-size:0.85rem;color:rgba(255,255,255,0.65);line-height:1.75;max-width:280px;}
 .fc-h{font-family:'IBM Plex Mono',monospace;font-size:0.61rem;letter-spacing:0.2em;
-  text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:0.95rem;}
-.fa{display:block;font-size:0.85rem;color:rgba(255,255,255,0.46);text-decoration:none;
+  text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:0.95rem;}
+.fa{display:block;font-size:0.85rem;color:rgba(255,255,255,0.75);text-decoration:none;
   margin-bottom:0.5rem;transition:color 0.15s;}
 .fa:hover{color:rgba(255,255,255,0.92);}
 .foot-bar{padding-top:1.5rem;display:flex;justify-content:space-between;
   align-items:center;flex-wrap:wrap;gap:0.75rem;}
-.foot-copy{font-size:0.8rem;color:rgba(255,255,255,0.26);}
+.foot-copy{font-size:0.8rem;color:rgba(255,255,255,0.55);}
 .foot-tag{font-family:'IBM Plex Mono',monospace;font-size:0.6rem;
-  color:rgba(255,255,255,0.16);letter-spacing:0.1em;}
+  color:rgba(255,255,255,0.4);letter-spacing:0.1em;}
 
 /* ── ANIMATIONS ───────────────────────────────────────────────────────────── */
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.35;}}
