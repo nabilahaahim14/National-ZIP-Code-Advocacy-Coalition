@@ -639,60 +639,33 @@ def render():
       <h2 class="sec-h">Four Steps Your City<br>Should Take Now</h2>
       <p class="sec-lead">Congress expects cities to build a documented record before requesting
       legislative action. Complete these steps to strengthen the coalition's Senate push.</p>
-      <div class="timeline">
-
-        <div class="tl-item">
-          <div class="tl-left"><div class="tl-num">A</div></div>
-          <div class="tl-card">
-            <span class="tl-phase">Recommended Action — USPS</span>
-            <div class="tl-title">Submit a USPS ZIP Code Boundary Review Request</div>
-            <div class="tl-body">Send a letter to your USPS Local Team requesting an evaluation
-            of your ZIP code boundary. Congress expects cities to receive formal USPS responses —
-            including denials — before pursuing legislative action. This creates the administrative
-            record the Senate needs.</div>
-          </div>
-        </div>
-
-        <div class="tl-item">
-          <div class="tl-left"><div class="tl-num">B</div></div>
-          <div class="tl-card">
-            <span class="tl-phase">Recommended Action — Local</span>
-            <div class="tl-title">Adopt a City Council Resolution</div>
-            <div class="tl-body">Collaborate with your City Council or Governing Board to adopt
-            a formal resolution supporting an independent ZIP code for your jurisdiction. Official
-            resolutions carry significantly more weight than standard correspondence with federal
-            offices.</div>
-          </div>
-        </div>
-
-        <div class="tl-item">
-          <div class="tl-left"><div class="tl-num">C</div></div>
-          <div class="tl-card">
-            <span class="tl-phase">Recommended Action — Community</span>
-            <div class="tl-title">Collect Resident and Business Testimonies</div>
-            <div class="tl-body">Gather documented testimonies from residents and businesses
-            impacted by ZIP code misalignment — delayed emergency responses, tax errors, insurance
-            overcharges, or logistics failures. Specific stories with dollar figures are the
-            coalition's most persuasive lobbying tool.</div>
-          </div>
-        </div>
-
-        <div class="tl-item">
-          <div class="tl-left"><div class="tl-num">D</div></div>
-          <div class="tl-card">
-            <span class="tl-phase">Recommended Action — Federal</span>
-            <div class="tl-title">Share All Documents with Your Senators and Congressmember(s)</div>
-            <div class="tl-body">Forward all relevant materials — resolutions, USPS responses,
-            resident statements, and supporting documentation — directly to your respective
-            Senators and Congressmember(s). Consistent, documented outreach from every coalition
-            city builds the political record needed for Senate action.</div>
-          </div>
-        </div>
-
-      </div>
     </div></div>
     """, unsafe_allow_html=True)
 
+    st.markdown('<div style="padding:0 3.5rem 5.5rem;max-width:1160px;margin:0 auto;"><div class="timeline">', unsafe_allow_html=True)
+
+    for step in [
+        ("A", "Recommended Action — USPS", "Submit a USPS ZIP Code Boundary Review Request",
+         "Send a letter to your USPS Local Team requesting an evaluation of your ZIP code boundary. Congress expects cities to receive formal USPS responses — including denials — before pursuing legislative action. This creates the administrative record the Senate needs."),
+        ("B", "Recommended Action — Local", "Adopt a City Council Resolution",
+         "Collaborate with your City Council or Governing Board to adopt a formal resolution supporting an independent ZIP code for your jurisdiction. Official resolutions carry significantly more weight than standard correspondence with federal offices."),
+        ("C", "Recommended Action — Community", "Collect Resident and Business Testimonies",
+         "Gather documented testimonies from residents and businesses impacted by ZIP code misalignment — delayed emergency responses, tax errors, insurance overcharges, or logistics failures. Specific stories with dollar figures are the coalition's most persuasive lobbying tool."),
+        ("D", "Recommended Action — Federal", "Share All Documents with Your Senators and Congressmember(s)",
+         "Forward all relevant materials — resolutions, USPS responses, resident statements, and supporting documentation — directly to your respective Senators and Congressmember(s). Consistent, documented outreach from every coalition city builds the political record needed for Senate action."),
+    ]:
+        st.markdown(f"""
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-num">{step[0]}</div></div>
+          <div class="tl-card">
+            <span class="tl-phase">{step[1]}</span>
+            <div class="tl-title">{step[2]}</div>
+            <div class="tl-body">{step[3]}</div>
+          </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.markdown("</div></div>", unsafe_allow_html=True)
     # ── PRECEDENT + BEFORE/AFTER ──────────────────────────────────────────────
     st.markdown('<div id="precedent"></div>', unsafe_allow_html=True)
     st.markdown(f"""

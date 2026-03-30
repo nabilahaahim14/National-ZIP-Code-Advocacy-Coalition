@@ -36,6 +36,7 @@ html,body,[data-testid="stAppViewContainer"],[data-testid="stApp"]{
 [data-testid="stMarkdownContainer"]{width:100%!important;}
 [data-testid="stMarkdownContainer"] p{margin:0;}
 [data-testid="stMarkdownContainer"] div{max-width:100%;}
+footer.footer{display:block!important;visibility:visible!important;}            
 .element-container{margin:0!important;padding:0!important;width:100%!important;}
 .stMarkdown{width:100%!important;}
 footer{visibility:hidden;}
