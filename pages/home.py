@@ -241,9 +241,7 @@ def render():
     st.markdown("""
     <section class="hero">
       <div class="hero-inner">
-        <div class="hero-kicker">
-          <div class="hero-dot"></div>
-        </div>
+      <div class="hero-kicker" style="display:none;"></div>
         <h1 class="hero-h1">
           <span style="color: rgba(255,255,255,0.95);">One City.</span><br>
           <span class="hero-h1-red">One ZIP Code.</span>
@@ -320,7 +318,7 @@ def render():
     <div class="section section-w" style="border-top:1px solid var(--border);">
     <div class="inner">
       <span class="sec-label sec-label-red">The Problem</span>
-      <h2 class="sec-h">Five Ways Outdated ZIP Codes<br>Are Costing Your City — Right Now</h2>
+      <h2 class="sec-h">Five Ways Outdated ZIP Codes Are Costing Your City — Right Now</h2>
       <p class="sec-lead">This is not a branding issue. These are documented, measurable harms
       affecting public safety, government revenue, and business competitiveness every single day.</p>
       <div class="prob-grid">{prob_html}</div>
@@ -533,7 +531,7 @@ def render():
         pass
 
     # Member directory dataframe
-    st.markdown('<div style="padding:2.5rem 3.5rem 5rem;max-width:1160px;margin:0 auto;">', unsafe_allow_html=True)
+    st.markdown('<div style="padding:2.5rem 0 5rem;max-width:100%;margin:0 auto;">', unsafe_allow_html=True)
     st.markdown("""
     <span style="font-family:'IBM Plex Mono',monospace;font-size:0.7rem;font-weight:600;
       letter-spacing:0.22em;text-transform:uppercase;color:var(--blue-m);
@@ -633,53 +631,47 @@ def render():
 # ── TAKE ACTION ───────────────────────────────────────────────────────────
     st.markdown('<div id="action"></div>', unsafe_allow_html=True)
     st.markdown("""
-    <div class="section section-w" style="border-top:1px solid var(--border);">
-    <div class="inner">
-      <span class="sec-label sec-label-red">Take Action</span>
-      <h2 class="sec-h">Four Steps Your City Should Take Now</h2>
-      <p class="sec-lead">Congress expects cities to build a documented record before requesting
-      legislative action. Complete these steps to strengthen the coalition's Senate push.</p>
-      <div class="timeline" style="margin-top:2rem;">
-
-        <div class="tl-item">
-          <div class="tl-left"><div class="tl-num">A</div></div>
-          <div class="tl-card">
-            <span class="tl-phase">Recommended Action — USPS</span>
-            <div class="tl-title">Submit a USPS ZIP Code Boundary Review Request</div>
-            <div class="tl-body">Send a letter to your USPS Local Team requesting an evaluation of your ZIP code boundary. Congress expects cities to receive formal USPS responses — including denials — before pursuing legislative action. This creates the administrative record the Senate needs.</div>
-          </div>
-        </div>
-
-        <div class="tl-item">
-          <div class="tl-left"><div class="tl-num">B</div></div>
-          <div class="tl-card">
-            <span class="tl-phase">Recommended Action — Local</span>
-            <div class="tl-title">Adopt a City Council Resolution</div>
-            <div class="tl-body">Collaborate with your City Council or Governing Board to adopt a formal resolution supporting an independent ZIP code for your jurisdiction. Official resolutions carry significantly more weight than standard correspondence with federal offices.</div>
-          </div>
-        </div>
-
-        <div class="tl-item">
-          <div class="tl-left"><div class="tl-num">C</div></div>
-          <div class="tl-card">
-            <span class="tl-phase">Recommended Action — Community</span>
-            <div class="tl-title">Collect Resident and Business Testimonies</div>
-            <div class="tl-body">Gather documented testimonies from residents and businesses impacted by ZIP code misalignment — delayed emergency responses, tax errors, insurance overcharges, or logistics failures. Specific stories with dollar figures are the coalition's most persuasive lobbying tool.</div>
-          </div>
-        </div>
-
-        <div class="tl-item">
-          <div class="tl-left"><div class="tl-num">D</div></div>
-          <div class="tl-card">
-            <span class="tl-phase">Recommended Action — Federal</span>
-            <div class="tl-title">Share All Documents with Your Senators and Congressmember(s)</div>
-            <div class="tl-body">Forward all relevant materials — resolutions, USPS responses, resident statements, and supporting documentation — directly to your respective Senators and Congressmember(s). Consistent, documented outreach from every coalition city builds the political record needed for Senate action.</div>
-          </div>
-        </div>
-
-      </div>
-    </div></div>
-    """, unsafe_allow_html=True)
+<div class="section section-w" style="border-top:1px solid var(--border);">
+<div class="inner">
+<span class="sec-label sec-label-red">Take Action</span>
+<h2 class="sec-h">Four Steps Your City Should Take Now</h2>
+<p class="sec-lead">Congress expects cities to build a documented record before requesting legislative action. Complete these steps to strengthen the coalition's Senate push.</p>
+<div class="timeline" style="margin-top:2rem;">
+<div class="tl-item">
+<div class="tl-left"><div class="tl-num">A</div></div>
+<div class="tl-card">
+<span class="tl-phase">Recommended Action — USPS</span>
+<div class="tl-title">Submit a USPS ZIP Code Boundary Review Request</div>
+<div class="tl-body">Send a letter to your USPS Local Team requesting an evaluation of your ZIP code boundary. Congress expects cities to receive formal USPS responses — including denials — before pursuing legislative action. This creates the administrative record the Senate needs.</div>
+</div>
+</div>
+<div class="tl-item">
+<div class="tl-left"><div class="tl-num">B</div></div>
+<div class="tl-card">
+<span class="tl-phase">Recommended Action — Local</span>
+<div class="tl-title">Adopt a City Council Resolution</div>
+<div class="tl-body">Collaborate with your City Council or Governing Board to adopt a formal resolution supporting an independent ZIP code for your jurisdiction. Official resolutions carry significantly more weight than standard correspondence with federal offices.</div>
+</div>
+</div>
+<div class="tl-item">
+<div class="tl-left"><div class="tl-num">C</div></div>
+<div class="tl-card">
+<span class="tl-phase">Recommended Action — Community</span>
+<div class="tl-title">Collect Resident and Business Testimonies</div>
+<div class="tl-body">Gather documented testimonies from residents and businesses impacted by ZIP code misalignment — delayed emergency responses, tax errors, insurance overcharges, or logistics failures. Specific stories with dollar figures are the coalition's most persuasive lobbying tool.</div>
+</div>
+</div>
+<div class="tl-item">
+<div class="tl-left"><div class="tl-num">D</div></div>
+<div class="tl-card">
+<span class="tl-phase">Recommended Action — Federal</span>
+<div class="tl-title">Share All Documents with Your Senators and Congressmember(s)</div>
+<div class="tl-body">Forward all relevant materials — resolutions, USPS responses, resident statements, and supporting documentation — directly to your respective Senators and Congressmember(s). Consistent outreach from every coalition city builds the political record needed for Senate action.</div>
+</div>
+</div>
+</div>
+</div></div>
+""", unsafe_allow_html=True)
     
     # ── PRECEDENT + BEFORE/AFTER ──────────────────────────────────────────────
     st.markdown('<div id="precedent"></div>', unsafe_allow_html=True)
@@ -714,7 +706,7 @@ def render():
       </div>
 
       <h3 style="font-size:1.35rem;font-weight:800;color:var(--blue);
-        margin:3.5rem 0 0.6rem;letter-spacing:-0.015em;">
+        margin:3.5rem 0 0.6rem;letter-spacing:-0.015em;white-space:nowrap;">
         Before vs. After: Hanahan, South Carolina</h3>
       <p style="font-size:0.93rem;color:var(--muted);line-height:1.82;
         margin-bottom:2rem;max-width:580px;">
