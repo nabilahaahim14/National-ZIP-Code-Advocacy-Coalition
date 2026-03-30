@@ -815,7 +815,7 @@ def render():
     st.markdown("""
     <div class="cta-band">
       <div class="cta-inner">
-        <h2 class="cta-h">The Senate Window<br>The 119th Congress ends at the end of December 2026</h2>
+        <h2 class="cta-h">The 119th Congress ends at the end of December 2026</h2>
         <p class="cta-p">Both House bills passed. 79+ cities are organized. The lobbying
         infrastructure is in place. What's missing is Senate action. One email from your
         city to Sen. Rand Paul can change that.</p>
@@ -823,6 +823,28 @@ def render():
           <a href="#action" class="btn-cred"> Take Action Now</a>
           <a href="mailto:afung@eastvaleca.gov" class="btn-coutline">Join the Coalition — Free →</a>
         </div>
+        <div style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid rgba(26,58,107,0.15);
+          display:flex;gap:2.5rem;justify-content:center;flex-wrap:wrap;">
+          <div style="text-align:center;">
+            <div style="font-size:0.7rem;font-family:'IBM Plex Mono',monospace;letter-spacing:0.18em;
+              text-transform:uppercase;color:var(--blue-m);margin-bottom:0.4rem;">Co-Chair · Castle Pines, CO</div>
+            <div style="font-weight:800;color:var(--blue);font-size:0.95rem;margin-bottom:0.3rem;">Michael Penny</div>
+            <a href="mailto:Michael.penny@castlepinesco.gov"
+              style="font-size:0.85rem;color:var(--blue-m);text-decoration:none;">
+              Michael.penny@castlepinesco.gov</a>
+          </div>
+          <div style="width:1px;background:rgba(26,58,107,0.12);"></div>
+          <div style="text-align:center;">
+            <div style="font-size:0.7rem;font-family:'IBM Plex Mono',monospace;letter-spacing:0.18em;
+              text-transform:uppercase;color:var(--blue-m);margin-bottom:0.4rem;">Co-Chair · Eastvale, CA</div>
+            <div style="font-weight:800;color:var(--blue);font-size:0.95rem;margin-bottom:0.3rem;">Alexander Fung</div>
+            <a href="mailto:afung@eastvaleca.gov"
+              style="font-size:0.85rem;color:var(--blue-m);text-decoration:none;">
+              afung@eastvaleca.gov</a>
+          </div>
+        </div>
+      </div>
+    </div>
       </div>
     </div>
     """, unsafe_allow_html=True)
