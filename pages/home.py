@@ -59,13 +59,13 @@ COMMITTEE = [
 
 BILLS = [
     {"id":"H.R. 672","author":"Rep. Mario Diaz-Balart (R-FL)","cities":"8 cities",
-     "badge":"b-g","prog":75,"cls":"bcard-p","companion":"S. 1455",
-     "status":"PASSED HOUSE",
+     "badge":"b-a","prog":75,"cls":"bcard-p","companion":"S. 1455",
+     "status":"SENATE COMMITTEE",
      "url":"https://www.congress.gov/bill/119th-congress/house-bill/672",
      "note":"Stalled in Senate HSGA Committee. Chair: Sen. Rand Paul (R-KY)."},
     {"id":"H.R. 3095","author":"Rep. Lauren Boebert (R-CO)","cities":"66 cities",
-     "badge":"b-g","prog":75,"cls":"bcard-p","companion":"S. 2961",
-     "status":"PASSED HOUSE",
+     "badge":"b-a","prog":75,"cls":"bcard-p","companion":"S. 2961",
+     "status":"SENATE COMMITTEE",
      "url":"https://www.congress.gov/bill/119th-congress/house-bill/3095",
      "note":"Stalled in Senate HSGA Committee. Chair: Sen. Rand Paul (R-KY)."},
     {"id":"S. 1455","author":"Sen. Rick Scott (R-FL)","cities":"14 cities",
@@ -291,7 +291,7 @@ def render():
         <div class="tcard-num">{i+1}</div>
         <div class="tcard-id">{b['id']}</div>
         <div class="tcard-author">{b['author']}</div>
-        <span class="tbadge {'tbadge-g' if b['prog']>=70 else 'tbadge-a'}">{b['status']}</span>
+        <span class="tbadge {'tbadge-g' if b['badge']=='b-g' else 'tbadge-a'}">{b['status']}</span>
         <div class="tcard-note">{b['note']}</div>
         <div class="tprog">
           <div class="tprog-fill {'tprog-green' if b['prog']>=70 else 'tprog-amber'}"

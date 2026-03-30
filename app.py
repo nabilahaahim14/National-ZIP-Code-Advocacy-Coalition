@@ -222,7 +222,7 @@ footer{visibility:hidden;}
 .tprog-amber{background:var(--amber);}
 
 /* ── PROBLEM CARDS — 4 up ─────────────────────────────────────────────────── */
-.prob-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;margin-top:3rem;}
+.prob-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:3rem;}
 .pcard{
   background:var(--white);border:1px solid var(--border);
   border-top:4px solid var(--blue);border-radius:0 0 10px 10px;
@@ -298,6 +298,25 @@ footer{visibility:hidden;}
 /* ── MAP SECTION — uses .inner for consistent padding ─────────────────────── */
 .map-frame{border:1px solid var(--border);border-radius:12px;overflow:hidden;
   box-shadow:0 4px 20px rgba(0,0,0,0.06);margin-top:2.5rem;}
+
+/* ── TIMELINE ─────────────────────────────────────────────────────────────── */
+.timeline{display:flex;flex-direction:column;gap:0;margin-top:2.5rem;}
+.tl-item{display:flex;gap:1.75rem;position:relative;padding-bottom:2.5rem;}
+.tl-item:last-child{padding-bottom:0;}
+.tl-item::before{content:'';position:absolute;left:21px;top:44px;bottom:0;
+  width:2px;background:var(--border);}
+.tl-item:last-child::before{display:none;}
+.tl-left{flex-shrink:0;}
+.tl-num{width:44px;height:44px;border-radius:50%;background:var(--blue);
+  color:var(--white);font-weight:800;font-size:0.95rem;display:flex;
+  align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;}
+.tl-card{flex:1;background:var(--white);border:1px solid var(--border);
+  border-radius:10px;padding:1.6rem 1.85rem;}
+.tl-phase{font-family:'IBM Plex Mono',monospace;font-size:0.61rem;font-weight:600;
+  letter-spacing:0.16em;text-transform:uppercase;color:var(--blue-m);
+  display:block;margin-bottom:0.5rem;}
+.tl-title{font-size:1.05rem;font-weight:800;color:var(--blue);margin-bottom:0.65rem;}
+.tl-body{font-size:0.9rem;color:var(--muted);line-height:1.82;}             
 
 /* ── TIMELINE STEPPER ─────────────────────────────────────────────────────── */
 .timeline{
