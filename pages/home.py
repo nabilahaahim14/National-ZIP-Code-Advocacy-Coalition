@@ -62,12 +62,12 @@ BILLS = [
      "badge":"b-g","prog":75,"cls":"bcard-p","companion":"S. 1455",
      "status":"PASSED HOUSE",
      "url":"https://www.congress.gov/bill/119th-congress/house-bill/672",
-     "note":"Passed full House July 2025. Awaits Senate companion action."},
+     "note":"Stalled in Senate HSGA Committee. Chair: Sen. Rand Paul (R-KY)."},
     {"id":"H.R. 3095","author":"Rep. Lauren Boebert (R-CO)","cities":"66 cities",
      "badge":"b-g","prog":75,"cls":"bcard-p","companion":"S. 2961",
      "status":"PASSED HOUSE",
      "url":"https://www.congress.gov/bill/119th-congress/house-bill/3095",
-     "note":"Passed full House July 2025. Awaits Senate companion action."},
+     "note":"Stalled in Senate HSGA Committee. Chair: Sen. Rand Paul (R-KY)."},
     {"id":"S. 1455","author":"Sen. Rick Scott (R-FL)","cities":"14 cities",
      "badge":"b-a","prog":35,"cls":"bcard-s","companion":"H.R. 672",
      "status":"SENATE COMMITTEE",
@@ -93,6 +93,9 @@ PROBLEMS = [
     {"icon":"📦","cls":"pcard-green","title":"Logistics & Commerce",
      "body":"Carriers geofence by ZIP. Incorporated cities like Eastvale, CA still carry decades-old unincorporated labels — triggering rural surcharges and 'Address Not Found' failures.",
      "stat":"$26K","stat_lbl":"annual surcharge per 100 shipments/week"},
+     {"icon":"🏙️","cls":"pcard-blue","title":"Business Attraction",
+     "body":"Business owners, developers, and brokers use GIS platforms that categorize opportunity data by ZIP code. When a city's ZIP spans multiple jurisdictions or carries a neighboring city's label, it is systematically excluded from site selection — costing jobs and investment.",
+     "stat":"","stat_lbl":"ZIP-based GIS platforms used in site selection"},
 ]
 
 CASES = [
@@ -135,9 +138,9 @@ RESOURCES = [
     {"icon":"📊","type":"Research","title":"ZIP Codes & Sales Tax (Avalara)",
      "desc":"Why ZIP codes fail as sales tax tools — Colorado case studies.",
      "url":"https://www.avalara.com/us/en/learn/whitepapers/zip-codes-the-wrong-tool-for-the-job.html","arrow":"Read Research →"},
-    {"icon":"📰","type":"White Paper","title":"Coalition White Paper",
-     "desc":"Published documentation of how shared ZIPs cause measurable municipal harm.",
-     "url":"https://www.eastvaleca.gov","arrow":"Download from eastvaleca.gov →"},
+    {"icon":"📰","type":"White Paper","title":"Coalition White Paper (Revised)",
+     "desc":"Updated documentation of how shared ZIPs cause measurable municipal harm across 79+ cities.",
+     "url":"https://www.eastvaleca.gov/home/showpublisheddocument/18184/639098699108370000","arrow":"Download Revised White Paper →"},
 ]
 
 STEPS = [
@@ -209,7 +212,7 @@ def render():
       <a class="nav-brand" href="#">
         <div class="nav-seal">🏛️</div>
         <div>
-          <div class="nav-name">National ZIP Coalition Advocacy</div>
+          <div class="nav-name">National ZIP Code Advocacy Coalition</div>
           <span class="nav-sub">119th Congress</span>
         </div>
       </a>
@@ -221,7 +224,7 @@ def render():
         <a href="#precedent" class="nav-a">Precedent</a>
         <a href="#resources" class="nav-a">Resources</a>
         <a href="#action" class="nav-urgent">
-          <span class="nav-dot"></span>Contact Your Senator
+          <span class="nav-dot"></span>Take Action Now
         </a>
       </div>
     </nav>
@@ -229,7 +232,7 @@ def render():
       <span class="alert-pill">⚠ SENATE ACTION NEEDED</span>
       <span class="alert-msg">H.R. 672 and H.R. 3095 passed the House in July 2025.
       S. 1455 and S. 2961 are <strong>stalled in committee.</strong>
-      The 119th Congress closes January 2027. —
+      The 119th Congress closes December 2026. —
       <a href="#action" class="alert-link">Take Action Now →</a></span>
     </div>
     """, unsafe_allow_html=True)
@@ -246,12 +249,13 @@ def render():
           <span class="hero-h1-red">One ZIP Code.</span>
         </h1>
         <p class="hero-sub">
-          USPS ZIP code boundaries haven't been updated since 1963. Today they delay 911 calls,
-          misallocate tax revenue, and systematically overcharge over one million Americans
-          in 79 municipalities across 20+ states. Both House bills passed. The Senate is the last obstacle.
+          Nowadays, many USPS ZIP code boundaries don't match their cities' municipal boundaries.
+          Today, they delay 911 calls, misallocate tax revenue, and systematically overcharge
+          over one million Americans in 79 municipalities across 20+ states.
+          Both House bills passed. The Senate is the last obstacle.
         </p>
         <div class="hero-ctas">
-          <a href="#action" class="btn-hero-red">Contact Your Senator Now</a>
+          <a href="#action" class="btn-hero-red">Take Action Now</a>
           <a href="#problem" class="btn-hero-ghost">See the Evidence →</a>
         </div>
       </div>
@@ -316,7 +320,7 @@ def render():
     <div class="section section-w" style="border-top:1px solid var(--border);">
     <div class="inner">
       <span class="sec-label sec-label-red">The Problem</span>
-      <h2 class="sec-h">Four Ways Outdated ZIP Codes<br>Are Costing Your City — Right Now</h2>
+      <h2 class="sec-h">Five Ways Outdated ZIP Codes<br>Are Costing Your City — Right Now</h2>
       <p class="sec-lead">This is not a branding issue. These are documented, measurable harms
       affecting public safety, government revenue, and business competitiveness every single day.</p>
       <div class="prob-grid">{prob_html}</div>
@@ -627,7 +631,69 @@ def render():
 
     st.markdown("</div></div>", unsafe_allow_html=True) 
     '''
+# ── TAKE ACTION ───────────────────────────────────────────────────────────
+    st.markdown('<div id="action"></div>', unsafe_allow_html=True)
+    st.markdown("""
+    <div class="section section-w" style="border-top:1px solid var(--border);">
+    <div class="inner">
+      <span class="sec-label sec-label-red">Take Action</span>
+      <h2 class="sec-h">Four Steps Your City<br>Should Take Now</h2>
+      <p class="sec-lead">Congress expects cities to build a documented record before requesting
+      legislative action. Complete these steps to strengthen the coalition's Senate push.</p>
+      <div class="timeline">
 
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-num">A</div></div>
+          <div class="tl-card">
+            <span class="tl-phase">Recommended Action — USPS</span>
+            <div class="tl-title">Submit a USPS ZIP Code Boundary Review Request</div>
+            <div class="tl-body">Send a letter to your USPS Local Team requesting an evaluation
+            of your ZIP code boundary. Congress expects cities to receive formal USPS responses —
+            including denials — before pursuing legislative action. This creates the administrative
+            record the Senate needs.</div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-num">B</div></div>
+          <div class="tl-card">
+            <span class="tl-phase">Recommended Action — Local</span>
+            <div class="tl-title">Adopt a City Council Resolution</div>
+            <div class="tl-body">Collaborate with your City Council or Governing Board to adopt
+            a formal resolution supporting an independent ZIP code for your jurisdiction. Official
+            resolutions carry significantly more weight than standard correspondence with federal
+            offices.</div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-num">C</div></div>
+          <div class="tl-card">
+            <span class="tl-phase">Recommended Action — Community</span>
+            <div class="tl-title">Collect Resident and Business Testimonies</div>
+            <div class="tl-body">Gather documented testimonies from residents and businesses
+            impacted by ZIP code misalignment — delayed emergency responses, tax errors, insurance
+            overcharges, or logistics failures. Specific stories with dollar figures are the
+            coalition's most persuasive lobbying tool.</div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-num">D</div></div>
+          <div class="tl-card">
+            <span class="tl-phase">Recommended Action — Federal</span>
+            <div class="tl-title">Share All Documents with Your Senators and Congressmember(s)</div>
+            <div class="tl-body">Forward all relevant materials — resolutions, USPS responses,
+            resident statements, and supporting documentation — directly to your respective
+            Senators and Congressmember(s). Consistent, documented outreach from every coalition
+            city builds the political record needed for Senate action.</div>
+          </div>
+        </div>
+
+      </div>
+    </div></div>
+    """, unsafe_allow_html=True)
+    
     # ── PRECEDENT + BEFORE/AFTER ──────────────────────────────────────────────
     st.markdown('<div id="precedent"></div>', unsafe_allow_html=True)
     st.markdown(f"""
@@ -775,7 +841,7 @@ def render():
         infrastructure is in place. What's missing is Senate action. One email from your
         city to Sen. Rand Paul can change that.</p>
         <div class="cta-btns">
-          <a href="#action" class="btn-cred">Contact Your Senator Now</a>
+          <a href="#action" class="btn-cred"> Take Action Now</a>
           <a href="mailto:afung@eastvaleca.gov" class="btn-coutline">Join the Coalition — Free →</a>
         </div>
       </div>
@@ -807,7 +873,11 @@ def render():
             <a href="https://www.eastvaleca.gov/community/national-zip-code-advocacy-coalition/-fsiteid-1#!/" target="_blank" class="fa">Coalition Website</a>
             <a href="https://www.eastvaleca.gov" target="_blank" class="fa">City of Eastvale, CA</a>
             <a href="https://www.castlepinesco.gov" target="_blank" class="fa">City of Castle Pines, CO</a>
+            <div class="fc-h" style="margin-top:1.25rem;">Contact</div>
+            <span class="fa" style="color:rgba(255,255,255,0.46);cursor:default;">Alexander Fung</span>
             <a href="mailto:afung@eastvaleca.gov" class="fa">afung@eastvaleca.gov</a>
+            <span class="fa" style="color:rgba(255,255,255,0.46);cursor:default;">Michael Penny</span>
+            <a href="mailto:Michael.penny@castlepinesco.gov" class="fa">Michael.penny@castlepinesco.gov</a>
           </div>
           <div>
             <div class="fc-h">Navigate</div>
