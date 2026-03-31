@@ -455,7 +455,7 @@ def render():
                               f'Email <a href="mailto:afung@eastvaleca.gov" style="color:var(--blue-m);">'
                               f'afung@eastvaleca.gov</a> to join.</div>')
 
-            # Senator rows
+# Senator rows
             if state_senators:
                 sen_rows = ""
                 for sname, sparty, srole in state_senators:
@@ -480,33 +480,36 @@ def render():
                          ✉ Email Senator
                       </a>
                     </div>"""
-                senator_block = f"""
-                <div style="border-top:1px solid var(--border);padding-top:1.1rem;margin-top:0.25rem;">
-                  <div style="font-family:'IBM Plex Mono',monospace;font-size:0.63rem;font-weight:600;
-                    letter-spacing:0.18em;text-transform:uppercase;color:var(--red);
-                    padding-top:0.85rem;border-top:3px solid var(--red);
-                    width:fit-content;margin-bottom:0.85rem;">⚡ Your HSGA Senator(s)</div>
-                  {sen_rows}
-                </div>"""
-            else:
-                senator_block = f"""<p style="font-size:0.9rem;color:var(--muted);line-height:1.8;
-                  border-top:1px solid var(--border);padding-top:1rem;margin-top:0.5rem;">
-                  No HSGA Committee senators from {state_sel}. Contact the full committee at
-                  <a href="https://www.hsgac.senate.gov/" target="_blank"
-                     style="color:var(--blue-m);">hsgac.senate.gov</a>.</p>"""
-
-                st.markdown(
-                    '<div style="background:var(--white);border:1px solid var(--border);'
-                    'border-radius:10px;padding:1.5rem 1.75rem;">'
+                senator_block = (
+                    '<div style="border-top:1px solid var(--border);padding-top:1.1rem;margin-top:0.25rem;">'
                     '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:0.63rem;font-weight:600;'
-                    'letter-spacing:0.18em;text-transform:uppercase;color:var(--blue-m);'
-                    'padding-top:0.85rem;border-top:3px solid var(--blue-m);'
-                    f'width:fit-content;margin-bottom:0.9rem;">Coalition Cities in {state_sel}</div>'
-                    + city_block
-                    + senator_block
-                    + '</div>',
-                    unsafe_allow_html=True
+                    'letter-spacing:0.18em;text-transform:uppercase;color:var(--red);'
+                    'padding-top:0.85rem;border-top:3px solid var(--red);'
+                    'width:fit-content;margin-bottom:0.85rem;">⚡ Your HSGA Senator(s)</div>'
+                    + sen_rows
+                    + '</div>'
                 )
+            else:
+                senator_block = (
+                    '<p style="font-size:0.9rem;color:var(--muted);line-height:1.8;'
+                    'border-top:1px solid var(--border);padding-top:1rem;margin-top:0.5rem;">'
+                    f'No HSGA Committee senators from {state_sel}. Contact the full committee at '
+                    '<a href="https://www.hsgac.senate.gov/" target="_blank"'
+                    ' style="color:var(--blue-m);">hsgac.senate.gov</a>.</p>'
+                )
+
+            st.markdown(
+                '<div style="background:var(--white);border:1px solid var(--border);'
+                'border-radius:10px;padding:1.5rem 1.75rem;">'
+                '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:0.63rem;font-weight:600;'
+                'letter-spacing:0.18em;text-transform:uppercase;color:var(--blue-m);'
+                'padding-top:0.85rem;border-top:3px solid var(--blue-m);'
+                f'width:fit-content;margin-bottom:0.9rem;">Coalition Cities in {state_sel}</div>'
+                + city_block
+                + senator_block
+                + '</div>',
+                unsafe_allow_html=True
+            )
         else:
             st.markdown("""
             <div style="background:var(--white);border:2px dashed var(--border);
