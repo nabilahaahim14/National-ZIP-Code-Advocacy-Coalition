@@ -84,26 +84,24 @@ footer{visibility:hidden;}
 
 /* ── HERO — full-width dark, headline + stat bar ──────────────────────────── */
 
-            /* ── HERO — full-width dark, headline + stat bar ──────────────────────────── */
 .hero {
-    /* Replace the old background:var(--g900) with this: */
-    background: linear-gradient(rgba(10, 32, 72, 0.8), rgba(10, 32, 72, 0.8)), 
-                url('https://lh3.googleusercontent.com/d/1JxS24P-SbB_g6kfUpgoT3VEhkd8xwiZE');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    padding: 9rem 0 0; /* Increased top padding for aesthetic spacing */
-    position: relative;
-    overflow: hidden;
+  /* Using a slightly darker overlay for better text contrast */
+  background: linear-gradient(rgba(15, 22, 35, 0.85), rgba(15, 22, 35, 0.92)), 
+              url('https://lh3.googleusercontent.com/d/1JxS24P-SbB_g6kfUpgoT3VEhkd8xwiZE');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 10rem 0 6rem; /* More vertical breathing room */
+  position: relative;
+  overflow: hidden;
+  margin-top: -1px; /* Seamless transition from alert bar */
 }
 .hero::before{content:'';position:absolute;inset:0;
   background:
     radial-gradient(ellipse 55% 70% at 70% 40%,rgba(34,81,163,0.35) 0%,transparent 65%),
     radial-gradient(ellipse 30% 50% at 5% 80%,rgba(192,24,27,0.14) 0%,transparent 60%);
   pointer-events:none;}
-.hero::after{content:'';position:absolute;inset:0;
-  background-image:radial-gradient(rgba(255,255,255,0.07) 1px,transparent 1px);
-  background-size:32px 32px;pointer-events:none;}
+.hero::after { display: none; }
 .hero-inner{
   max-width:1160px;margin:0 auto;padding:0 3.5rem;
   position:relative;z-index:1;
@@ -117,16 +115,22 @@ footer{visibility:hidden;}
   box-shadow:0 0 8px #4ADE80;flex-shrink:0;animation:pulse 2s ease-in-out infinite;}
 .hero-kicker-t{font-family:'IBM Plex Mono',monospace;font-size:0.65rem;
   letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.65);}
-.hero-h1{
-  font-size:clamp(3rem,5.5vw,5.2rem);font-weight:900;color:var(--white);
-  line-height:1.04;letter-spacing:-0.035em;margin-bottom:1.5rem;
-  max-width:820px; text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-            
+.hero-h1 {
+  font-size: clamp(3.5rem, 6vw, 5.5rem);
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin-bottom: 1.5rem;
+  /* Subtle glow to make text feel high-end */
+  text-shadow: 0 4px 20px rgba(0,0,0,0.3);
 }
 .hero-h1-red{color:#FCA5A5;}
-.hero-sub{
-  font-size:clamp(1rem,1.6vw,1.15rem);color:rgba(255,255,255,0.62);
-  max-width:100%;line-height:1.85;margin-bottom:2.5rem;font-weight:400;
+.hero-sub {
+  color: rgba(255,255,255,0.7);
+  max-width: 700px; /* Don't let text stretch too wide */
+  font-size: 1.1rem;
+  margin-bottom: 3rem;
 }
 .hero-ctas{display:flex;gap:0.85rem;flex-wrap:wrap;margin-bottom:0;}
 .btn-hero-red{
