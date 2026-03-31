@@ -240,8 +240,7 @@ def render():
     # ── HERO — full-width, stat bar ───────────────────────────────────────────
     st.markdown("""
     <section class="hero" style="
-        background: linear-gradient(rgba(10, 32, 72, 0.85), rgba(10, 32, 72, 0.85)), 
-                    url('https://lh3.googleusercontent.com/d/1JxS24P-SbB_g6kfUpgoT3VEhkd8xwiZE');
+        background: linear-gradient(rgba(10, 32, 72, 0.85), rgba(10, 32, 72, 0.85)), url('https://lh3.googleusercontent.com/d/1JxS24P-SbB_g6kfUpgoT3VEhkd8xwiZE');
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
@@ -496,17 +495,18 @@ def render():
                   <a href="https://www.hsgac.senate.gov/" target="_blank"
                      style="color:var(--blue-m);">hsgac.senate.gov</a>.</p>"""
 
-            st.markdown(f"""
+            st.markdown("""
             <div style="background:var(--white);border:1px solid var(--border);
                  border-radius:10px;padding:1.5rem 1.75rem;">
               <div style="font-family:'IBM Plex Mono',monospace;font-size:0.63rem;font-weight:600;
                 letter-spacing:0.18em;text-transform:uppercase;color:var(--blue-m);
                 padding-top:0.85rem;border-top:3px solid var(--blue-m);
-                width:fit-content;margin-bottom:0.9rem;">Coalition Cities in {state_sel}</div>
-              {city_block}
-              {senator_block}
+                width:fit-content;margin-bottom:0.9rem;">Coalition Cities in {state}</div>
+              {cities}
+              {senators}
             </div>
-            """, unsafe_allow_html=True)
+            """.format(state=state_sel, cities=city_block, senators=senator_block), 
+            unsafe_allow_html=True)
         else:
             st.markdown("""
             <div style="background:var(--white);border:2px dashed var(--border);
