@@ -240,6 +240,12 @@ def render():
     # ── HERO — full-width, stat bar ───────────────────────────────────────────
     st.markdown("""
     <section class="hero">
+        background-image: linear-gradient(rgba(10, 32, 72, 0.85), rgba(10, 32, 72, 0.85)), 
+        url('https://lh3.googleusercontent.com/d/1JxS24P-SbB_g6kfUpgoT3VEhkd8xwiZE');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    ">
       <div class="hero-inner">
       <div class="hero-kicker" style="display:none;"></div>
         <h1 class="hero-h1">
