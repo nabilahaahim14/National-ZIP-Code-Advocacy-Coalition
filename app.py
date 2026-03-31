@@ -83,9 +83,18 @@ footer{visibility:hidden;}
 .alert-link:hover{color:var(--white);text-decoration:underline;}
 
 /* ── HERO — full-width dark, headline + stat bar ──────────────────────────── */
-.hero{
-  background:var(--g900);padding:7rem 0 0;
-  position:relative;overflow:hidden;
+
+            /* ── HERO — full-width dark, headline + stat bar ──────────────────────────── */
+.hero {
+    /* Replace the old background:var(--g900) with this: */
+    background: linear-gradient(rgba(10, 32, 72, 0.8), rgba(10, 32, 72, 0.8)), 
+                url('https://lh3.googleusercontent.com/d/1JxS24P-SbB_g6kfUpgoT3VEhkd8xwiZE');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    padding: 9rem 0 0; /* Increased top padding for aesthetic spacing */
+    position: relative;
+    overflow: hidden;
 }
 .hero::before{content:'';position:absolute;inset:0;
   background:
