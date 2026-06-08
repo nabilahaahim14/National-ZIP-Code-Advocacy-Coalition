@@ -536,7 +536,13 @@ def render():
     </div></div>
     """, unsafe_allow_html=True)
 
-    st.markdown('<div style="padding:0 3.5rem 0;max-width:1160px;margin:0 auto;">', unsafe_allow_html=True)
+    # Use CSS to constrain Streamlit's own block container width for native widgets
+    st.markdown("""
+    <style>
+    [data-testid="stHorizontalBlock"] { max-width:1160px; margin:0 auto; padding:0 3.5rem; }
+    [data-testid="stDataFrame"] { max-width:1160px; margin:0 auto; padding:0 3.5rem; }
+    </style>
+    """, unsafe_allow_html=True)
     col_l, col_r = st.columns([1, 2])
     with col_l:
         st.markdown("""
@@ -637,11 +643,10 @@ def render():
               ← Select your state to see coalition cities<br>and your HSGA Committee senator
             </div>
             """, unsafe_allow_html=True)
-    st.markdown("</div>", unsafe_allow_html=True)
 
     # Interactive map
     st.markdown("""
-    <div style="padding:3rem 3.5rem 0;max-width:1160px;margin:0 auto;">
+    <div style="padding:3rem 3.5rem 0.5rem;max-width:1160px;margin:0 auto;">
       <span style="font-family:'IBM Plex Mono',monospace;font-size:0.7rem;font-weight:600;
         letter-spacing:0.22em;text-transform:uppercase;color:var(--blue-m);
         padding-top:1rem;border-top:3px solid var(--blue-m);
@@ -652,6 +657,20 @@ def render():
     try:
         with open(map_path, "r", encoding="utf-8") as f:
             map_html = f.read()
+        # Inject JS to force map to fit continental US bounds on load
+        us_bounds_js = """<script>
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                var maps = Object.values(window).filter(function(v) {
+                    return v && typeof v === 'object' && typeof v.fitBounds === 'function' && typeof v.setView === 'function';
+                });
+                maps.forEach(function(m) {
+                    try { m.fitBounds([[24.4, -124.8], [49.4, -66.9]]); } catch(e) {}
+                });
+            }, 400);
+        });
+        </script>"""
+        map_html = map_html.replace("</body>", us_bounds_js + "\n</body>")
         st.markdown('<div style="padding:0 3.5rem;max-width:1160px;margin:0 auto;"><div class="map-frame">', unsafe_allow_html=True)
         components.html(map_html, height=520, scrolling=False)
         st.markdown("</div></div>", unsafe_allow_html=True)
@@ -659,7 +678,6 @@ def render():
         pass
 
     # Member directory
-    st.markdown('<div style="padding:2.5rem 0 5rem;max-width:100%;margin:0 auto;">', unsafe_allow_html=True)
     st.markdown("""
     <span style="font-family:'IBM Plex Mono',monospace;font-size:0.7rem;font-weight:600;
       letter-spacing:0.22em;text-transform:uppercase;color:var(--blue-m);
@@ -695,7 +713,6 @@ def render():
                 min_value=0, max_value=int(df["Coalition Density"].max()),
                 format="%d cities", width="medium"),
         }, hide_index=False)
-    st.markdown("</div>", unsafe_allow_html=True)
 
     # ── TAKE ACTION ───────────────────────────────────────────────────────────
     st.markdown('<div id="action"></div>', unsafe_allow_html=True)
