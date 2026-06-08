@@ -146,7 +146,7 @@ TESTIMONIALS = [
 
 RESOURCES = [
     {"icon":"📄","type":"White Paper","title":"NZCAC White Paper — 2026 Edition",
-     "desc":"Full documentation of how shared ZIPs cause measurable harm across 55+ member municipalities. Municipal testimonials, impact data, legislative history, and the call to action.",
+     "desc":"Full documentation of how shared ZIPs cause measurable harm across 75+ member municipalities. Municipal testimonials, impact data, legislative history, and the call to action.",
      "url":"https://www.eastvaleca.gov/home/showpublisheddocument/18184/639098699108370000",
      "arrow":"Download White Paper →"},
     {"icon":"📋","type":"Legislation","title":"S. 4505 — Consolidated Bill (Ernst)",
