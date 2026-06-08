@@ -237,7 +237,7 @@ def render():
     st.markdown("""
     <nav class="nav">
       <a class="nav-brand" href="#">
-        <div class="nav-seal">🏛️</div>
+        <img src="https://lh3.googleusercontent.com/d/14liYHXqAGnmBAlW28chUFBa5ZnYyTbVd" style="width:36px;height:36px;object-fit:contain;border-radius:50%;background:rgba(255,255,255,0.08);" alt="NZCAC Logo">
         <div>
           <div class="nav-name">National ZIP Code Advocacy Coalition</div>
           <span class="nav-sub">119th Congress</span>
