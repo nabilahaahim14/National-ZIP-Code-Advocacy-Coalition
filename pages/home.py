@@ -33,7 +33,7 @@ CITIES = sorted([
 STATE_SENATORS = {
     "KY":[("Rand Paul","R","Chair")],
     "WI":[("Ron Johnson","R","")],
-    "OK":[("James Lankford","R","")],
+    "OK":[("James Lankford","R",""),("Alan Armstrong","R","")],
     "FL":[("Rick Scott","R",""),("Ashley Moody","R","")],
     "MO":[("Josh Hawley","R","")],
     "OH":[("Bernie Moreno","R","")],
