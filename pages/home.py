@@ -57,141 +57,168 @@ COMMITTEE = [
     ("Elissa Slotkin","D","MI",""),
 ]
 
-BILLS = [
+# ── S.4505 is the primary consolidated bill; prior bills shown as history ──
+PRIMARY_BILL = {
+    "id": "S. 4505",
+    "author": "Sen. Joni Ernst (R-IA)",
+    "cities": "75 cities",
+    "status": "SENATE — ACTIVE",
+    "badge": "b-g",
+    "prog": 50,
+    "cls": "bcard-p",
+    "url": "https://www.congress.gov/search?q=%22S.+4505%22&searchField=allfields",
+    "note": "Consolidated bill introduced by Sen. Ernst. Incorporates H.R. 672, H.R. 3095, S. 1455, and S. 2961. Wisconsin communities excluded due to Sen. Ron Johnson (R-WI) objections — amendments being sought.",
+}
+
+PRIOR_BILLS = [
     {"id":"H.R. 672","author":"Rep. Mario Diaz-Balart (R-FL)","cities":"8 cities",
      "badge":"b-a","prog":75,"cls":"bcard-p","companion":"S. 1455",
-     "status":"SENATE COMMITTEE",
+     "status":"HOUSE PASSED · CONSOLIDATED INTO S. 4505",
      "url":"https://www.congress.gov/bill/119th-congress/house-bill/672",
-     "note":"Stalled in Senate HSGA Committee. Chair: Sen. Rand Paul (R-KY)."},
+     "note":"Passed House July 2025. Consolidated into S. 4505 by Sen. Ernst."},
     {"id":"H.R. 3095","author":"Rep. Lauren Boebert (R-CO)","cities":"66 cities",
      "badge":"b-a","prog":75,"cls":"bcard-p","companion":"S. 2961",
-     "status":"SENATE COMMITTEE",
+     "status":"HOUSE PASSED · CONSOLIDATED INTO S. 4505",
      "url":"https://www.congress.gov/bill/119th-congress/house-bill/3095",
-     "note":"Stalled in Senate HSGA Committee. Chair: Sen. Rand Paul (R-KY)."},
+     "note":"Passed House July 2025. Consolidated into S. 4505 by Sen. Ernst."},
     {"id":"S. 1455","author":"Sen. Rick Scott (R-FL)","cities":"14 cities",
      "badge":"b-a","prog":35,"cls":"bcard-s","companion":"H.R. 672",
-     "status":"SENATE COMMITTEE",
+     "status":"CONSOLIDATED INTO S. 4505",
      "url":"https://www.congress.gov/bill/119th-congress/senate-bill/1455",
-     "note":"Stalled in Senate HSGA Committee. Chair: Sen. Rand Paul (R-KY)."},
+     "note":"Senate companion to H.R. 672. Consolidated into S. 4505 by Sen. Ernst."},
     {"id":"S. 2961","author":"Sen. Mike Banks (R-IN)","cities":"69 cities",
      "badge":"b-a","prog":35,"cls":"bcard-s","companion":"H.R. 3095",
-     "status":"SENATE COMMITTEE",
+     "status":"CONSOLIDATED INTO S. 4505",
      "url":"https://www.congress.gov/bill/119th-congress/senate-bill/2961",
-     "note":"Stalled in Senate HSGA Committee. Chair: Sen. Rand Paul (R-KY)."},
+     "note":"Senate companion to H.R. 3095. Consolidated into S. 4505 by Sen. Ernst."},
 ]
 
 PROBLEMS = [
     {"icon":"🚨","cls":"pcard-red","title":"Public Safety",
-     "body":"ZIP confusion routes 911 calls to wrong dispatch centers. When a city boundary crosses ZIP lines, emergency response is delayed — and seconds determine outcomes.",
-     "stat":"3 min+","stat_lbl":"avg 911 delay from mis-routing"},
-    {"icon":"💰","cls":"pcard-amber","title":"Fiscal Accuracy",
-     "body":"Sales tax revenue generated inside your city is credited to neighboring jurisdictions. ZIP 80111 spans four tax rates — every business is an audit waiting to happen.",
-     "stat":"$20K+","stat_lbl":"annual audit exposure per $2M in sales"},
-    {"icon":"📋","cls":"pcard-blue","title":"Insurance Equity",
-     "body":"Insurers rate policies by ZIP, not city boundary. Low-risk coalition cities sharing a ZIP with higher-risk neighbors absorb inflated premiums with no recourse.",
+     "body":"ZIP confusion routes 911 calls to wrong dispatch centers. In Somers, WI, firefighters from the wrong department were dispatched because two residences in different municipalities shared the same address and ZIP code. A street had to be renamed as a result. Seconds determine outcomes.",
+     "stat":"14 ZIP","stat_lbl":"codes span Somers, WI — one city"},
+    {"icon":"💰","cls":"pcard-amber","title":"Lost Tax Revenue",
+     "body":"Sales tax generated inside your city is credited to neighboring jurisdictions. Frederick, CO estimates a conservative $1.5M in lost annual sales tax due to shared ZIP codes. Green, OH identified $614,000 in unpaid taxes in 2023 alone — from ZIP-driven resident confusion.",
+     "stat":"$1.5M","stat_lbl":"est. annual lost sales tax · Frederick, CO"},
+    {"icon":"📋","cls":"pcard-blue","title":"Insurance Inequity",
+     "body":"Insurers rate policies by ZIP, not city boundary. Eastvale, CA shares ZIP 92880 with Corona — a high-risk wildfire zone. Despite Eastvale not being classified high-risk by CalFire, residents pay inflated premiums based on their neighbor's risk profile. Some cannot get coverage at all.",
      "stat":"20%+","stat_lbl":"territory mis-assignment error rate"},
     {"icon":"📦","cls":"pcard-green","title":"Logistics & Commerce",
-     "body":"Carriers geofence by ZIP. Incorporated cities like Eastvale, CA still carry decades-old unincorporated labels — triggering rural surcharges and 'Address Not Found' failures.",
-     "stat":"$26K","stat_lbl":"annual surcharge per 100 shipments/week"},
-     {"icon":"🏙️","cls":"pcard-blue","title":"Business Attraction",
-     "body":"Business owners, developers, and brokers use GIS platforms that categorize opportunity data by ZIP code. When a city's ZIP spans multiple jurisdictions or carries a neighboring city's label, it is systematically excluded from site selection — costing jobs and investment.",
-     "stat":"","stat_lbl":"ZIP-based GIS platforms used in site selection"},
+     "body":"Carriers geofence by ZIP. Mills, WY has a post office ZIP (82644) that only covers a single P.O. box location — all home delivery uses Casper's 82604. Residents ordering online face returns, failed deliveries, and packages routed to Casper. One resident cannot receive medical supplies at home.",
+     "stat":"2 ZIP","stat_lbl":"codes for one city · Mills, WY"},
+    {"icon":"🏙️","cls":"pcard-blue","title":"Business Attraction",
+     "body":"Commercial developers use GIS platforms that categorize opportunity data by ZIP code. When a city's ZIP carries a neighboring city's label, it is systematically excluded from site selection. Green, OH's 1,200+ businesses appear under Akron, Uniontown, or North Canton — never Green.",
+     "stat":"6 ZIPs","stat_lbl":"carve through Green, OH — none say 'Green'"},
 ]
 
 CASES = [
-    {"stat":"$20K+","sub":"annual audit exposure per $2M in sales",
-     "lbl":"Case Study A · Sales Tax","title":"The Greenwood Village Audit Trap",
-     "desc":"ZIP 80111 spans four distinct sales tax rates. Compliance software applies the wrong rate by default. Coalition cities sharing ZIPs with Aurora, Englewood, and Littleton face identical risk. The IRS does not accept 'our ZIP code made us do it' as a defense.",
-     "src":"Source: Avalara / Colorado DOR"},
-    {"stat":"20%+","sub":"territory mis-assignment using ZIP-based data",
-     "lbl":"Case Study B · Insurance","title":"The Shared-ZIP Premium Trap",
-     "desc":"Actuarial research shows insurers using postal ZIPs mis-assign more than 20% of policies — consistently overcharging shared-ZIP municipalities. Low-crime coalition cities pay high-crime rates because their ZIP is anchored to a neighboring metro.",
-     "src":"Source: Insurance Journal; Consumer Federation of America"},
-    {"stat":"$26K","sub":"annual surcharge at 100 shipments per week",
-     "lbl":"Case Study C · Logistics","title":"The Eastvale Address Problem",
-     "desc":"Eastvale incorporated in 2010 but still carries 'Mira Loma, CA' as its USPS mailing city. UPS, FedEx, and Amazon trigger rural surcharges, 1–3 day delays, and 'Address Not Found' errors — a direct competitive disadvantage for every business in the city.",
-     "src":"Source: City of Eastvale; USPS carrier route data"},
+    {"stat":"$614K","sub":"in unpaid taxes identified in Green, OH — 2023 alone",
+     "lbl":"Case Study A · Tax Revenue · Green, OH",
+     "title":"ZIP-Driven Tax Confusion Costs Green $614K a Year",
+     "desc":"Green, OH has 27,475 residents and 1,200+ businesses — yet not a single home or business address says 'Green.' All six ZIP codes identify with other cities. In 2023, the city's Income Tax Division identified $614,000 in unpaid taxes from residents and businesses filing with the wrong jurisdiction. Every year, Green expends significant resources reversing improper tax payments. In 2024, First Energy incorrectly assigned over 1,500 utility accounts due to ZIP confusion, resulting in billing errors that took multiple cycles to correct.",
+     "src":"Source: City of Green, OH · Mayor's Letter to USPS, February 2025"},
+    {"stat":"$1.5M","sub":"conservative estimate of annual lost sales tax · Frederick, CO",
+     "lbl":"Case Study B · Fiscal Loss · Frederick, CO",
+     "title":"Frederick Loses Millions to Neighboring ZIP Codes",
+     "desc":"Over 4,000 Frederick households are assigned to Longmont's ZIP code (80504), and more than 2,000 have the Erie ZIP (80516). This misattribution redirects sales tax revenue out of Frederick — a conservative estimate of $1.5 million annually. Residents confirm the impact firsthand: large purchases like automobiles are auto-assigned to Boulder County tax rates, which are higher than Frederick's. The town cannot verify that its sales taxes haven't been going to neighboring cities for years.",
+     "src":"Source: Town of Frederick, CO · Coalition White Paper 2026"},
+    {"stat":"40 yrs","sub":"of advocacy with no resolution · Superior, CO",
+     "lbl":"Case Study C · Systemic Failure · Superior, CO",
+     "title":"Four Decades of Requests. Zero Resolution.",
+     "desc":"Superior, CO has been seeking a unique ZIP code since 1988 — formally requesting one in 1992, 1997, 2000, and multiple times since. Every request has been denied. In Esri's ArcGIS — used daily by city staff — some Superior addresses default to Louisville. Staff spend significant time cleaning misattributed data. Annual revenue loss is estimated in the hundreds of thousands. The town had 250 residents in 1988. Today it has 13,000+. The ZIP code has never been updated to reflect this.",
+     "src":"Source: Town of Superior, CO · Coalition White Paper 2026"},
+]
+
+TESTIMONIALS = [
+    {"city":"Green, OH","quote":"Not a single home or business address in Green belongs to Green. All are divided up and assigned to neighboring communities — even though Green is the largest city in southern Summit County.",
+     "role":"Mayor Rocco P. Yeargin · City of Green"},
+    {"city":"Somers, WI","quote":"A major incident led to the renaming of one of the village's streets after firefighters from the wrong department were dispatched to a call because two residences in two different municipalities shared the same address and ZIP code.",
+     "role":"Kevin Poirier · Assistant to the Village Administrator, Somers, WI"},
+    {"city":"Eastvale, CA","quote":"Despite Eastvale not being deemed a high-risk zone by CalFire, the city's shared ZIP code impacts residents' insurance rates. While most residents experience increases, some are unable to obtain coverage at all.",
+     "role":"City of Eastvale · Coalition White Paper 2026"},
+    {"city":"Frederick, CO","quote":"Over 4,000 households are assigned to the Longmont ZIP code, and more than 2,000 have the Erie ZIP. This situation has the potential to cause a conservative estimate of $1.5 million in lost sales tax revenue annually.",
+     "role":"Town of Frederick, CO · Coalition White Paper 2026"},
+    {"city":"Mills, WY","quote":"She recently tried to order furniture online and had to cancel the order because the delivery company could not verify it was an actual home.",
+     "role":"Darcie Gudger · Mills, WY resident (re: elderly mother's medical supply deliveries)"},
+    {"city":"Urbandale, IA","quote":"New USPS staff reversed course, telling Urbandale that many areas of our City had been assigned Urbandale ZIP codes 'in error' and outlining a plan to change those ZIP codes — forcing hundreds of residents and businesses to change their mailing address.",
+     "role":"City of Urbandale, IA · Coalition White Paper 2026"},
 ]
 
 RESOURCES = [
+    {"icon":"📄","type":"White Paper","title":"NZCAC White Paper — 2026 Edition",
+     "desc":"Full documentation of how shared ZIPs cause measurable harm across 55+ member municipalities. Municipal testimonials, impact data, legislative history, and the call to action.",
+     "url":"https://www.eastvaleca.gov/home/showpublisheddocument/18184/639098699108370000",
+     "arrow":"Download White Paper →"},
+    {"icon":"📋","type":"Legislation","title":"S. 4505 — Consolidated Bill (Ernst)",
+     "desc":"Sen. Joni Ernst (R-IA) consolidated H.R. 672, H.R. 3095, S. 1455, and S. 2961 into S. 4505 covering 75 cities.",
+     "url":"https://www.congress.gov/search?q=%22S.+4505%22&searchField=allfields",
+     "arrow":"Search on Congress.gov →"},
     {"icon":"📋","type":"Legislation","title":"H.R. 672 — Full Bill Text",
-     "desc":"Rep. Mario Diaz-Balart (R-FL). Passed House July 2025.",
+     "desc":"Rep. Mario Diaz-Balart (R-FL). Passed House July 2025. Consolidated into S. 4505.",
      "url":"https://www.congress.gov/bill/119th-congress/house-bill/672","arrow":"View on Congress.gov →"},
     {"icon":"📋","type":"Legislation","title":"H.R. 3095 — Full Bill Text",
-     "desc":"Rep. Lauren Boebert (R-CO). Passed House July 2025.",
+     "desc":"Rep. Lauren Boebert (R-CO). Passed House July 2025. Consolidated into S. 4505.",
      "url":"https://www.congress.gov/bill/119th-congress/house-bill/3095","arrow":"View on Congress.gov →"},
-    {"icon":"📋","type":"Legislation","title":"S. 1455 — Full Bill Text",
-     "desc":"Sen. Rick Scott (R-FL). In Senate HSGA Committee.",
-     "url":"https://www.congress.gov/bill/119th-congress/senate-bill/1455","arrow":"View on Congress.gov →"},
     {"icon":"📋","type":"Legislation","title":"S. 2961 — Full Bill Text",
-     "desc":"Sen. Mike Banks (R-IN). In Senate HSGA Committee.",
+     "desc":"Sen. Mike Banks (R-IN). In Senate HSGA Committee. Consolidated into S. 4505.",
      "url":"https://www.congress.gov/bill/119th-congress/senate-bill/2961","arrow":"View on Congress.gov →"},
     {"icon":"🏛️","type":"Coalition","title":"Official Coalition Webpage",
      "desc":"Primary hub on eastvaleca.gov with background, partners, and contact info.",
      "url":"https://www.eastvaleca.gov/community/national-zip-code-advocacy-coalition/-fsiteid-1#!/","arrow":"Visit eastvaleca.gov →"},
     {"icon":"⚖️","type":"Committee","title":"Senate HSGA Committee",
-     "desc":"Where S. 1455 and S. 2961 are stalled. Chair: Sen. Rand Paul (R-KY).",
+     "desc":"Where S. 4505 will be reviewed. Chair: Sen. Rand Paul (R-KY).",
      "url":"https://www.hsgac.senate.gov/","arrow":"Visit Committee →"},
     {"icon":"📖","type":"Precedent","title":"Postal Accountability Act (2006)",
-     "desc":"Section 1009 mandated unique ZIPs for Auburn OH, Hanahan SC, and others.",
+     "desc":"Section 1009 mandated unique ZIPs for Auburn OH, Hanahan SC, Bradbury CA, and Discovery Bay CA.",
      "url":"https://www.congress.gov/bill/109th-congress/house-bill/6407","arrow":"View on Congress.gov →"},
     {"icon":"📊","type":"Research","title":"ZIP Codes & Sales Tax (Avalara)",
      "desc":"Why ZIP codes fail as sales tax tools — Colorado case studies.",
      "url":"https://www.avalara.com/us/en/learn/whitepapers/zip-codes-the-wrong-tool-for-the-job.html","arrow":"Read Research →"},
-    {"icon":"📰","type":"White Paper","title":"Coalition White Paper (Revised)",
-     "desc":"Updated documentation of how shared ZIPs cause measurable municipal harm across 79+ cities.",
-     "url":"https://www.eastvaleca.gov/home/showpublisheddocument/18184/639098699108370000","arrow":"Download Revised White Paper →"},
 ]
 
 STEPS = [
-    {"n":"01","phase":"Phase 1 — Foundation","urgent":False,
-     "title":"Pass a City Council Resolution",
-     "body":"Formally resolve your council's support for S. 1455 and S. 2961. Send certified copies to your Senators and Congressmember. A resolution on official letterhead carries significantly more weight than a standard email — it creates an official paper trail that Senate staff catalog.",
-     "cta":"Download Resolution Template →",
-     "url":"https://www.eastvaleca.gov/community/national-zip-code-advocacy-coalition/-fsiteid-1#!/"},
-    {"n":"02","phase":"⚡ URGENT — Phase 2","urgent":True,
-     "title":"Write to Your Senate HSGA Committee Senator",
-     "body":"This is the single most impactful action available right now. Every coalition city must send individual letters to each Senator on the Senate Homeland Security & Governmental Affairs Committee — especially Chairman Sen. Rand Paul (R-KY). Use the pre-filled template below and personalize with one specific impact from your city.",
+    {"n":"A","phase":"Recommended Action — USPS","urgent":False,
+     "title":"Submit a USPS ZIP Code Boundary Review Request",
+     "body":"Send a formal letter to your USPS Local District Manager requesting a ZIP code boundary review. Congress expects cities to receive formal USPS responses — including denials — before pursuing legislative action. USPS must acknowledge within 30 days and provide a final determination within 60. This creates the administrative record the Senate needs.",
      "cta":None,"url":None},
-    {"n":"03","phase":"Phase 2 — Federal Push","urgent":False,
-     "title":"File a USPS Boundary Review Request",
-     "body":"Submit a formal letter to USPS requesting a ZIP code boundary review. USPS must acknowledge within 30 days and respond within 60. This runs parallel to — not instead of — the legislative push, and creates a formal administrative record.",
-     "cta":"USPS Contact Directory →","url":"https://postalinspectors.uspis.gov/"},
-    {"n":"04","phase":"Phase 2 — Federal Push","urgent":False,
-     "title":"Submit a Verified Impact Story",
-     "body":"One documented incident — a 911 confusion, a sales tax audit, an insurance penalty, or a logistics delay with a dollar figure attached — is the coalition's most powerful lobbying asset. Three sentences and one number is enough. Senators respond to constituent stories with specifics.",
-     "cta":"Submit Your Impact Story →",
-     "url":"mailto:afung@eastvaleca.gov?subject=Impact Story Submission"},
-    {"n":"05","phase":"Phase 3 — Coalition Growth","urgent":False,
-     "title":"Join the Formal Coalition",
-     "body":"No cost. Monthly coordination meetings. Shared lobbying costs through Van Scoyoc Associates. One email to Alexander Fung gets your city into a working group of 79+ municipalities with active federal legislation already passed by the full House.",
-     "cta":"Email Alexander Fung →","url":"mailto:afung@eastvaleca.gov"},
-    {"n":"06","phase":"Phase 3 — Coalition Growth","urgent":False,
-     "title":"Post the Monthly Social Media Wave",
-     "body":"Every first Tuesday of the month, all coalition cities post simultaneously. The pre-designed graphic and caption are in the media kit. Coordinated volume creates national visibility that individual posts cannot. It takes three minutes and builds the political pressure the Senate needs to act.",
-     "cta":"Download Social Media Kit →",
-     "url":"https://www.eastvaleca.gov/community/national-zip-code-advocacy-coalition/-fsiteid-1#!/"},
+    {"n":"B","phase":"⚡ URGENT — Federal Action","urgent":True,
+     "title":"Write to Your Senate HSGA Committee Senator",
+     "body":"S. 4505 is the active consolidated bill — introduced by Sen. Joni Ernst (R-IA). It now must clear the Senate Homeland Security & Governmental Affairs Committee. Every coalition city must send individual letters to each Senator on the committee — especially Chairman Sen. Rand Paul (R-KY). Use the pre-filled template and personalize with one specific impact from your city.",
+     "cta":None,"url":None},
+    {"n":"C","phase":"Recommended Action — Local","urgent":False,
+     "title":"Adopt a City Council Resolution",
+     "body":"Collaborate with your City Council or Governing Board to adopt a formal resolution supporting an independent ZIP code for your jurisdiction. Official resolutions carry significantly more weight than standard correspondence with federal offices — they create an official paper trail that Senate staff catalog.",
+     "cta":None,"url":None},
+    {"n":"D","phase":"Recommended Action — Community","urgent":False,
+     "title":"Collect Resident and Business Testimonies",
+     "body":"Gather documented testimonies from residents and businesses impacted by ZIP misalignment — delayed emergency responses, lost tax revenue, insurance overcharges, or logistics failures. The coalition's 2026 White Paper includes real examples: a Mills, WY resident who cannot receive medical supplies at home; a Somers, WI street renamed after a wrong-department fire dispatch. Three sentences and one dollar figure is enough.",
+     "cta":"Download White Paper for Examples →",
+     "url":"https://www.eastvaleca.gov/home/showpublisheddocument/18184/639098699108370000"},
+    {"n":"E","phase":"Recommended Action — Federal","urgent":False,
+     "title":"Share All Documents with Your Senators and Congressmember(s)",
+     "body":"Forward your resolution, USPS correspondence, resident testimonies, and the coalition's 2026 White Paper directly to your respective Senators and Congressmember(s). Consistent outreach from every coalition city builds the political record needed for Senate action on S. 4505.",
+     "cta":"Join the Coalition — Free →","url":"mailto:afung@eastvaleca.gov"},
 ]
 
 def email_template(senator_name="Sen. Rand Paul"):
-    subject = "Urgent: Please Advance S. 1455 and S. 2961 — ZIP Code Geographic Integrity Act"
+    subject = "Urgent: Please Advance S. 4505 — ZIP Code Geographic Integrity Act"
     body = f"""Dear {senator_name},
 
-I am writing on behalf of [Your City Name], a member of the National ZIP Code Advocacy Coalition — 79+ municipalities across 20+ states representing over 1 million residents.
+I am writing on behalf of [Your City Name], a member of the National ZIP Code Advocacy Coalition — 75+ municipalities across 20+ states representing over 1 million residents.
 
-I urge you to advance S. 1455 and S. 2961 through the Senate Homeland Security & Governmental Affairs Committee. Both companion House bills passed in July 2025. The Senate must act before December 2026.
+I urge you to advance S. 4505 through the Senate Homeland Security & Governmental Affairs Committee. This consolidated bill was introduced by Sen. Joni Ernst (R-IA) and incorporates the previously separate H.R. 672, H.R. 3095, S. 1455, and S. 2961. The companion House bills passed in July 2025.
 
 Three documented harms our community experiences due to outdated ZIP boundaries:
 
-1. PUBLIC SAFETY: 911 calls are routed to wrong dispatch centers. Response times increase. Lives are at risk.
+1. PUBLIC SAFETY: 911 calls are routed to wrong dispatch centers. In Somers, WI, firefighters from the wrong department responded to an emergency because two residences in different municipalities shared the same address and ZIP code.
 
-2. FISCAL ACCURACY: Local sales tax revenue is credited to neighboring jurisdictions. Our businesses face audit exposure with no ability to self-correct.
+2. FISCAL ACCURACY: Local sales tax revenue is credited to neighboring jurisdictions. Frederick, CO estimates $1.5M in lost annual sales tax. Green, OH identified $614,000 in unpaid taxes in 2023 alone — entirely caused by ZIP code confusion.
 
-3. ECONOMIC HARM: Insurance, logistics, and federal datasets all use ZIP codes — our city is systematically mis-rated and overcharged.
+3. ECONOMIC HARM: Insurance, logistics, and federal datasets all use ZIP codes — our city is systematically mis-rated and overcharged. Some Eastvale, CA residents cannot obtain homeowners insurance at all because their ZIP is coded to a wildfire-risk neighbor.
 
 Congress has done this before. Section 1009 of the Postal Accountability and Enhancement Act (2006) mandated unique ZIP codes for Hanahan, SC and three other cities — and it worked. The estimated cost per adjustment is $193,327 — 0.0002% of USPS's $89B annual budget.
 
-Please bring S. 1455 and S. 2961 to a committee vote.
+Please bring S. 4505 to a committee vote.
 
 Respectfully,
 [Your Name]
@@ -206,7 +233,7 @@ Respectfully,
 
 def render():
 
-    # ── NAV + ALERT (one call) ────────────────────────────────────────────────
+    # ── NAV + ALERT ───────────────────────────────────────────────────────────
     st.markdown("""
     <nav class="nav">
       <a class="nav-brand" href="#">
@@ -220,7 +247,7 @@ def render():
         <a href="#problem"   class="nav-a">The Problem</a>
         <a href="#tracker"   class="nav-a">Bill Status</a>
         <a href="#members"   class="nav-a">Members</a>
-        <a href="#action"    class="nav-a">Roadmap</a>
+        <a href="#action"    class="nav-a">Take Action</a>
         <a href="#precedent" class="nav-a">Precedent</a>
         <a href="#resources" class="nav-a">Resources</a>
         <a href="#action" class="nav-urgent">
@@ -229,15 +256,14 @@ def render():
       </div>
     </nav>
     <div class="alert-bar">
-      <span class="alert-pill">⚠ SENATE ACTION NEEDED</span>
-      <span class="alert-msg">H.R. 672 and H.R. 3095 passed the House in July 2025.
-      S. 1455 and S. 2961 are <strong>stalled in committee.</strong>
-      The 119th Congress ends at the end of December 2026. —
+      <span class="alert-pill">⚡ UPDATE: S. 4505 INTRODUCED</span>
+      <span class="alert-msg">Sen. Joni Ernst (R-IA) consolidated H.R. 672, H.R. 3095, S. 1455 &amp; S. 2961 into
+      <strong>S. 4505</strong> — covering 75 cities. Now before the Senate HSGA Committee. —
       <a href="#action" class="alert-link">Take Action Now →</a></span>
     </div>
     """, unsafe_allow_html=True)
 
-    # ── HERO — full-width, stat bar ───────────────────────────────────────────
+    # ── HERO ──────────────────────────────────────────────────────────────────
     st.markdown("""
     <section class="hero" style="
         background: linear-gradient(rgba(10, 32, 72, 0.85), rgba(10, 32, 72, 0.85)), url('https://lh3.googleusercontent.com/d/1JxS24P-SbB_g6kfUpgoT3VEhkd8xwiZE');
@@ -246,26 +272,25 @@ def render():
         background-attachment: fixed;
     ">
       <div class="hero-inner">
-      <div class="hero-kicker" style="display:none;"></div>
+        <div class="hero-kicker" style="display:none;"></div>
         <h1 class="hero-h1">
           <span style="color: rgba(255,255,255,0.95);">One City.</span><br>
           <span class="hero-h1-red">One ZIP Code.</span>
         </h1>
         <p class="hero-sub">
-          Nowadays, many USPS ZIP code boundaries don't match their cities' municipal boundaries.
-          Today, they delay 911 calls, misallocate tax revenue, and systematically overcharge
-          over one million Americans in 79 municipalities across 20+ states.
-          Both House bills passed. The Senate is the last obstacle.
+          Outdated USPS ZIP code boundaries delay 911 calls, misallocate tax revenue, inflate insurance
+          rates, and systematically harm over one million Americans across 75+ municipalities in 20+ states.
+          S. 4505 is now before the Senate. The 119th Congress ends December 2026.
         </p>
         <div class="hero-ctas">
-          <a href="#action" class="btn-hero-red">Take Action Now</a>
+          <a href="#action" class="btn-hero-red">Take Action on S. 4505</a>
           <a href="#problem" class="btn-hero-ghost">See the Evidence →</a>
         </div>
       </div>
       <div class="hero-statbar">
         <div class="hst">
-          <span class="hst-n">79+</span>
-          <span class="hst-l">Member Cities</span>
+          <span class="hst-n">75+</span>
+          <span class="hst-l">Cities in S. 4505</span>
         </div>
         <div class="hst">
           <span class="hst-n">20+</span>
@@ -276,8 +301,8 @@ def render():
           <span class="hst-l">Residents Affected</span>
         </div>
         <div class="hst">
-          <span class="hst-n">4</span>
-          <span class="hst-l">Active Federal Bills</span>
+          <span class="hst-n">S.4505</span>
+          <span class="hst-l">Active Consolidated Bill</span>
         </div>
         <div class="hst">
           <span class="hst-n">$0</span>
@@ -289,27 +314,62 @@ def render():
 
     # ── BILL TRACKER ──────────────────────────────────────────────────────────
     st.markdown('<div id="tracker"></div>', unsafe_allow_html=True)
-    tracker_html = "".join(f"""
-      <div class="tcard {'tcard-passed' if b['prog']>=70 else 'tcard-stalled'}">
-        <div class="tcard-num">{i+1}</div>
-        <div class="tcard-id">{b['id']}</div>
+
+    # Primary bill card (S. 4505)
+    b = PRIMARY_BILL
+    primary_card = f"""
+      <div class="tcard tcard-passed" style="border-left:4px solid var(--green);border-top:3px solid var(--green);position:relative;">
+        <div style="position:absolute;top:0.75rem;right:0.85rem;background:var(--green);color:white;
+          font-family:'IBM Plex Mono',monospace;font-size:0.58rem;font-weight:700;letter-spacing:0.1em;
+          padding:0.2rem 0.6rem;border-radius:3px;text-transform:uppercase;">★ Primary Bill</div>
+        <div class="tcard-id" style="font-size:1.4rem;">{b['id']}</div>
         <div class="tcard-author">{b['author']}</div>
-        <span class="tbadge {'tbadge-g' if b['badge']=='b-g' else 'tbadge-a'}">{b['status']}</span>
-        <div class="tcard-note">{b['note']}</div>
-        <div class="tprog">
-          <div class="tprog-fill {'tprog-green' if b['prog']>=70 else 'tprog-amber'}"
-               style="width:{b['prog']}%"></div>
+        <div style="font-size:0.8rem;color:var(--muted);margin-bottom:0.5rem;">{b['cities']}</div>
+        <span class="tbadge tbadge-g">{b['status']}</span>
+        <div class="tcard-note" style="margin-top:0.75rem;">{b['note']}</div>
+        <div class="tprog" style="margin-top:1rem;">
+          <div class="tprog-fill tprog-green" style="width:{b['prog']}%"></div>
         </div>
-      </div>""" for i, b in enumerate(BILLS))
+        <a href="{b['url']}" target="_blank" style="display:inline-block;margin-top:0.85rem;
+          font-size:0.83rem;font-weight:600;color:var(--blue-m);text-decoration:none;">
+          Search on Congress.gov →</a>
+      </div>"""
+
+    prior_cards = "".join(f"""
+      <div class="tcard tcard-stalled" style="opacity:0.82;">
+        <div style="position:absolute;top:0.75rem;right:0.85rem;background:var(--g200);color:var(--g500);
+          font-family:'IBM Plex Mono',monospace;font-size:0.56rem;font-weight:700;letter-spacing:0.09em;
+          padding:0.18rem 0.55rem;border-radius:3px;text-transform:uppercase;">Consolidated</div>
+        <div class="tcard-id">{pb['id']}</div>
+        <div class="tcard-author">{pb['author']}</div>
+        <div style="font-size:0.78rem;color:var(--muted);margin-bottom:0.4rem;">{pb['cities']}</div>
+        <span class="tbadge tbadge-a" style="font-size:0.56rem;">{pb['status']}</span>
+        <div class="tcard-note" style="margin-top:0.6rem;">{pb['note']}</div>
+        <div class="tprog" style="margin-top:0.75rem;">
+          <div class="tprog-fill tprog-amber" style="width:{pb['prog']}%"></div>
+        </div>
+      </div>""" for pb in PRIOR_BILLS)
+
     st.markdown(f"""
     <div class="tracker-band">
     <div class="tracker-inner">
-      <span class="tracker-label">📊 Live Legislative Progress — 119th Congress (Jan 2025 – Dec 2026)</span>
-      <div class="tracker-grid">{tracker_html}</div>
+      <span class="tracker-label">📊 Legislative Status — 119th Congress (Jan 2025 – Dec 2026)</span>
+      <div style="margin-bottom:1.25rem;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:0.62rem;font-weight:600;
+          letter-spacing:0.14em;text-transform:uppercase;color:var(--green);margin-bottom:0.6rem;">
+          ★ Active Consolidated Bill</div>
+        <div style="display:grid;grid-template-columns:1fr;">{primary_card}</div>
+      </div>
+      <div style="margin-top:1.5rem;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:0.62rem;font-weight:600;
+          letter-spacing:0.14em;text-transform:uppercase;color:var(--g400);margin-bottom:0.6rem;">
+          Prior Bills — Now Consolidated into S. 4505</div>
+        <div class="tracker-grid">{prior_cards}</div>
+      </div>
     </div></div>
     """, unsafe_allow_html=True)
 
-    # ── THE PROBLEM — 4 cards ─────────────────────────────────────────────────
+    # ── THE PROBLEM ───────────────────────────────────────────────────────────
     st.markdown('<div id="problem"></div>', unsafe_allow_html=True)
     prob_html = "".join(f"""
       <div class="pcard {p['cls']}">
@@ -325,12 +385,13 @@ def render():
       <span class="sec-label sec-label-red">The Problem</span>
       <h2 class="sec-h">Five Ways Outdated ZIP Codes Are Costing Your City — Right Now</h2>
       <p class="sec-lead">This is not a branding issue. These are documented, measurable harms
-      affecting public safety, government revenue, and business competitiveness every single day.</p>
+      affecting public safety, government revenue, and business competitiveness every single day —
+      as detailed in the coalition's 2026 White Paper.</p>
       <div class="prob-grid">{prob_html}</div>
     </div></div>
     """, unsafe_allow_html=True)
 
-    # ── CASE STUDIES ──────────────────────────────────────────────────────────
+    # ── CASE STUDIES ─────────────────────────────────────────────────────────
     case_html = "".join(f"""
       <div class="ccase">
         <div class="ccase-top">
@@ -347,25 +408,72 @@ def render():
     st.markdown(f"""
     <div class="section section-g" style="border-top:1px solid var(--border);">
     <div class="inner">
-      <span class="sec-label">Business Impact</span>
-      <h2 class="sec-h">The Numbers Don't Lie</h2>
-      <p class="sec-lead">Three documented case studies. Real costs. Real cities. No ambiguity.</p>
+      <span class="sec-label">Documented Impact · From the 2026 White Paper</span>
+      <h2 class="sec-h">Real Cities. Real Numbers. No Ambiguity.</h2>
+      <p class="sec-lead">Three case studies drawn directly from the coalition's 2026 White Paper — with verified data, city contacts, and documented sources.</p>
       <div class="case-grid">{case_html}</div>
     </div></div>
     """, unsafe_allow_html=True)
 
+    # ── MUNICIPAL TESTIMONIALS ────────────────────────────────────────────────
+    testi_html = "".join(f"""
+      <div class="story-card">
+        <div class="story-city">{t['city']}</div>
+        <div class="story-body" style="font-style:italic;color:var(--text);margin-bottom:0.75rem;">
+          "{t['quote']}"</div>
+        <div style="font-size:0.78rem;color:var(--g400);font-family:'IBM Plex Mono',monospace;">
+          — {t['role']}</div>
+      </div>""" for t in TESTIMONIALS)
+    st.markdown(f"""
+    <div class="section section-w" style="border-top:1px solid var(--border);">
+    <div class="inner">
+      <span class="sec-label">Municipal Testimonials · 2026 White Paper</span>
+      <h2 class="sec-h">In Their Own Words</h2>
+      <p class="sec-lead">Direct quotes from city officials, fire chiefs, and residents — drawn
+      from the coalition's 2026 White Paper. These are the voices S. 4505 is meant to protect.</p>
+      <div class="story-grid">{testi_html}</div>
+      <div style="margin-top:2rem;text-align:center;">
+        <a href="https://www.eastvaleca.gov/home/showpublisheddocument/18184/639098699108370000"
+           target="_blank"
+           style="display:inline-flex;align-items:center;gap:0.5rem;background:var(--blue);
+           color:white;font-weight:700;font-size:0.92rem;padding:0.85rem 1.9rem;
+           border-radius:6px;text-decoration:none;">
+          📄 Read the Full 2026 White Paper →
+        </a>
+      </div>
+    </div></div>
+    """, unsafe_allow_html=True)
+
     # ── LEGISLATION + COMMITTEE ───────────────────────────────────────────────
-    bill_html = "".join(f"""
-      <div class="bcard {b['cls']}">
+    # Primary bill detail
+    b = PRIMARY_BILL
+    primary_bill_card = f"""
+      <div class="bcard bcard-p" style="border-left:4px solid var(--green);grid-column:1/-1;">
         <div class="bill-top">
-          <div class="bill-id">{b['id']}</div>
-          <span class="badge {b['badge']}">{b['status']}</span>
+          <div class="bill-id" style="font-size:1.5rem;">{b['id']} <span style="font-size:0.9rem;font-weight:400;color:var(--muted);">— Active Consolidated Bill</span></div>
+          <span class="badge b-g">{b['status']}</span>
         </div>
-        <div class="bill-author">{b['author']}</div>
-        <div class="bill-cities">{b['cities']} · Companion: {b['companion']}</div>
-        <div class="bill-note">{b['note']}</div>
-        <a href="{b['url']}" target="_blank" class="bill-link">View on Congress.gov →</a>
-      </div>""" for b in BILLS)
+        <div class="bill-author" style="font-size:1rem;font-weight:600;">{b['author']}</div>
+        <div class="bill-cities" style="margin-bottom:0.75rem;">{b['cities']} · Consolidates H.R. 672, H.R. 3095, S. 1455, S. 2961</div>
+        <div class="bill-note" style="background:var(--amber-lt);border:1px solid #FDE68A;border-radius:6px;padding:0.85rem 1rem;font-size:0.88rem;color:var(--text);line-height:1.7;">
+          ⚠ <strong>Wisconsin communities excluded</strong> due to Sen. Ron Johnson (R-WI) objections.
+          The Wisconsin communities (Caledonia, Somers, Mount Pleasant, Franklin, Greenfield, Glendale, Rochester, Harrison)
+          are now requesting amendments to be re-included.
+        </div>
+        <a href="{b['url']}" target="_blank" class="bill-link">Search S. 4505 on Congress.gov →</a>
+      </div>"""
+
+    prior_bill_html = "".join(f"""
+      <div class="bcard {pb['cls']}" style="opacity:0.78;">
+        <div class="bill-top">
+          <div class="bill-id">{pb['id']}</div>
+          <span class="badge b-a" style="font-size:0.58rem;">{pb['status']}</span>
+        </div>
+        <div class="bill-author">{pb['author']}</div>
+        <div class="bill-cities">{pb['cities']} · Companion: {pb['companion']}</div>
+        <div class="bill-note">{pb['note']}</div>
+        <a href="{pb['url']}" target="_blank" class="bill-link">View on Congress.gov →</a>
+      </div>""" for pb in PRIOR_BILLS)
 
     cm_html = "".join(
         f'<div class="cm{" cm-chair" if r else ""}">'
@@ -374,23 +482,40 @@ def render():
         for n,p,s,r in COMMITTEE)
 
     st.markdown(f"""
-    <div class="section section-w" style="border-top:1px solid var(--border);">
+    <div class="section section-g" style="border-top:1px solid var(--border);">
     <div class="inner">
       <span class="sec-label">119th Congress · Jan 2025 – Dec 2026</span>
       <h2 class="sec-h">Legislative Tracker</h2>
-      <p class="sec-lead">Both House bills passed. The path to law runs entirely through the
-      Senate Homeland Security &amp; Governmental Affairs Committee.</p>
-      <div class="bill-grid">{bill_html}</div>
-      <div class="callout callout-a">
-        <div class="callout-t">⚠ The Bottleneck: Senate HSGA Committee</div>
-        <div class="callout-b">Both Senate bills pass or fail together. Chairman Sen. Rand Paul (R-KY)
-        must bring them to a vote. Once the Senate acts, a House/Senate conference merges all four bills
-        for White House signature. The 119th Congress ends at the end of December 2026.</div>
+      <p class="sec-lead">Sen. Ernst consolidated all four prior bills into <strong>S. 4505</strong>.
+      The path to law now runs entirely through the Senate Homeland Security &amp; Governmental Affairs Committee.</p>
+
+      <div style="margin-bottom:1.5rem;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:0.63rem;font-weight:600;
+          letter-spacing:0.18em;text-transform:uppercase;color:var(--green);
+          border-top:3px solid var(--green);padding-top:0.85rem;width:fit-content;margin-bottom:0.85rem;">
+          ★ Active Consolidated Bill</div>
+        <div style="display:grid;grid-template-columns:1fr;">{primary_bill_card}</div>
       </div>
+
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:0.63rem;font-weight:600;
+          letter-spacing:0.18em;text-transform:uppercase;color:var(--g400);
+          border-top:3px solid var(--g200);padding-top:0.85rem;width:fit-content;margin-bottom:0.85rem;">
+          Prior Bills — Consolidated into S. 4505</div>
+        <div class="bill-grid">{prior_bill_html}</div>
+      </div>
+
+      <div class="callout callout-a" style="margin-top:2rem;">
+        <div class="callout-t">⚠ The Bottleneck: Senate HSGA Committee</div>
+        <div class="callout-b">S. 4505 passes or fails in committee. Chairman Sen. Rand Paul (R-KY)
+        must bring it to a vote. Wisconsin communities affected by Sen. Johnson's objection are
+        actively seeking amendments to be re-included. The 119th Congress ends December 2026 — no action means starting over.</div>
+      </div>
+
       <div style="margin-top:3rem;">
         <span class="sec-label sec-label-amber">Senate HSGA Committee — 15 Members</span>
         <p class="sec-lead" style="margin-bottom:0.5rem;">
-          Contact every Senator from your state on this list.</p>
+          Contact every Senator from your state on this list. They are the decisive votes on S. 4505.</p>
         <div class="committee-grid">{cm_html}</div>
         <a href="https://www.hsgac.senate.gov/" target="_blank"
            style="display:inline-block;margin-top:1.25rem;font-size:0.85rem;font-weight:600;
@@ -402,16 +527,15 @@ def render():
     # ── MEMBER LOOKUP ─────────────────────────────────────────────────────────
     st.markdown('<div id="members"></div>', unsafe_allow_html=True)
     st.markdown("""
-    <div class="section section-g" style="border-top:1px solid var(--border);padding-bottom:3rem;">
+    <div class="section section-w" style="border-top:1px solid var(--border);padding-bottom:3rem;">
     <div class="inner">
       <span class="sec-label">Coalition Membership</span>
       <h2 class="sec-h">Is Your City a Member?<br>Who Represents You?</h2>
       <p class="sec-lead">Select your state to see coalition member cities and your HSGA Committee
-      senator — then contact them directly with a pre-filled email template.</p>
+      senator — then contact them directly with a pre-filled email template for S. 4505.</p>
     </div></div>
     """, unsafe_allow_html=True)
 
-    # State lookup — Streamlit native (needs consistent inner padding)
     st.markdown('<div style="padding:0 3.5rem 0;max-width:1160px;margin:0 auto;">', unsafe_allow_html=True)
     col_l, col_r = st.columns([1, 2])
     with col_l:
@@ -426,7 +550,7 @@ def render():
             Select your state to see:<br>
             ✓ Coalition member cities<br>
             ✓ Your HSGA Committee senator<br>
-            ✓ Pre-filled contact email
+            ✓ Pre-filled S. 4505 contact email
           </p>
         </div>
         """, unsafe_allow_html=True)
@@ -439,7 +563,6 @@ def render():
             state_cities = [c for c, s in CITIES if s == state_sel]
             state_senators = STATE_SENATORS.get(state_sel, [])
 
-            # City chips
             if state_cities:
                 chips = "".join(
                     f'<span style="display:inline-flex;align-items:center;padding:0.3rem 0.85rem;'
@@ -455,7 +578,6 @@ def render():
                               f'Email <a href="mailto:afung@eastvaleca.gov" style="color:var(--blue-m);">'
                               f'afung@eastvaleca.gov</a> to join.</div>')
 
-# Senator rows
             if state_senators:
                 sen_rows = ""
                 for sname, sparty, srole in state_senators:
@@ -477,7 +599,7 @@ def render():
                          style="display:inline-flex;align-items:center;gap:0.45rem;
                          background:var(--red);color:white;font-weight:700;font-size:0.87rem;
                          padding:0.6rem 1.2rem;border-radius:6px;text-decoration:none;">
-                         ✉ Email Senator
+                         ✉ Email re: S. 4505
                       </a>
                     </div>"""
                 senator_block = (
@@ -486,8 +608,7 @@ def render():
                     'letter-spacing:0.18em;text-transform:uppercase;color:var(--red);'
                     'padding-top:0.85rem;border-top:3px solid var(--red);'
                     'width:fit-content;margin-bottom:0.85rem;">⚡ Your HSGA Senator(s)</div>'
-                    + sen_rows
-                    + '</div>'
+                    + sen_rows + '</div>'
                 )
             else:
                 senator_block = (
@@ -505,9 +626,7 @@ def render():
                 'letter-spacing:0.18em;text-transform:uppercase;color:var(--blue-m);'
                 'padding-top:0.85rem;border-top:3px solid var(--blue-m);'
                 f'width:fit-content;margin-bottom:0.9rem;">Coalition Cities in {state_sel}</div>'
-                + city_block
-                + senator_block
-                + '</div>',
+                + city_block + senator_block + '</div>',
                 unsafe_allow_html=True
             )
         else:
@@ -520,7 +639,7 @@ def render():
             """, unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
-    # Interactive map — wrapped in .inner for consistent alignment
+    # Interactive map
     st.markdown("""
     <div style="padding:3rem 3.5rem 0;max-width:1160px;margin:0 auto;">
       <span style="font-family:'IBM Plex Mono',monospace;font-size:0.7rem;font-weight:600;
@@ -539,7 +658,7 @@ def render():
     except Exception:
         pass
 
-    # Member directory dataframe
+    # Member directory
     st.markdown('<div style="padding:2.5rem 0 5rem;max-width:100%;margin:0 auto;">', unsafe_allow_html=True)
     st.markdown("""
     <span style="font-family:'IBM Plex Mono',monospace;font-size:0.7rem;font-weight:600;
@@ -547,7 +666,7 @@ def render():
       padding-top:1rem;border-top:3px solid var(--blue-m);
       width:fit-content;display:block;margin-bottom:0.85rem;">Member Directory — Searchable</span>
     <p style="font-size:0.9rem;color:var(--muted);line-height:1.8;margin-bottom:1.25rem;max-width:500px;">
-      Search by city name or filter by state. Coalition Density shows how many members each state has.</p>
+      Search by city name or filter by state.</p>
     """, unsafe_allow_html=True)
 
     df = pd.DataFrame(CITIES, columns=["City", "State"])
@@ -578,19 +697,16 @@ def render():
         }, hide_index=False)
     st.markdown("</div>", unsafe_allow_html=True)
 
-    # ── ADVOCACY ROADMAP — TIMELINE ───────────────────────────────────────────
-    ''' 
+    # ── TAKE ACTION ───────────────────────────────────────────────────────────
     st.markdown('<div id="action"></div>', unsafe_allow_html=True)
     st.markdown("""
     <div class="section section-g" style="border-top:1px solid var(--border);">
     <div class="inner">
-      <span class="sec-label sec-label-red">Advocacy Roadmap</span>
-      <h2 class="sec-h">Six Steps. One Goal.<br>Move the Senate.</h2>
-      <p class="sec-lead">
-        <strong style="color:var(--red);">Step 2 is the most time-sensitive action available.</strong>
-        Senate committee votes can happen with little public notice. The 119th Congress ends at the end of December 2026. Complete all six steps and your city has done
-        everything possible to move this legislation.
-      </p>
+      <span class="sec-label sec-label-red">Take Action</span>
+      <h2 class="sec-h">Five Steps Your City Should Take Now</h2>
+      <p class="sec-lead">Congress expects cities to build a documented record before requesting
+      legislative action. Complete these steps to strengthen S. 4505's path through the Senate.
+      <strong style="color:var(--red);">Step B is the most urgent action available right now.</strong></p>
     </div></div>
     """, unsafe_allow_html=True)
 
@@ -614,7 +730,7 @@ def render():
                 {phase_html}{title_html}{body_html}
                 <a href="{mailto}" class="tl-urgent-btn">
                   <span class="tl-pulse-dot"></span>
-                  ✉ Open Pre-Filled Email to HSGA Committee
+                  ✉ Open Pre-Filled Email re: S. 4505
                 </a>
             """, unsafe_allow_html=True)
             with st.expander("Preview email template before sending"):
@@ -635,53 +751,8 @@ def render():
             </div>
             """, unsafe_allow_html=True)
 
-    st.markdown("</div></div>", unsafe_allow_html=True) 
-    '''
-# ── TAKE ACTION ───────────────────────────────────────────────────────────
-    st.markdown('<div id="action"></div>', unsafe_allow_html=True)
-    st.markdown("""
-<div class="section section-w" style="border-top:1px solid var(--border);">
-<div class="inner">
-<span class="sec-label sec-label-red">Take Action</span>
-<h2 class="sec-h">Four Steps Your City Should Take Now</h2>
-<p class="sec-lead">Congress expects cities to build a documented record before requesting legislative action. Complete these steps to strengthen the coalition's Senate push.</p>
-<div class="timeline" style="margin-top:2rem;">
-<div class="tl-item">
-<div class="tl-left"><div class="tl-num">A</div></div>
-<div class="tl-card">
-<span class="tl-phase">Recommended Action — USPS</span>
-<div class="tl-title">Submit a USPS ZIP Code Boundary Review Request</div>
-<div class="tl-body">Send a letter to your USPS Local Team requesting an evaluation of your ZIP code boundary. Congress expects cities to receive formal USPS responses — including denials — before pursuing legislative action. This creates the administrative record the Senate needs.</div>
-</div>
-</div>
-<div class="tl-item">
-<div class="tl-left"><div class="tl-num">B</div></div>
-<div class="tl-card">
-<span class="tl-phase">Recommended Action — Local</span>
-<div class="tl-title">Adopt a City Council Resolution</div>
-<div class="tl-body">Collaborate with your City Council or Governing Board to adopt a formal resolution supporting an independent ZIP code for your jurisdiction. Official resolutions carry significantly more weight than standard correspondence with federal offices.</div>
-</div>
-</div>
-<div class="tl-item">
-<div class="tl-left"><div class="tl-num">C</div></div>
-<div class="tl-card">
-<span class="tl-phase">Recommended Action — Community</span>
-<div class="tl-title">Collect Resident and Business Testimonies</div>
-<div class="tl-body">Gather documented testimonies from residents and businesses impacted by ZIP code misalignment — delayed emergency responses, tax errors, insurance overcharges, or logistics failures. Specific stories with dollar figures are the coalition's most persuasive lobbying tool.</div>
-</div>
-</div>
-<div class="tl-item">
-<div class="tl-left"><div class="tl-num">D</div></div>
-<div class="tl-card">
-<span class="tl-phase">Recommended Action — Federal</span>
-<div class="tl-title">Share All Documents with Your Senators and Congressmember(s)</div>
-<div class="tl-body">Forward all relevant materials — resolutions, USPS responses, resident statements, and supporting documentation — directly to your respective Senators and Congressmember(s). Consistent outreach from every coalition city builds the political record needed for Senate action.</div>
-</div>
-</div>
-</div>
-</div></div>
-""", unsafe_allow_html=True)
-    
+    st.markdown("</div></div>", unsafe_allow_html=True)
+
     # ── PRECEDENT + BEFORE/AFTER ──────────────────────────────────────────────
     st.markdown('<div id="precedent"></div>', unsafe_allow_html=True)
     st.markdown(f"""
@@ -690,7 +761,7 @@ def render():
       <span class="sec-label sec-label-green">Legislative Precedent &amp; Proof</span>
       <h2 class="sec-h">It Has Been Done Before.<br>It Worked.</h2>
       <p class="sec-lead">Congress mandated ZIP code changes for four specific cities in 2006.
-      Every one of those cities saw the harms resolved. This is the coalition's proven template.</p>
+      Every one of those cities saw the harms resolved. S. 4505 uses the exact same mechanism — at 75-city scale.</p>
 
       <div class="prec-law">
         <p>"Section 1009 of the Postal Accountability and Enhancement Act (2006) directed the United States
@@ -709,13 +780,13 @@ def render():
           <div class="prec-s">estimated cost per ZIP adjustment<br>(0.0002% of USPS annual budget)</div>
         </div>
         <div class="prec-stat">
-          <div class="prec-n">$89B</div>
-          <div class="prec-s">USPS annual operating budget —<br>the fiscal objection is negligible</div>
+          <div class="prec-n">75+</div>
+          <div class="prec-s">cities seeking the same fix today<br>via S. 4505 (Ernst)</div>
         </div>
       </div>
 
       <h3 style="font-size:1.35rem;font-weight:800;color:var(--blue);
-        margin:3.5rem 0 0.6rem;letter-spacing:-0.015em;white-space:nowrap;">
+        margin:3.5rem 0 0.6rem;letter-spacing:-0.015em;">
         Before vs. After: Hanahan, South Carolina</h3>
       <p style="font-size:0.93rem;color:var(--muted);line-height:1.82;
         margin-bottom:2rem;max-width:580px;">
@@ -761,18 +832,18 @@ def render():
         <div class="story-card">
           <div class="story-city">Discovery Bay, California · 2006</div>
           <div class="story-title">Eliminated Logistics and Delivery Errors</div>
-          <div class="story-body">Discovery Bay carriers incorrectly applied surcharges due to ZIP assignment. Resolution required a congressional mandate — the same path the coalition is now pursuing for 79+ cities simultaneously.</div>
+          <div class="story-body">Discovery Bay carriers incorrectly applied surcharges due to ZIP assignment. Resolution required a congressional mandate — the same path the coalition is now pursuing for 75+ cities simultaneously via S. 4505.</div>
         </div>
         <div class="story-card">
-          <div class="story-city">The 2026 Coalition · All 79+ Cities</div>
+          <div class="story-city">The S. 4505 Coalition · 75+ Cities</div>
           <div class="story-title">The Same Fix, at Scale</div>
-          <div class="story-body">The coalition is pursuing the exact legislative mechanism that worked in 2006 — for 79+ cities at once, across 20+ states, with four active bills already cleared by the full House. The precedent is established. The Senate must act.</div>
+          <div class="story-body">S. 4505 uses the exact legislative mechanism that worked in 2006 — for 75+ cities at once, across 20+ states. The four prior bills have already cleared the full House. The precedent is established. The Senate must act.</div>
         </div>
       </div>
     </div></div>
     """, unsafe_allow_html=True)
 
-    # ── RESOURCES + LANGUAGE GUIDE ────────────────────────────────────────────
+    # ── RESOURCES ─────────────────────────────────────────────────────────────
     st.markdown('<div id="resources"></div>', unsafe_allow_html=True)
     res_html = "".join(f"""
       <a href="{r['url']}" target="_blank" class="rcard">
@@ -788,7 +859,7 @@ def render():
       <span class="sec-label">Media Kit &amp; Resources</span>
       <h2 class="sec-h">Everything You Need<br>to Make the Case</h2>
       <p class="sec-lead">Hand these to a journalist, a Senator's chief of staff,
-      or a Chamber president. The story writes itself.</p>
+      or a Chamber president. The 2026 White Paper is the coalition's primary evidence document.</p>
       <div class="res-grid">{res_html}</div>
 
       <div style="margin-top:4rem;">
@@ -824,12 +895,12 @@ def render():
     st.markdown("""
     <div class="cta-band">
       <div class="cta-inner">
-        <h2 class="cta-h">The 119th Congress ends at the end of December 2026</h2>
-        <p class="cta-p">Both House bills passed. 79+ cities are organized. The lobbying
-        infrastructure is in place. What's missing is Senate action. One email from your
-        city to Sen. Rand Paul can change that.</p>
+        <h2 class="cta-h">The 119th Congress ends December 2026.<br>S. 4505 needs a Senate vote now.</h2>
+        <p class="cta-p">Sen. Ernst has done her part. 75+ cities are organized. The lobbying
+        infrastructure is in place. What's missing is Senate committee action.
+        One email from your city to Sen. Rand Paul can change that.</p>
         <div class="cta-btns">
-          <a href="#action" class="btn-cred"> Take Action Now</a>
+          <a href="#action" class="btn-cred">Take Action on S. 4505</a>
           <a href="mailto:afung@eastvaleca.gov" class="btn-coutline">Join the Coalition — Free →</a>
         </div>
         <div style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid rgba(26,58,107,0.15);
@@ -854,8 +925,6 @@ def render():
         </div>
       </div>
     </div>
-      </div>
-    </div>
     """, unsafe_allow_html=True)
 
     # ── FOOTER ────────────────────────────────────────────────────────────────
@@ -865,13 +934,14 @@ def render():
         <div class="footer-grid">
           <div>
             <div class="fb-name">National ZIP Code Advocacy Coalition</div>
-            <div class="fb-desc">A free working group of 79+ municipalities fighting for
+            <div class="fb-desc">A free working group of 75+ municipalities fighting for
             Geographic Integrity — public safety, fiscal accuracy, and data integrity.
             Founded April 2023. Co-Chairs: Michael Penny (Castle Pines, CO)
             and Alexander Fung (Eastvale, CA).</div>
           </div>
           <div>
             <div class="fc-h">Legislation</div>
+            <a href="https://www.congress.gov/search?q=%22S.+4505%22&searchField=allfields" target="_blank" class="fa">S. 4505 (Ernst) ★</a>
             <a href="https://www.congress.gov/bill/119th-congress/house-bill/672" target="_blank" class="fa">H.R. 672</a>
             <a href="https://www.congress.gov/bill/119th-congress/house-bill/3095" target="_blank" class="fa">H.R. 3095</a>
             <a href="https://www.congress.gov/bill/119th-congress/senate-bill/1455" target="_blank" class="fa">S. 1455</a>
@@ -881,6 +951,7 @@ def render():
           <div>
             <div class="fc-h">Coalition</div>
             <a href="https://www.eastvaleca.gov/community/national-zip-code-advocacy-coalition/-fsiteid-1#!/" target="_blank" class="fa">Coalition Website</a>
+            <a href="https://www.eastvaleca.gov/home/showpublisheddocument/18184/639098699108370000" target="_blank" class="fa">2026 White Paper</a>
             <a href="https://www.eastvaleca.gov" target="_blank" class="fa">City of Eastvale, CA</a>
             <a href="https://www.castlepinesco.gov" target="_blank" class="fa">City of Castle Pines, CO</a>
             <div class="fc-h" style="margin-top:1.25rem;">Contact</div>
@@ -901,9 +972,8 @@ def render():
         </div>
         <div class="foot-bar">
           <div class="foot-copy">© 2026 National ZIP Code Advocacy Coalition. All rights reserved.</div>
-          <div class="foot-tag">119TH CONGRESS · JAN 2025 – DEC 2026 · ONE CITY. ONE ZIP CODE.</div>
+          <div class="foot-tag">119TH CONGRESS · JAN 2025 – DEC 2026 · S. 4505 · ONE CITY. ONE ZIP CODE.</div>
         </div>
       </div>
     </footer>
     """, unsafe_allow_html=True)
-
