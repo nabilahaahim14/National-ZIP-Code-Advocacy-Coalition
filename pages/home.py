@@ -727,9 +727,13 @@ def render():
     </div></div>
     """, unsafe_allow_html=True)
 
-    st.markdown('<div style="padding:0 3.5rem 5.5rem;max-width:1160px;margin:0 auto;">'
-                '<div class="timeline">', unsafe_allow_html=True)
+    # Build entire timeline as one HTML block to avoid Streamlit gap issues
+    subj, body_txt = email_template("Sen. Rand Paul and the Senate HSGA Committee")
+    mailto = f"mailto:?subject={urllib.parse.quote(subj)}&body={urllib.parse.quote(body_txt)}"
+    # Escape body text for HTML attribute
+    body_escaped = body_txt.replace("&","&amp;").replace("<","&lt;").replace(">","&gt;")
 
+    timeline_items = []
     for step in STEPS:
         u = step["urgent"]
         item_cls = " tl-urgent" if u else ""
@@ -738,42 +742,40 @@ def render():
         body_html  = f'<div class="tl-body">{step["body"]}</div>'
 
         if u:
-            subj, body_txt = email_template("Sen. Rand Paul and the Senate HSGA Committee")
-            mailto = f"mailto:?subject={urllib.parse.quote(subj)}&body={urllib.parse.quote(body_txt)}"
-            # Render the full card including expander inside a container
-            st.markdown(f"""
-            <div class="tl-item{item_cls}">
-              <div class="tl-left"><div class="tl-num">{step['n']}</div></div>
-              <div class="tl-card">
-                {phase_html}{title_html}{body_html}
-                <a href="{mailto}" class="tl-urgent-btn" style="margin-bottom:0.75rem;display:inline-flex;">
+            cta_html = f'''
+                <a href="{mailto}" class="tl-urgent-btn">
                   <span class="tl-pulse-dot"></span>
                   ✉ Open Pre-Filled Email re: S. 4505
                 </a>
-              </div>
-            </div>
-            """, unsafe_allow_html=True)
-            # Expander rendered separately below the card, indented to match
-            st.markdown('<div style="padding-left:5rem;margin-top:-1.5rem;margin-bottom:2rem;">', unsafe_allow_html=True)
-            with st.expander("Preview email template before sending"):
-                st.markdown(f"""
-                <div class="email-preview">
-                <div class="email-subject">Subject: {subj}</div>{body_txt}</div>
-                """, unsafe_allow_html=True)
-            st.markdown("</div>", unsafe_allow_html=True)
+                <details style="margin-top:1rem;">
+                  <summary style="cursor:pointer;font-size:0.88rem;color:var(--muted);
+                    padding:0.5rem 0;user-select:none;list-style:none;display:flex;
+                    align-items:center;gap:0.4rem;">
+                    <span style="font-size:0.75rem;">▶</span> Preview email template before sending
+                  </summary>
+                  <div class="email-preview" style="margin-top:0.75rem;">
+                    <div class="email-subject">Subject: {subj}</div>{body_txt}
+                  </div>
+                </details>'''
         else:
-            cta = (f'<a href="{step["url"]}" target="_blank" class="tl-btn">{step["cta"]}</a>'
-                   if step.get("cta") else "")
-            st.markdown(f"""
-            <div class="tl-item">
-              <div class="tl-left"><div class="tl-num">{step['n']}</div></div>
-              <div class="tl-card">
-                {phase_html}{title_html}{body_html}{cta}
-              </div>
-            </div>
-            """, unsafe_allow_html=True)
+            cta_html = (f'<a href="{step["url"]}" target="_blank" class="tl-btn">{step["cta"]}</a>'
+                       if step.get("cta") else "")
 
-    st.markdown("</div></div>", unsafe_allow_html=True)
+        timeline_items.append(f'''
+        <div class="tl-item{item_cls}">
+          <div class="tl-left"><div class="tl-num">{step["n"]}</div></div>
+          <div class="tl-card">
+            {phase_html}{title_html}{body_html}{cta_html}
+          </div>
+        </div>''')
+
+    st.markdown(
+        '<div style="padding:0 3.5rem 5.5rem;max-width:1160px;margin:0 auto;">' +
+        '<div class="timeline">' +
+        "".join(timeline_items) +
+        '</div></div>',
+        unsafe_allow_html=True
+    )
 
     # ── PRECEDENT + BEFORE/AFTER ──────────────────────────────────────────────
     st.markdown('<div id="precedent"></div>', unsafe_allow_html=True)
