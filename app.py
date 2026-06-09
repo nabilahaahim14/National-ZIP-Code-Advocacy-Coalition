@@ -345,7 +345,7 @@ footer{visibility:hidden;}
   z-index:0;
 }
 .tl-item{
-  display:flex;gap:2rem;padding-bottom:2.75rem;position:relative;
+ display:flex;gap:2rem;padding-bottom:3.5rem;position:relative;
 }
 .tl-item:last-child{padding-bottom:0;}
 /* Left column: number circle */
