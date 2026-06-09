@@ -740,22 +740,27 @@ def render():
         if u:
             subj, body_txt = email_template("Sen. Rand Paul and the Senate HSGA Committee")
             mailto = f"mailto:?subject={urllib.parse.quote(subj)}&body={urllib.parse.quote(body_txt)}"
+            # Render the full card including expander inside a container
             st.markdown(f"""
             <div class="tl-item{item_cls}">
               <div class="tl-left"><div class="tl-num">{step['n']}</div></div>
               <div class="tl-card">
                 {phase_html}{title_html}{body_html}
-                <a href="{mailto}" class="tl-urgent-btn">
+                <a href="{mailto}" class="tl-urgent-btn" style="margin-bottom:0.75rem;display:inline-flex;">
                   <span class="tl-pulse-dot"></span>
                   ✉ Open Pre-Filled Email re: S. 4505
                 </a>
+              </div>
+            </div>
             """, unsafe_allow_html=True)
+            # Expander rendered separately below the card, indented to match
+            st.markdown('<div style="padding-left:5rem;margin-top:-1.5rem;margin-bottom:2rem;">', unsafe_allow_html=True)
             with st.expander("Preview email template before sending"):
                 st.markdown(f"""
                 <div class="email-preview">
                 <div class="email-subject">Subject: {subj}</div>{body_txt}</div>
                 """, unsafe_allow_html=True)
-            st.markdown("</div></div>", unsafe_allow_html=True)
+            st.markdown("</div>", unsafe_allow_html=True)
         else:
             cta = (f'<a href="{step["url"]}" target="_blank" class="tl-btn">{step["cta"]}</a>'
                    if step.get("cta") else "")
