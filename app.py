@@ -333,6 +333,10 @@ footer{visibility:hidden;}
 .tl-title{font-size:1.05rem;font-weight:800;color:var(--blue);margin-bottom:0.65rem;}
 .tl-body{font-size:0.9rem;color:var(--muted);line-height:1.82;}             
 
+/* ── DETAILS/SUMMARY (email preview toggle) ──────────────────────────────── */
+details > summary { list-style: none; }
+details > summary::-webkit-details-marker { display: none; }
+details[open] > summary span { transform: rotate(90deg); display:inline-block; }
 /* ── TIMELINE STEPPER ─────────────────────────────────────────────────────── */
 .timeline{
   position:relative;margin-top:1rem;
