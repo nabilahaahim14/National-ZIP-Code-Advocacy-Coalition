@@ -250,6 +250,7 @@ def render():
         <a href="#action"    class="nav-a">Take Action</a>
         <a href="#precedent" class="nav-a">Precedent</a>
         <a href="#resources" class="nav-a">Resources</a>
+        <a href="#library"   class="nav-a">Letters</a>
         <a href="#action" class="nav-urgent">
           <span class="nav-dot"></span>Take Action Now
         </a>
@@ -915,6 +916,42 @@ def render():
     </div></div>
     """, unsafe_allow_html=True)
 
+    # ── ADVOCACY LIBRARY ──────────────────────────────────────────────────────
+    st.markdown('<div id="library"></div>', unsafe_allow_html=True)
+    st.markdown("""
+    <div class="section section-w" style="border-top:1px solid var(--border);">
+    <div class="inner">
+      <span class="sec-label">Coalition Advocacy Library</span>
+      <h2 class="sec-h">The Letters Behind<br>the Coalition</h2>
+      <p class="sec-lead">Two living archives of the coalition's written record: general
+      municipal support letters from member cities, and the formal letters sent directly to
+      the Senate HSGA Committee Chairman. Use them as templates, as proof of momentum, or to
+      see how peer cities have framed their case.</p>
+      <div class="res-grid" style="grid-template-columns:repeat(2,1fr);">
+        <a href="https://drive.google.com/drive/folders/18cfyu1mlfXG8DOt7smez8ck98oVir7jB?usp=drive_link"
+          target="_blank" class="rcard">
+          <div class="rcard-icon">📨</div>
+          <div class="rcard-type">Support Letters · 23+ Cities</div>
+          <div class="rcard-t">General Support Letters</div>
+          <div class="rcard-d">Municipal support letters organized by city — Fairview,
+          Greenfield, Burr Ridge, Centennial, Zionsville, and more. A working template
+          library for any city drafting its own.</div>
+          <div class="rcard-arrow">Open the folder →</div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1cZrmiqW2WmnkJ78XaHYdt4rUAxEh_Z7F?usp=drive_link"
+          target="_blank" class="rcard">
+          <div class="rcard-icon">⚖️</div>
+          <div class="rcard-type">Federal Correspondence · HSGAC</div>
+          <div class="rcard-t">Letters to the HSGAC Chairman</div>
+          <div class="rcard-d">Formal letters sent to the Senate Homeland Security &amp;
+          Governmental Affairs Committee Chairman from Superior CO, Canyon Lake CA,
+          Castle Pines CO, Eastvale CA, and others — the federal paper trail behind S. 4505.</div>
+          <div class="rcard-arrow">Open the folder →</div>
+        </a>
+      </div>
+    </div></div>
+    """, unsafe_allow_html=True)
+
     # ── CTA BAND ──────────────────────────────────────────────────────────────
     st.markdown("""
     <div class="cta-band">
@@ -992,6 +1029,7 @@ def render():
             <a href="#action"    class="fa">Take Action</a>
             <a href="#precedent" class="fa">Precedent</a>
             <a href="#resources" class="fa">Resources</a>
+            <a href="#library"   class="fa">Support Letters</a>
           </div>
         </div>
         <div class="foot-bar">
