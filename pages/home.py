@@ -174,6 +174,18 @@ RESOURCES = [
     {"icon":"📊","type":"Research","title":"ZIP Codes & Sales Tax (Avalara)",
      "desc":"Why ZIP codes fail as sales tax tools — Colorado case studies.",
      "url":"https://www.avalara.com/us/en/learn/whitepapers/zip-codes-the-wrong-tool-for-the-job.html","arrow":"Read Research →"},
+    {"icon":"🎨","type":"Media Kit","title":"Brand Guidelines",
+     "desc":"Official coalition branding standards — color palette, typography, logo usage, and voice. Use this before producing any coalition-facing material.",
+     "url":"https://drive.google.com/drive/folders/1YU9Cmgesi6LYdM5Fik28J7Uobj7aClIZ?usp=drive_link","arrow":"Open in Drive →"},
+    {"icon":"🏷️","type":"Media Kit","title":"Coalition Logo",
+     "desc":"Downloadable NZCAC logo files for use in letters, resolutions, presentations, and member-city communications.",
+     "url":"https://drive.google.com/drive/folders/1nuLR-zhyeoASbC0CRnGKKePwulHXEj5v?usp=drive_link","arrow":"Open in Drive →"},
+    {"icon":"📑","type":"Media Kit","title":"One-Page Fact Sheet",
+     "desc":"The coalition's case distilled to a single page — ideal to hand to a journalist, staffer, or council member who needs the essentials fast.",
+     "url":"https://drive.google.com/drive/folders/1mPQQJDxe75-PKGDMBZfATztpdJioOrMu?usp=drive_link","arrow":"Open in Drive →"},
+    {"icon":"📱","type":"Media Kit","title":"Social Media Examples",
+     "desc":"Ready-to-adapt social posts and graphics for member cities to amplify the campaign across their own channels.",
+     "url":"https://drive.google.com/drive/folders/1IyMmGst9wT1Y9ugDxPsYSkJTE1RCFb1m?usp=drive_link","arrow":"Open in Drive →"},
 ]
 
 STEPS = [
