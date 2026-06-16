@@ -964,6 +964,90 @@ def render():
     </div></div>
     """, unsafe_allow_html=True)
 
+    # ── CITY WEBPAGE TEMPLATE ─────────────────────────────────────────────────
+    st.markdown('<div id="template"></div>', unsafe_allow_html=True)
+
+    TEMPLATE_HTML = '''<!-- =====================================================================
+     NATIONAL ZIP CODE ADVOCACY COALITION — MEMBER CITY LANDING TEMPLATE
+     ---------------------------------------------------------------------
+     HOW TO USE:
+     1. Copy this entire block onto your municipal website.
+     2. Edit ONLY the two sections marked  ✏️ EDIT THIS SECTION  below.
+        - Replace every [BRACKETED] placeholder with your city's details.
+     3. Leave everything marked  🔒 KEEP AS-IS  unchanged — those are
+        coalition-wide and identical for all member cities.
+     ===================================================================== -->
+
+<div style="max-w: 1100px; margin: 30px auto; padding: 0 20px; box-sizing: border-box;">
+  <article style="flex: 3 1 600px; box-sizing: border-box;">
+
+    <!-- 🔒 KEEP AS-IS — coalition logo + name -->
+    <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 15px; flex-wrap: wrap;">
+      <img src="https://raw.githubusercontent.com/nabilahaahim14/National-ZIP-Code-Advocacy-Coalition/main/assets/logo.png" alt="National ZIP Code Advocacy Coalition Logo" style="max-height: 80px; width: auto; object-fit: contain;" />
+      <div>
+        <h2 style="font-size: 28px; font-weight: 800; color: #121212; margin: 0 0 10px 0; letter-spacing: -0.5px;">National ZIP Code Advocacy Coalition</h2>
+        <div style="width: 60px; height: 3px; background-color: #c8102e; border-radius: 5px;">&nbsp;</div>
+      </div>
+    </div>
+
+    <!-- ✏️ EDIT THIS SECTION 1 — Your city\'s ZIP situation. Replace the [BRACKETS]. -->
+    <p style="font-size: 15px; color: #3a3a3c; margin: 0 0 18px 0; line-height: 1.6;">The [Village/City/Town] of [CITY NAME] currently shares its primary Zoning Improvement Plan (ZIP) code, <strong>[YOUR ZIP CODE]</strong>, with [describe who you share it with — e.g. neighboring municipalities and unincorporated county areas]. Because the United States Postal Service (USPS) maps boundaries based on logistical delivery efficiency rather than municipal city borders, vast portions of [CITY NAME] are misaligned.</p>
+    <p style="font-size: 15px; color: #3a3a3c; margin: 0 0 25px 0; line-height: 1.6;">[Describe the real-world impact on YOUR residents and businesses. Common examples: online databases route local sales taxes to neighboring towns, first-responder routing faces delay risk from overlapping street names, and homeowner auto/property insurance premiums are artificially inflated. Keep at least one detail specific to your community.]</p>
+    <!-- ✏️ END EDIT SECTION 1 -->
+
+    <!-- 🔒 KEEP AS-IS — about the coalition -->
+    <h3 style="font-size: 18px; font-weight: bold; color: #121212; margin: 30px 0 12px 0; border-bottom: 2px solid #F2F2F7; padding-bottom: 8px;">What is the National ZIP Code Advocacy Coalition?</h3>
+    <p style="font-size: 14px; color: #3a3a3c; margin: 0 0 15px 0; line-height: 1.6;">The <strong>National ZIP Code Advocacy Coalition</strong> is a collaborative working group comprised of more than <strong>80 municipalities from across 30 states</strong>. Founded in 2023 through a joint effort between the cities of Eastvale, California and Castle Pines, Colorado, the coalition brings together communities facing identical postal boundary hurdles.</p>
+    <p style="font-size: 14px; color: #3a3a3c; margin: 0 0 25px 0; line-height: 1.6;">Rather than battling localized bureaucracy individually, member cities pool their collective resources, political connections, and spatial data to lobby federal representatives in Washington, D.C. The coalition advocates for structural changes to how the USPS establishes boundary lines for fast-growing and distinct suburban communities.</p>
+
+    <h3 style="font-size: 18px; font-weight: bold; color: #121212; margin: 30px 0 12px 0; border-bottom: 2px solid #F2F2F7; padding-bottom: 8px;">Why We Formed &amp; Joined This Movement</h3>
+
+    <!-- ✏️ EDIT THIS SECTION 2 — Why YOUR city joined. Replace with your own history. -->
+    <p style="font-size: 14px; color: #3a3a3c; margin: 0 0 15px 0; line-height: 1.6;">[Tell your city\'s story in 2–4 sentences. For example: Have you petitioned the USPS directly for a boundary adjustment, and were you denied? (USPS bars secondary administrative requests for 10 years after a formal denial.) When did your City Council or Governing Board vote to join the coalition? Why is federal legislation now your path forward?]</p>
+    <!-- ✏️ END EDIT SECTION 2 -->
+
+    <!-- 🔒 KEEP AS-IS — current federal legislation (coalition-wide) -->
+    <p style="font-size: 14px; color: #3a3a3c; margin: 0 0 25px 0; line-height: 1.6;">Our remaining path is active federal legislation. We are working with our federal representatives to support legislative measures&mdash;originally introduced as <strong>H.R. 672</strong>, <strong>H.R. 3095</strong>, <strong>S. 1455</strong>, and <strong>S. 2961</strong>&mdash;which have since been consolidated into <strong>S. 4505</strong>, the unified bill introduced by Sen. Joni Ernst (R-IA) that mandates the USPS to correct municipal boundaries. S. 4505 is now before the Senate Homeland Security &amp; Governmental Affairs Committee, chaired by Sen. Rand Paul (R-KY).</p>
+
+    <!-- 🔒 KEEP AS-IS — interactive dashboard call-to-action -->
+    <div style="background-color: #fafafb; border: 2px solid #C8102E; border-radius: 12px; padding: 35px; margin: 40px 0; text-align: center; box-shadow: 0 4px 15px rgba(200, 16, 46, 0.05); box-sizing: border-box;">
+      <span style="background-color: #fee2e2; color: #c8102e; font-size: 10px; font-weight: bold; padding: 4px 12px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; display: inline-block;"> Interactive Spatial Mapping Portal </span>
+      <h3 style="font-size: 22px; font-weight: 800; color: #121212; margin: 15px 0 10px 0; letter-spacing: -0.5px;">Learn More in Detail</h3>
+      <p style="font-size: 13px; color: #48484a; max-w: 620px; margin: 0 auto 25px auto; line-height: 1.5;">To provide complete transparency on how shared ZIP code boundaries impact you, we have developed an interactive mapping application. Residents can search their properties, view tax misallocations, analyze insurance premium risk zones, and check coalition milestones.</p>
+      <div style="margin-top: 10px;">
+        <a style="background-color: #c8102e; color: #ffffff; font-weight: bold; padding: 14px 30px; border-radius: 6px; font-size: 14px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(200, 16, 46, 0.2);" rel="noopener noreferrer" href="https://national-zip-code-advocacy-coalition.streamlit.app/" target="_blank"> Launch Interactive Data Dashboard &rarr; </a>
+      </div>
+    </div>
+  </article>
+</div>
+
+<hr class="section-rule" />
+
+<!-- 🔒 KEEP AS-IS — national membership status map -->
+<div class="map-section">
+  <div class="map-header">
+    <h2 class="section-title">Municipal membership status across the U.S.</h2>
+    <p class="body-text">The interactive map below shows the status of municipalities participating in the National ZIP Code Advocacy Coalition across all 50 states.</p>
+    <div class="map-frame-wrap">
+      <iframe src="https://nabilahaahim14.github.io/National-ZIP-Code-Advocacy-Coalition/usa_municipalities_status_map.html" title="USA Municipalities Coalition Status Map" width="100%" height="800" loading="lazy" style="border:none;"></iframe>
+    </div>
+  </div>
+</div>'''
+
+    st.markdown("""
+    <div class="section section-w" style="border-top:1px solid var(--border);">
+    <div class="inner">
+      <span class="sec-label">Member City Toolkit</span>
+      <h2 class="sec-h">Add This Page<br>to Your Website</h2>
+      <p class="sec-lead">Copy the HTML block below and paste it into your municipal website's CMS.
+      Edit only the two <strong>✏️ EDIT THIS SECTION</strong> areas with your city's details —
+      everything else is coalition-wide and should stay as-is. Use the Burr Ridge page as a
+      live reference example.</p>
+    </div></div>
+    """, unsafe_allow_html=True)
+
+    st.code(TEMPLATE_HTML, language="html")
+
     # ── CTA BAND ──────────────────────────────────────────────────────────────
     st.markdown("""
     <div class="cta-band">
