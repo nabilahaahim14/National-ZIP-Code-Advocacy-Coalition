@@ -946,7 +946,7 @@ def render():
       municipal support letters from member cities, formal letters sent directly to the Senate HSGAC Chairman,
       and official legislative resources, text, and tracking tools for S. 4505.</p>
       <div class="res-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
-        <a href="[https://drive.google.com/drive/folders/18cfyu1mlfXG8DOt7smez8ck98oVir7jB?usp=drive_link](https://drive.google.com/drive/folders/18cfyu1mlfXG8DOt7smez8ck98oVir7jB?usp=drive_link)"
+        <a href="https://drive.google.com/drive/folders/18cfyu1mlfXG8DOt7smez8ck98oVir7jB?usp=drive_link"
           target="_blank" class="rcard">
           <div class="rcard-icon">📨</div>
           <div class="rcard-type">Support Letters · 23+ Cities</div>
@@ -956,7 +956,7 @@ def render():
           library for any city drafting its own.</div>
           <div class="rcard-arrow">Open the folder →</div>
         </a>
-        <a href="[https://drive.google.com/drive/folders/1cZrmiqW2WmnkJ78XaHYdt4rUAxEh_Z7F?usp=drive_link](https://drive.google.com/drive/folders/1cZrmiqW2WmnkJ78XaHYdt4rUAxEh_Z7F?usp=drive_link)"
+        <a href="https://drive.google.com/drive/folders/1cZrmiqW2WmnkJ78XaHYdt4rUAxEh_Z7F?usp=drive_link"
           target="_blank" class="rcard">
           <div class="rcard-icon">⚖️</div>
           <div class="rcard-type">Federal Correspondence · HSGAC</div>
@@ -966,7 +966,7 @@ def render():
           Castle Pines CO, Eastvale CA, and others — the federal paper trail behind S. 4505.</div>
           <div class="rcard-arrow">Open the folder →</div>
         </a>
-        <a href="[https://drive.google.com/drive/folders/1bFrZzxAMja9v18-aUSttTUnH23BwcRBd?usp=drive_link](https://drive.google.com/drive/folders/1bFrZzxAMja9v18-aUSttTUnH23BwcRBd?usp=drive_link)"
+        <a href="https://drive.google.com/drive/folders/1bFrZzxAMja9v18-aUSttTUnH23BwcRBd?usp=drive_link"
           target="_blank" class="rcard">
           <div class="rcard-icon">🏛️</div>
           <div class="rcard-type">Federal Legislation · S. 4505</div>
