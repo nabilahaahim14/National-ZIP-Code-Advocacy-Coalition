@@ -935,8 +935,7 @@ def render():
       </div>
     </div></div>
     """, unsafe_allow_html=True)
-
-# ── ADVOCACY LIBRARY ──────────────────────────────────────────────────────
+    # ── ADVOCACY LIBRARY ──────────────────────────────────────────────────────
     st.markdown('<div id="library"></div>', unsafe_allow_html=True)
     st.markdown("""
     <div class="section section-w" style="border-top:1px solid var(--border);">
