@@ -936,19 +936,18 @@ def render():
     </div></div>
     """, unsafe_allow_html=True)
 
-    # ── ADVOCACY LIBRARY ──────────────────────────────────────────────────────
+# ── ADVOCACY LIBRARY ──────────────────────────────────────────────────────
     st.markdown('<div id="library"></div>', unsafe_allow_html=True)
     st.markdown("""
     <div class="section section-w" style="border-top:1px solid var(--border);">
     <div class="inner">
       <span class="sec-label">Coalition Advocacy Library</span>
       <h2 class="sec-h">The Letters Behind<br>the Coalition</h2>
-      <p class="sec-lead">Two living archives of the coalition's written record: general
-      municipal support letters from member cities, and the formal letters sent directly to
-      the Senate HSGA Committee Chairman. Use them as templates, as proof of momentum, or to
-      see how peer cities have framed their case.</p>
-      <div class="res-grid" style="grid-template-columns:repeat(2,1fr);">
-        <a href="https://drive.google.com/drive/folders/18cfyu1mlfXG8DOt7smez8ck98oVir7jB?usp=drive_link"
+      <p class="sec-lead">Three living archives of the coalition's written record and legislative progress: general
+      municipal support letters from member cities, formal letters sent directly to the Senate HSGAC Chairman,
+      and official legislative resources, text, and tracking tools for S. 4505.</p>
+      <div class="res-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+        <a href="[https://drive.google.com/drive/folders/18cfyu1mlfXG8DOt7smez8ck98oVir7jB?usp=drive_link](https://drive.google.com/drive/folders/18cfyu1mlfXG8DOt7smez8ck98oVir7jB?usp=drive_link)"
           target="_blank" class="rcard">
           <div class="rcard-icon">📨</div>
           <div class="rcard-type">Support Letters · 23+ Cities</div>
@@ -958,7 +957,7 @@ def render():
           library for any city drafting its own.</div>
           <div class="rcard-arrow">Open the folder →</div>
         </a>
-        <a href="https://drive.google.com/drive/folders/1cZrmiqW2WmnkJ78XaHYdt4rUAxEh_Z7F?usp=drive_link"
+        <a href="[https://drive.google.com/drive/folders/1cZrmiqW2WmnkJ78XaHYdt4rUAxEh_Z7F?usp=drive_link](https://drive.google.com/drive/folders/1cZrmiqW2WmnkJ78XaHYdt4rUAxEh_Z7F?usp=drive_link)"
           target="_blank" class="rcard">
           <div class="rcard-icon">⚖️</div>
           <div class="rcard-type">Federal Correspondence · HSGAC</div>
@@ -966,6 +965,14 @@ def render():
           <div class="rcard-d">Formal letters sent to the Senate Homeland Security &amp;
           Governmental Affairs Committee Chairman from Superior CO, Canyon Lake CA,
           Castle Pines CO, Eastvale CA, and others — the federal paper trail behind S. 4505.</div>
+          <div class="rcard-arrow">Open the folder →</div>
+        </a>
+        <a href="[https://drive.google.com/drive/folders/1bFrZzxAMja9v18-aUSttTUnH23BwcRBd?usp=drive_link](https://drive.google.com/drive/folders/1bFrZzxAMja9v18-aUSttTUnH23BwcRBd?usp=drive_link)"
+          target="_blank" class="rcard">
+          <div class="rcard-icon">🏛️</div>
+          <div class="rcard-type">Federal Legislation · S. 4505</div>
+          <div class="rcard-t">S. 4505 Senate Bill Resources</div>
+          <div class="rcard-d">Official Senate bill text (introduced by Sen. Joni Ernst), community-specific boundary summaries, legislative trackers, and unified advocacy materials to mandate USPS ZIP code designation.</div>
           <div class="rcard-arrow">Open the folder →</div>
         </a>
       </div>
