@@ -62,12 +62,12 @@ PRIMARY_BILL = {
     "id": "S. 4505",
     "author": "Sen. Joni Ernst (R-IA)",
     "cities": "75 cities",
-    "status": "SENATE — ACTIVE",
+    "status": "COMMITTEE PASSED (10-5) · SENATE FLOOR",
     "badge": "b-g",
-    "prog": 50,
+    "prog": 70,
     "cls": "bcard-p",
     "url": "https://www.congress.gov/search?q=%22S.+4505%22&searchField=allfields",
-    "note": "Consolidated bill introduced by Sen. Ernst. Incorporates H.R. 672, H.R. 3095, S. 1455, and S. 2961. Wisconsin communities excluded due to one Senator's objections — amendments being sought.",
+    "note": "Consolidated bill introduced by Sen. Ernst. Incorporates H.R. 672, H.R. 3095, S. 1455, and S. 2961. Passed HSGAC 10-5 on 8/6/2026 with an amendment re-including all Wisconsin communities. Now on the Senate Legislative Calendar (Calendar No. 546) awaiting a floor vote.",
 }
 
 PRIOR_BILLS = [
@@ -277,9 +277,9 @@ def render():
       </div>
     </nav>
     <div class="alert-bar">
-      <span class="alert-pill">⚡ UPDATE: S. 4505 INTRODUCED</span>
-      <span class="alert-msg">Sen. Joni Ernst (R-IA) consolidated H.R. 672, H.R. 3095, S. 1455 &amp; S. 2961 into
-      <strong>S. 4505</strong> — covering 75 cities. Now before the Senate HSGA Committee. —
+      <span class="alert-pill">⚡ UPDATE: S. 4505 PASSED COMMITTEE</span>
+      <span class="alert-msg">S. 4505 passed the Senate HSGA Committee 10-5 with an amendment re-including Wisconsin communities —
+      <strong>S. 4505</strong> now covers all 75 cities and sits on the Senate Legislative Calendar. —
       <a href="#action" class="alert-link">Take Action Now →</a></span>
     </div>
     """, unsafe_allow_html=True)
@@ -301,7 +301,7 @@ def render():
         <p class="hero-sub">
           Outdated USPS ZIP code boundaries delay 911 calls, misallocate tax revenue, inflate insurance
           rates, and systematically harm over one million Americans across 75+ municipalities in 20+ states.
-          S. 4505 is now before the Senate. The 119th Congress ends December 2026.
+          S. 4505 has passed committee 10-5 and is on the Senate floor calendar. The 119th Congress ends December 2026.
         </p>
         <div class="hero-ctas">
           <a href="#action" class="btn-hero-red">Take Action on S. 4505</a>
@@ -476,10 +476,9 @@ def render():
         </div>
         <div class="bill-author" style="font-size:1rem;font-weight:600;">{b['author']}</div>
         <div class="bill-cities" style="margin-bottom:0.75rem;">{b['cities']} · Consolidates H.R. 672, H.R. 3095, S. 1455, S. 2961</div>
-        <div class="bill-note" style="background:var(--amber-lt);border:1px solid #FDE68A;border-radius:6px;padding:0.85rem 1rem;font-size:0.88rem;color:var(--text);line-height:1.7;">
-          ⚠ <strong>Wisconsin communities excluded</strong> due to one Senator's objections.
-          The Wisconsin communities (Caledonia, Somers, Mount Pleasant, Franklin, Greenfield, Glendale, Rochester, Harrison)
-          are now requesting amendments to be re-included.
+        <div class="bill-note" style="background:var(--green-lt);border:1px solid #BBF7D0;border-radius:6px;padding:0.85rem 1rem;font-size:0.88rem;color:var(--text);line-height:1.7;">
+          ✓ <strong>Wisconsin communities re-included.</strong>
+          HSGAC passed S. 4505 10-5 with an amendment restoring Caledonia, Somers, Mount Pleasant, Franklin, Greenfield, Glendale, Rochester, and Harrison, WI to the bill.
         </div>
         <a href="{b['url']}" target="_blank" class="bill-link">Search S. 4505 on Congress.gov →</a>
       </div>"""
@@ -527,10 +526,10 @@ def render():
       </div>
 
       <div class="callout callout-a" style="margin-top:2rem;">
-        <div class="callout-t">⚠ The Bottleneck: Senate HSGA Committee</div>
-        <div class="callout-b">S. 4505 passes or fails in committee. Chairman Sen. Rand Paul (R-KY)
-        must bring it to a vote. Wisconsin communities affected by one Senator's objection are
-        actively seeking amendments to be re-included. The 119th Congress ends December 2026 — no action means starting over.</div>
+        <div class="callout-t">⚠ The Bottleneck: Senate Floor Vote</div>
+        <div class="callout-b">S. 4505 passed HSGAC 10-5 with an amendment re-including Wisconsin communities and now
+        sits on the Senate Legislative Calendar (Calendar No. 546). Senate leadership must schedule it for a floor vote.
+        The 119th Congress ends December 2026 — no action means starting over.</div>
       </div>
 
       <div style="margin-top:3rem;">
