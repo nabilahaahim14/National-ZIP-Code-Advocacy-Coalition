@@ -290,9 +290,9 @@ def render():
       </div>
     </nav>
     <div class="alert-bar">
-      <span class="alert-pill">⚡ UPDATE: S. 4505 PASSED COMMITTEE</span>
-      <span class="alert-msg">S. 4505 passed the Senate HSGA Committee 10-5 with an amendment re-including Wisconsin communities -
-      <strong>S. 4505</strong> now covers all 75 cities and sits on the Senate Legislative Calendar. -
+      <span class="alert-pill">⚡ NEW: HOUSE COMPANION BILL INTRODUCED</span>
+      <span class="alert-msg">Rep. Diaz-Balart introduced <strong>H.R. 10257</strong> on 9/3/2026 as the House companion to
+      <strong>S. 4505</strong>, consolidating H.R. 672 and H.R. 3095 to cover 80 communities. Both chambers now have an active bill. -
       <a href="#action" class="alert-link">Take Action Now →</a></span>
     </div>
     """, unsafe_allow_html=True)
@@ -314,7 +314,7 @@ def render():
         <p class="hero-sub">
           Outdated USPS ZIP code boundaries delay 911 calls, misallocate tax revenue, inflate insurance
           rates, and systematically harm over one million Americans across 75+ municipalities in 20+ states.
-          S. 4505 has passed committee 10-5 and is on the Senate floor calendar. The 119th Congress ends December 2026.
+          S. 4505 has passed committee 10-5 and is on the Senate floor calendar; its House companion, H.R. 10257, was introduced September 3, 2026. The 119th Congress ends December 2026.
         </p>
         <div class="hero-ctas">
           <a href="#action" class="btn-hero-red">Take Action on S. 4505</a>
@@ -574,10 +574,10 @@ def render():
       </div>
 
       <div class="callout callout-a" style="margin-top:2rem;">
-        <div class="callout-t">⚠ The Bottleneck: Senate Floor Vote</div>
-        <div class="callout-b">S. 4505 passed HSGAC 10-5 with an amendment re-including Wisconsin communities and now
-        sits on the Senate Legislative Calendar (Calendar No. 546). Senate leadership must schedule it for a floor vote.
-        The 119th Congress ends December 2026 - no action means starting over.</div>
+        <div class="callout-t">⚠ The Bottleneck: Two Floor Votes, Then Reconciliation</div>
+        <div class="callout-b">S. 4505 sits on the Senate Legislative Calendar (Calendar No. 546) awaiting a floor vote, while H.R. 10257
+        awaits action in House Oversight and Government Reform. Both chambers must pass their bill, then reconcile the two into one measure
+        for the President. The 119th Congress ends December 2026 — no action means starting over.</div>
       </div>
 
       <div style="margin-top:3rem;">
