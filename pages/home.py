@@ -106,6 +106,18 @@ PRIOR_BILLS = [
      "note":"Senate companion to H.R. 3095. Consolidated into S. 4505 by Sen. Ernst."},
 ]
 
+# ── D.C. LOBBYING TRIPS ──
+# TO ADD A TRIP: copy one dict block, fill in the fields, done.
+# Leave "TBD" in any field you don't have yet — it renders as a muted placeholder.
+LOBBYING_TRIPS = [
+    {"date":"TBD",
+     "title":"TBD — trip name",
+     "attendees":"TBD",
+     "offices":"TBD",
+     "outcome":"TBD",
+     "status":"pending"},
+]
+
 PROBLEMS = [
     {"icon":"🚨","cls":"pcard-red","title":"Public Safety",
      "body":"ZIP confusion routes 911 calls to wrong dispatch centers. In Somers, WI, firefighters from the wrong department were dispatched because two residences in different municipalities shared the same address and ZIP code. A street had to be renamed as a result. Seconds determine outcomes.",
@@ -591,6 +603,35 @@ def render():
       </div>
     </div></div>
     """, unsafe_allow_html=True)
+
+    
+    # ── D.C. LOBBYING ─────────────────────────────────────────────────────────
+    st.markdown('<div id="lobbying"></div>', unsafe_allow_html=True)
+    if LOBBYING_TRIPS:
+        trip_html = "".join(f"""
+          <div class="tl-item">
+            <div class="tl-left"><div class="tl-num">{i+1}</div></div>
+            <div class="tl-card">
+              <span class="tl-phase">{t['date']}</span>
+              <div class="tl-title">{t['title']}</div>
+              <div class="tl-body">
+                <strong>Delegation:</strong> {t['attendees']}<br>
+                <strong>Offices visited:</strong> {t['offices']}<br>
+                <strong>Outcome:</strong> {t['outcome']}
+              </div>
+            </div>
+          </div>""" for i, t in enumerate(LOBBYING_TRIPS))
+
+        st.markdown(f"""
+        <div class="section section-w" style="border-top:1px solid var(--border);">
+        <div class="inner">
+          <span class="sec-label">Federal Advocacy · Washington, D.C.</span>
+          <h2 class="sec-h">Coalition Lobbying Trips</h2>
+          <p class="sec-lead">Member cities travel to Washington to meet directly with congressional offices,
+          committee staff, and USPS officials. These visits are how S. 4505 and H.R. 10257 gained cosponsors.</p>
+          <div class="timeline">{trip_html}</div>
+        </div></div>
+        """, unsafe_allow_html=True)
 
     # ── MEMBER LOOKUP ─────────────────────────────────────────────────────────
     st.markdown('<div id="members"></div>', unsafe_allow_html=True)
