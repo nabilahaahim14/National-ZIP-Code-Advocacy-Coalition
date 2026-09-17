@@ -70,6 +70,19 @@ PRIMARY_BILL = {
     "note": "Consolidated bill introduced by Sen. Ernst. Incorporates H.R. 672, H.R. 3095, S. 1455, and S. 2961. Passed HSGAC 10-5 on 8/6/2026 with an amendment re-including all Wisconsin communities. Now on the Senate Legislative Calendar (Calendar No. 546) awaiting a floor vote.",
 }
 
+# ── H.R. 10257 is the House companion to S. 4505 ──
+COMPANION_BILL = {
+    "id": "H.R. 10257",
+    "author": "Rep. Mario Diaz-Balart (R-FL)",
+    "cities": "80 cities",
+    "status": "INTRODUCED · HOUSE OVERSIGHT & GOV'T REFORM",
+    "badge": "b-a",
+    "prog": 20,
+    "cls": "bcard-p",
+    "url": "https://www.congress.gov/bill/119th-congress/house-bill/10257",
+    "note": "House companion to S. 4505, introduced 9/3/2026 by Rep. Diaz-Balart. Consolidates H.R. 672 (14 cities) and H.R. 3095 (66 cities) into one House bill covering all 80 communities. Referred to the House Oversight and Government Reform Committee. Goal: pass both S. 4505 and H.R. 10257, then reconcile them into one bill for the President's signature.",
+}
+
 PRIOR_BILLS = [
     {"id":"H.R. 672","author":"Rep. Mario Diaz-Balart (R-FL)","cities":"8 cities",
      "badge":"b-a","prog":75,"cls":"bcard-p","companion":"S. 1455",
@@ -356,6 +369,24 @@ def render():
           Search on Congress.gov →</a>
       </div>"""
 
+    companion_card = f"""
+      <div class="tcard" style="border-left:4px solid var(--amber);border-top:3px solid var(--amber);position:relative;">
+        <div style="position:absolute;top:0.75rem;right:0.85rem;background:var(--amber);color:white;
+          font-family:'IBM Plex Mono',monospace;font-size:0.58rem;font-weight:700;letter-spacing:0.1em;
+          padding:0.2rem 0.6rem;border-radius:3px;text-transform:uppercase;">🏛 House Companion</div>
+        <div class="tcard-id" style="font-size:1.4rem;">{COMPANION_BILL['id']}</div>
+        <div class="tcard-author">{COMPANION_BILL['author']}</div>
+        <div style="font-size:0.8rem;color:var(--muted);margin-bottom:0.5rem;">{COMPANION_BILL['cities']}</div>
+        <span class="tbadge tbadge-a">{COMPANION_BILL['status']}</span>
+        <div class="tcard-note" style="margin-top:0.75rem;">{COMPANION_BILL['note']}</div>
+        <div class="tprog" style="margin-top:1rem;">
+          <div class="tprog-fill tprog-amber" style="width:{COMPANION_BILL['prog']}%"></div>
+        </div>
+        <a href="{COMPANION_BILL['url']}" target="_blank" style="display:inline-block;margin-top:0.85rem;
+          font-size:0.83rem;font-weight:600;color:var(--blue-m);text-decoration:none;">
+          Search on Congress.gov →</a>
+      </div>"""
+      
     prior_cards = "".join(f"""
       <div class="tcard tcard-stalled" style="opacity:0.82;">
         <div style="position:absolute;top:0.75rem;right:0.85rem;background:var(--g200);color:var(--g500);
@@ -378,8 +409,8 @@ def render():
       <div style="margin-bottom:1.25rem;">
         <div style="font-family:'IBM Plex Mono',monospace;font-size:0.62rem;font-weight:600;
           letter-spacing:0.14em;text-transform:uppercase;color:var(--green);margin-bottom:0.6rem;">
-          ★ Active Consolidated Bill</div>
-        <div style="display:grid;grid-template-columns:1fr;">{primary_card}</div>
+          ★ Active Bills — Senate &amp; House</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">{primary_card}{companion_card}</div>
       </div>
       <div style="margin-top:1.5rem;">
         <div style="font-family:'IBM Plex Mono',monospace;font-size:0.62rem;font-weight:600;
@@ -483,6 +514,23 @@ def render():
         <a href="{b['url']}" target="_blank" class="bill-link">Search S. 4505 on Congress.gov →</a>
       </div>"""
 
+      
+    companion_bill_card = f"""
+      <div class="bcard bcard-p" style="border-left:4px solid var(--amber);grid-column:1/-1;">
+        <div class="bill-top">
+          <div class="bill-id" style="font-size:1.5rem;">{COMPANION_BILL['id']} <span style="font-size:0.9rem;font-weight:400;color:var(--muted);">— House Companion to S. 4505</span></div>
+          <span class="badge b-a">{COMPANION_BILL['status']}</span>
+        </div>
+        <div class="bill-author" style="font-size:1rem;font-weight:600;">{COMPANION_BILL['author']}</div>
+        <div class="bill-cities" style="margin-bottom:0.75rem;">{COMPANION_BILL['cities']} · Consolidates H.R. 672, H.R. 3095</div>
+        <div class="bill-note" style="background:var(--amber-lt, #FEF3C7);border:1px solid #FDE68A;border-radius:6px;padding:0.85rem 1rem;font-size:0.88rem;color:var(--text);line-height:1.7;">
+          🏛 <strong>House track now active.</strong>
+          Introduced 9/3/2026 by Rep. Diaz-Balart (R-FL). Once both S. 4505 and H.R. 10257 pass their chambers, the two will be reconciled into one bill for the President's signature.
+        </div>
+        <a href="{COMPANION_BILL['url']}" target="_blank" class="bill-link">Search H.R. 10257 on Congress.gov →</a>
+      </div>"""
+      
+
     prior_bill_html = "".join(f"""
       <div class="bcard {pb['cls']}" style="opacity:0.78;">
         <div class="bill-top">
@@ -506,15 +554,15 @@ def render():
     <div class="inner">
       <span class="sec-label">119th Congress · Jan 2025 – Dec 2026</span>
       <h2 class="sec-h">Legislative Tracker</h2>
-      <p class="sec-lead">Sen. Ernst consolidated all four prior bills into <strong>S. 4505</strong>.
-      The path to law now runs entirely through the Senate Homeland Security &amp; Governmental Affairs Committee.</p>
+      <p class="sec-lead">Sen. Ernst consolidated all four prior bills into <strong>S. 4505</strong>, and Rep. Diaz-Balart introduced its House companion, <strong>H.R. 10257</strong>.
+      The path to law now runs on two tracks: Senate passage of S. 4505 and House passage of H.R. 10257, then reconciliation into one bill for the President.</p>
 
       <div style="margin-bottom:1.5rem;">
         <div style="font-family:'IBM Plex Mono',monospace;font-size:0.63rem;font-weight:600;
           letter-spacing:0.18em;text-transform:uppercase;color:var(--green);
           border-top:3px solid var(--green);padding-top:0.85rem;width:fit-content;margin-bottom:0.85rem;">
-          ★ Active Consolidated Bill</div>
-        <div style="display:grid;grid-template-columns:1fr;">{primary_bill_card}</div>
+          ★ Active Bills — Senate &amp; House</div>
+        <div style="display:grid;grid-template-columns:1fr;gap:1rem;">{primary_bill_card}{companion_bill_card}</div>
       </div>
 
       <div>
