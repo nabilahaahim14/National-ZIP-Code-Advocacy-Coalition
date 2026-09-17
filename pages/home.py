@@ -433,6 +433,51 @@ def render():
     </div></div>
     """, unsafe_allow_html=True)
 
+    
+    # ── D.C. LOBBYING (collapsible) ───────────────────────────────────────────
+    st.markdown('<div id="lobbying"></div>', unsafe_allow_html=True)
+    if LOBBYING_TRIPS:
+        trip_html = "".join(f"""
+          <div class="tl-item">
+            <div class="tl-left"><div class="tl-num">{i+1}</div></div>
+            <div class="tl-card">
+              <span class="tl-phase">{t['date']}</span>
+              <div class="tl-title">{t['title']}</div>
+              <div class="tl-body">
+                <strong>Delegation:</strong> {t['attendees']}<br>
+                <strong>Offices visited:</strong> {t['offices']}<br>
+                <strong>Outcome:</strong> {t['outcome']}
+              </div>
+            </div>
+          </div>""" for i, t in enumerate(LOBBYING_TRIPS))
+
+        st.markdown(f"""
+        <div class="section section-w" style="border-top:1px solid var(--border);padding:2.5rem 0;">
+        <div class="inner">
+          <details>
+            <summary style="cursor:pointer;display:flex;align-items:center;gap:0.85rem;
+              background:var(--g50);border:1px solid var(--border);border-left:4px solid var(--blue-m);
+              border-radius:8px;padding:1.1rem 1.5rem;transition:background 0.15s;">
+              <span style="color:var(--blue-m);font-size:0.9rem;font-weight:700;flex-shrink:0;">▶</span>
+              <span style="flex:1;">
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:0.62rem;font-weight:600;
+                  letter-spacing:0.18em;text-transform:uppercase;color:var(--blue-m);display:block;
+                  margin-bottom:0.3rem;">Federal Advocacy · Washington, D.C.</span>
+                <span style="font-size:1.15rem;font-weight:800;color:var(--blue);letter-spacing:-0.015em;">
+                  Coalition Lobbying Trips</span>
+                <span style="font-size:0.85rem;color:var(--muted);margin-left:0.6rem;">
+                  ({len(LOBBYING_TRIPS)} recorded)</span>
+              </span>
+            </summary>
+            <div style="padding:1.75rem 0 0.5rem 0;">
+              <p class="sec-lead" style="margin-bottom:1.5rem;">Member cities travel to Washington to meet
+              directly with congressional offices, committee staff, and USPS officials.</p>
+              <div class="timeline">{trip_html}</div>
+            </div>
+          </details>
+        </div></div>
+        """, unsafe_allow_html=True)
+
     # ── THE PROBLEM ───────────────────────────────────────────────────────────
     st.markdown('<div id="problem"></div>', unsafe_allow_html=True)
     prob_html = "".join(f"""
@@ -604,34 +649,7 @@ def render():
     </div></div>
     """, unsafe_allow_html=True)
 
-    
-    # ── D.C. LOBBYING ─────────────────────────────────────────────────────────
-    st.markdown('<div id="lobbying"></div>', unsafe_allow_html=True)
-    if LOBBYING_TRIPS:
-        trip_html = "".join(f"""
-          <div class="tl-item">
-            <div class="tl-left"><div class="tl-num">{i+1}</div></div>
-            <div class="tl-card">
-              <span class="tl-phase">{t['date']}</span>
-              <div class="tl-title">{t['title']}</div>
-              <div class="tl-body">
-                <strong>Delegation:</strong> {t['attendees']}<br>
-                <strong>Offices visited:</strong> {t['offices']}<br>
-                <strong>Outcome:</strong> {t['outcome']}
-              </div>
-            </div>
-          </div>""" for i, t in enumerate(LOBBYING_TRIPS))
 
-        st.markdown(f"""
-        <div class="section section-w" style="border-top:1px solid var(--border);">
-        <div class="inner">
-          <span class="sec-label">Federal Advocacy · Washington, D.C.</span>
-          <h2 class="sec-h">Coalition Lobbying Trips</h2>
-          <p class="sec-lead">Member cities travel to Washington to meet directly with congressional offices,
-          committee staff, and USPS officials. These visits are how S. 4505 and H.R. 10257 gained cosponsors.</p>
-          <div class="timeline">{trip_html}</div>
-        </div></div>
-        """, unsafe_allow_html=True)
 
     # ── MEMBER LOOKUP ─────────────────────────────────────────────────────────
     st.markdown('<div id="members"></div>', unsafe_allow_html=True)
