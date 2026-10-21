@@ -62,7 +62,7 @@ PRIMARY_BILL = {
     "id": "S. 4505",
     "author": "Sen. Joni Ernst (R-IA)",
     "cities": "75 cities",
-    "status": "COMMITTEE PASSED (10-5) · SENATE FLOOR",
+    "status": "COMMITTEE PASSED (10-3) · SENATE FLOOR",
     "badge": "b-g",
     "prog": 70,
     "cls": "bcard-p",
