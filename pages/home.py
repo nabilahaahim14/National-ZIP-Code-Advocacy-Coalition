@@ -1013,6 +1013,64 @@ def render():
       or a Chamber president. The 2026 White Paper is the coalition's primary evidence document.</p>
       <div class="res-grid">{res_html}</div>
 
+      
+      <div style="margin-top:3.5rem;background:var(--white);border:1px solid var(--border);
+        border-left:4px solid var(--blue-m);border-radius:10px;padding:2rem 2.25rem;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:0.62rem;font-weight:600;
+          letter-spacing:0.18em;text-transform:uppercase;color:var(--blue-m);display:block;
+          margin-bottom:0.6rem;">Member Resource · Customizable</span>
+        <h3 style="font-size:1.35rem;font-weight:800;color:var(--blue);margin-bottom:0.75rem;
+          letter-spacing:-0.015em;">S. 4505 One-Pager</h3>
+        <p style="font-size:0.93rem;color:var(--muted);line-height:1.8;margin-bottom:1.75rem;">
+          A single page covering the bill text, the committee vote, the CBO cost estimate, answers to
+          the two objections we hear most, and the full list of named communities. Share the PDF as-is,
+          or use the Canva template to localize the <strong>&ldquo;What It Means at Home&rdquo;</strong>
+          panel with your own city&rsquo;s residents and impact figures before you circulate it.</p>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.75rem;">
+          <a href="https://drive.google.com/file/d/1_J4Z-viE5R7GIaeIAnMcYDZAW0yjUpkx/view?usp=sharing"
+             target="_blank" style="display:flex;flex-direction:column;padding:1.25rem 1.4rem;
+             background:var(--g50);border:1px solid var(--border);border-radius:8px;
+             text-decoration:none;transition:all 0.15s;">
+            <span style="font-size:1.3rem;margin-bottom:0.6rem;"></span>
+            <span style="font-size:0.95rem;font-weight:700;color:var(--blue);margin-bottom:0.3rem;">
+              Download the PDF</span>
+            <span style="font-size:0.84rem;color:var(--muted);line-height:1.6;flex:1;">
+              Ready to print, email, or hand to a staffer. No account needed.</span>
+            <span style="margin-top:0.85rem;font-size:0.82rem;font-weight:600;color:var(--blue-m);">
+              Open in Drive →</span>
+          </a>
+          <a href="https://canva.link/uveurmnwdhvt39t"
+             target="_blank" style="display:flex;flex-direction:column;padding:1.25rem 1.4rem;
+             background:var(--g50);border:1px solid var(--border);border-radius:8px;
+             text-decoration:none;transition:all 0.15s;">
+            <span style="font-size:1.3rem;margin-bottom:0.6rem;"></span>
+            <span style="font-size:0.95rem;font-weight:700;color:var(--blue);margin-bottom:0.3rem;">
+              Open the Canva Template</span>
+            <span style="font-size:0.84rem;color:var(--muted);line-height:1.6;flex:1;">
+              Edit the local-impact panel for your community. A free Canva account is required.</span>
+            <span style="margin-top:0.85rem;font-size:0.82rem;font-weight:600;color:var(--blue-m);">
+              Use the template →</span>
+          </a>
+        </div>
+
+        <div style="background:var(--blue-lt);border-radius:8px;padding:1.4rem 1.6rem;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:0.62rem;font-weight:600;
+            letter-spacing:0.16em;text-transform:uppercase;color:var(--blue-m);margin-bottom:0.85rem;">
+            How to customize it</div>
+          <ol style="margin:0;padding-left:1.3rem;font-size:0.89rem;color:var(--text);line-height:1.9;">
+            <li>Open the Canva template link above.</li>
+            <li>Select <strong>&ldquo;Use template for new design.&rdquo;</strong> This opens an editable
+                copy in your own Canva account &mdash; the coalition&rsquo;s master file is never changed.</li>
+            <li>Edit the <strong>&ldquo;What It Means at Home&rdquo;</strong> panel only. Replace the
+                bracketed placeholders with your resident count, your community and state, one concrete
+                local problem, and one sourced impact figure.</li>
+            <li>Leave the rest of the page as-is so the bill facts stay consistent across member cities.</li>
+            <li>Download as PDF and share with your council, residents, or local press.</li>
+          </ol>
+        </div>
+      </div>
+
       <div style="margin-top:4rem;">
         <span class="sec-label">Strategic Communications Guide</span>
         <h3 style="font-size:1.5rem;font-weight:800;color:var(--blue);
