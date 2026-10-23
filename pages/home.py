@@ -67,7 +67,7 @@ PRIMARY_BILL = {
     "prog": 70,
     "cls": "bcard-p",
     "url": "https://www.congress.gov/search?q=%22S.+4505%22&searchField=allfields",
-    "note": "Consolidated bill introduced by Sen. Ernst. Incorporates H.R. 672, H.R. 3095, S. 1455, and S. 2961. Passed HSGAC 10-5 on 8/6/2026 with an amendment re-including all Wisconsin communities. Now on the Senate Legislative Calendar (Calendar No. 546) awaiting a floor vote.",
+    "note": "Consolidated bill introduced by Sen. Ernst. Incorporates H.R. 672, H.R. 3095, S. 1455, and S. 2961. Passed HSGAC 10-3 on 8/6/2026 with an amendment re-including all Wisconsin communities. Now on the Senate Legislative Calendar (Calendar No. 546) awaiting a floor vote.",
 }
 
 # ── H.R. 10257 is the House companion to S. 4505 ──
@@ -326,7 +326,7 @@ def render():
         <p class="hero-sub">
           Outdated USPS ZIP code boundaries delay 911 calls, misallocate tax revenue, inflate insurance
           rates, and systematically harm over one million Americans across 75+ municipalities in 20+ states.
-          S. 4505 has passed committee 10-5 and is on the Senate floor calendar; its House companion, H.R. 10257, was introduced September 3, 2026. The 119th Congress ends December 2026.
+          S. 4505 has passed committee 10-3 and is on the Senate floor calendar; its House companion, H.R. 10257, was introduced September 3, 2026. The 119th Congress ends December 2026.
         </p>
         <div class="hero-ctas">
           <a href="#action" class="btn-hero-red">Take Action on S. 4505</a>
@@ -566,7 +566,7 @@ def render():
         <div class="bill-cities" style="margin-bottom:0.75rem;">{b['cities']} · Consolidates H.R. 672, H.R. 3095, S. 1455, S. 2961</div>
         <div class="bill-note" style="background:var(--green-lt);border:1px solid #BBF7D0;border-radius:6px;padding:0.85rem 1rem;font-size:0.88rem;color:var(--text);line-height:1.7;">
           ✓ <strong>Wisconsin communities re-included.</strong>
-          HSGAC passed S. 4505 10-5 with an amendment restoring Caledonia, Somers, Mount Pleasant, Franklin, Greenfield, Glendale, Rochester, and Harrison, WI to the bill.
+          HSGAC passed S. 4505 10-3 with an amendment restoring Caledonia, Somers, Mount Pleasant, Franklin, Greenfield, Glendale, Rochester, and Harrison, WI to the bill.
         </div>
         <a href="{b['url']}" target="_blank" class="bill-link">Search S. 4505 on Congress.gov →</a>
       </div>"""
