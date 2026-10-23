@@ -549,6 +549,7 @@ details[open] > summary span { transform: rotate(90deg); display:inline-block; }
   .nav-links{display:none;}
   .hero-statbar{grid-template-columns:repeat(3,1fr);}
   .case-grid,.bill-grid,.story-grid,.lang-grid,.ba-grid{grid-template-columns:1fr;}
+  .res-grid+div>div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important;}
   .ba-div-col{flex-direction:row;padding:0.5rem 0;}
   .ba-law{writing-mode:horizontal-tb;}
   .res-grid{grid-template-columns:1fr 1fr;}
