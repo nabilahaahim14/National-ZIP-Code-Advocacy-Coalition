@@ -61,7 +61,7 @@ COMMITTEE = [
 PRIMARY_BILL = {
     "id": "S. 4505",
     "author": "Sen. Joni Ernst (R-IA)",
-    "cities": "75 cities",
+    "cities": "83 communities",
     "status": "COMMITTEE PASSED (10-3) · SENATE FLOOR",
     "badge": "b-g",
     "prog": 70,
@@ -175,7 +175,7 @@ RESOURCES = [
      "url":"https://www.eastvaleca.gov/home/showpublisheddocument/18184/639098699108370000",
      "arrow":"Download White Paper →"},
     {"icon":"📋","type":"Legislation","title":"S. 4505 - Consolidated Bill (Ernst)",
-     "desc":"Sen. Joni Ernst (R-IA) consolidated H.R. 672, H.R. 3095, S. 1455, and S. 2961 into S. 4505 covering 75 cities.",
+     "desc":"Sen. Joni Ernst (R-IA) consolidated H.R. 672, H.R. 3095, S. 1455, and S. 2961 into S. 4505 covering 83 communities.",
      "url":"https://www.congress.gov/search?q=%22S.+4505%22&searchField=allfields",
      "arrow":"Search on Congress.gov →"},
     {"icon":"📋","type":"Legislation","title":"H.R. 672 - Full Bill Text",
@@ -912,7 +912,7 @@ def render():
       <span class="sec-label sec-label-green">Legislative Precedent &amp; Proof</span>
       <h2 class="sec-h">It Has Been Done Before.<br>It Worked.</h2>
       <p class="sec-lead">Congress mandated ZIP code changes for four specific cities in 2006.
-      Every one of those cities saw the harms resolved. S. 4505 uses the exact same mechanism - at 75-city scale.</p>
+      Every one of those cities saw the harms resolved. S. 4505 uses the exact same mechanism - at 83-community scale.</p>
 
       <div class="prec-law">
         <p>"Section 1009 of the Postal Accountability and Enhancement Act (2006) directed the United States
@@ -931,8 +931,8 @@ def render():
           <div class="prec-s">estimated cost per ZIP adjustment<br>(0.0002% of USPS annual budget)</div>
         </div>
         <div class="prec-stat">
-          <div class="prec-n">75+</div>
-          <div class="prec-s">cities seeking the same fix today<br>via S. 4505 (Ernst)</div>
+          <div class="prec-n">83</div>
+          <div class="prec-s">communities seeking the same fix today<br>via S. 4505 (Ernst)</div>
         </div>
       </div>
 
@@ -983,12 +983,12 @@ def render():
         <div class="story-card">
           <div class="story-city">Discovery Bay, California · 2006</div>
           <div class="story-title">Eliminated Logistics and Delivery Errors</div>
-          <div class="story-body">Discovery Bay carriers incorrectly applied surcharges due to ZIP assignment. Resolution required a congressional mandate - the same path the coalition is now pursuing for 75+ cities simultaneously via S. 4505.</div>
+          <div class="story-body">Discovery Bay carriers incorrectly applied surcharges due to ZIP assignment. Resolution required a congressional mandate - the same path the coalition is now pursuing for 83 communities simultaneously via S. 4505.</div>
         </div>
         <div class="story-card">
           <div class="story-city">The S. 4505 Coalition · 75+ Cities</div>
           <div class="story-title">The Same Fix, at Scale</div>
-          <div class="story-body">S. 4505 uses the exact legislative mechanism that worked in 2006 - for 75+ cities at once, across 20+ states. The four prior bills have already cleared the full House. The precedent is established. The Senate must act.</div>
+          <div class="story-body">S. 4505 uses the exact legislative mechanism that worked in 2006 - for 83 communities at once, across 23 states. The four prior bills have already cleared the full House. The precedent is established. The Senate must act.</div>
         </div>
       </div>
     </div></div>
@@ -1026,7 +1026,6 @@ def render():
           the two objections we hear most, and the full list of named communities. Share the PDF as-is,
           or use the Canva template to localize the <strong>&ldquo;What It Means at Home&rdquo;</strong>
           panel with your own city&rsquo;s residents and impact figures before you circulate it.</p>
-
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.75rem;">
           <a href="https://drive.google.com/file/d/1_J4Z-viE5R7GIaeIAnMcYDZAW0yjUpkx/view?usp=sharing"
              target="_blank" style="display:flex;flex-direction:column;padding:1.25rem 1.4rem;
@@ -1053,7 +1052,6 @@ def render():
               Use the template →</span>
           </a>
         </div>
-
         <div style="background:var(--blue-lt);border-radius:8px;padding:1.4rem 1.6rem;">
           <div style="font-family:'IBM Plex Mono',monospace;font-size:0.62rem;font-weight:600;
             letter-spacing:0.16em;text-transform:uppercase;color:var(--blue-m);margin-bottom:0.85rem;">
