@@ -1027,7 +1027,7 @@ def render():
           or use the Canva template to localize the <strong>&ldquo;What It Means at Home&rdquo;</strong>
           panel with your own city&rsquo;s residents and impact figures before you circulate it.</p>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.75rem;">
-          <a href="https://drive.google.com/file/d/1_J4Z-viE5R7GIaeIAnMcYDZAW0yjUpkx/view?usp=sharing"
+          <a href="https://drive.google.com/file/d/1NRklTTSJ-97BrY61spqyFeDkdI_zDL0L/view?usp=sharing"
              target="_blank" style="display:flex;flex-direction:column;padding:1.25rem 1.4rem;
              background:var(--g50);border:1px solid var(--border);border-radius:8px;
              text-decoration:none;transition:all 0.15s;">
