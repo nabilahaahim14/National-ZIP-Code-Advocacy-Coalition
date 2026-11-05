@@ -106,16 +106,35 @@ PRIOR_BILLS = [
      "note":"Senate companion to H.R. 3095. Consolidated into S. 4505 by Sen. Ernst."},
 ]
 
-# ── D.C. LOBBYING TRIPS ──
 # TO ADD A TRIP: copy one dict block, fill in the fields, done.
 # Leave "TBD" in any field you don't have yet — it renders as a muted placeholder.
+Replace:# TO ADD A TRIP: copy one dict block, fill in all four fields, done.
+# Trips render newest-last, in the order listed here.
 LOBBYING_TRIPS = [
-    {"date":"TBD",
-     "title":"TBD — trip name",
-     "attendees":"TBD",
-     "offices":"TBD",
-     "outcome":"TBD",
-     "status":"pending"},
+    {"congress":"118th Congress",
+     "date":"June 2023",
+     "title":"Raising Awareness in the House",
+     "attendees":"Castle Pines, CO; Eastvale, CA"},
+
+    {"congress":"118th Congress",
+     "date":"May 2024",
+     "title":"Building Support in the House",
+     "attendees":"Castle Pines, CO; Eastvale, CA; Somers, WI"},
+
+    {"congress":"119th Congress",
+     "date":"November 2025",
+     "title":"Raising Awareness in the Senate",
+     "attendees":"Burr Ridge, IL; Castle Pines, CO; Eastvale, CA; Frederick, CO; Goose Creek, SC; Green, OH; Hochatown, OK; Ocoee, FL; Severance, CO; Somers, WI; Superior, CO; Urbandale, IA"},
+
+    {"congress":"119th Congress",
+     "date":"March 2026",
+     "title":"Garnering Support in the Senate",
+     "attendees":"Burr Ridge, IL; Castle Pines, CO; Eastvale, CA; Frederick, CO; Glendale, WI; Goose Creek, SC; Green, OH; Greenfield, WI; Ocoee, FL"},
+
+    {"congress":"119th Congress",
+     "date":"September 2026",
+     "title":"Maintaining Support in the Senate",
+     "attendees":"Burr Ridge, IL; Eastvale, CA; Frederick, CO; Hochatown, OK; Superior, CO; Urbandale, IA"},
 ]
 
 PROBLEMS = [
@@ -187,9 +206,6 @@ RESOURCES = [
     {"icon":"📋","type":"Legislation","title":"S. 2961 - Full Bill Text",
      "desc":"Sen. Jim Banks (R-IN). In Senate HSGA Committee. Consolidated into S. 4505.",
      "url":"https://www.congress.gov/bill/119th-congress/senate-bill/2961","arrow":"View on Congress.gov →"},
-    {"icon":"🏛️","type":"Coalition","title":"Official Coalition Webpage",
-     "desc":"Primary hub on eastvaleca.gov with background, partners, and contact info.",
-     "url":"https://www.eastvaleca.gov/community/national-zip-code-advocacy-coalition/-fsiteid-1#!/","arrow":"Visit eastvaleca.gov →"},
     {"icon":"⚖️","type":"Committee","title":"Senate HSGA Committee",
      "desc":"Where S. 4505 will be reviewed. Chair: Sen. Rand Paul (R-KY).",
      "url":"https://www.hsgac.senate.gov/","arrow":"Visit Committee →"},
@@ -326,7 +342,7 @@ def render():
         <p class="hero-sub">
           Outdated USPS ZIP code boundaries delay 911 calls, misallocate tax revenue, inflate insurance
           rates, and systematically harm over one million Americans across 75+ municipalities in 20+ states.
-          S. 4505 has passed committee 10-3 and is on the Senate floor calendar; its House companion, H.R. 10257, was introduced September 3, 2026. The 119th Congress ends December 2026.
+         S. 4505 has passed committee 10-3 and is on the Senate floor calendar; its House companion, H.R. 10257, was introduced September 3, 2026. The 119th Congress ends at the end of December 2026.
         </p>
         <div class="hero-ctas">
           <a href="#action" class="btn-hero-red">Take Action on S. 4505</a>
@@ -441,12 +457,10 @@ def render():
           <div class="tl-item">
             <div class="tl-left"><div class="tl-num">{i+1}</div></div>
             <div class="tl-card">
-              <span class="tl-phase">{t['date']}</span>
+              <span class="tl-phase">{t['congress']} · {t['date']}</span>
               <div class="tl-title">{t['title']}</div>
               <div class="tl-body">
-                <strong>Delegation:</strong> {t['attendees']}<br>
-                <strong>Offices visited:</strong> {t['offices']}<br>
-                <strong>Outcome:</strong> {t['outcome']}
+               <strong>Delegation:</strong> {t['attendees']}
               </div>
             </div>
           </div>""" for i, t in enumerate(LOBBYING_TRIPS))
