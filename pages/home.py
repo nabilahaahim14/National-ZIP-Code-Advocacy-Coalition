@@ -108,7 +108,7 @@ PRIOR_BILLS = [
 
 # TO ADD A TRIP: copy one dict block, fill in the fields, done.
 # Leave "TBD" in any field you don't have yet — it renders as a muted placeholder.
-Replace:# TO ADD A TRIP: copy one dict block, fill in all four fields, done.
+# TO ADD A TRIP: copy one dict block, fill in all four fields, done.
 # Trips render newest-last, in the order listed here.
 LOBBYING_TRIPS = [
     {"congress":"118th Congress",
